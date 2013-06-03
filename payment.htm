@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
- <link href="http://qunarzz.com/payment/dev/styles/preAuth-dev.css" rel="stylesheet" type="text/css"/> 
-<!-- <link href="http://pay1.qunar.com/static/payment/prd/styles/preAuth-2013051616300202.css" rel="stylesheet" type="text/css"/>--> 
+<link href="http://qunarzz.com/payment/dev/styles/preAuth-dev.css" rel="stylesheet" type="text/css"/> 
+<!--  <link href="http://pay1.qunar.com/static/payment/prd/styles/preAuth-2013051616300202.css" rel="stylesheet" type="text/css"/>--> 
 <title>支付</title>
 <!--[if IE 6]>
 <script type="text/javascript" src="/static/js/compatibilityUtils/build/DD_belatedPNG-min.js"></script>
@@ -18,10 +17,10 @@ DD_belatedPNG.fix('.png24');
 <div class="q_page_container">
     <div class="q_page_wrap">
         <div class="q_page">
-            <div class="b_header">
+            <div class="b_header b_header_v2">
                 <div class="header_inner">
                     <div class="e_header_logo png24"></div>
-                    <span class="e_header_title">支付</span></div>
+                    <span class="e_header_title">预授权</span></div>
             </div>
             <input id="oldtime" value="${oldtime}" class="hide" type="hidden">
             <input id="newtime" value="${newtime}" class="hide" type="hidden">
@@ -42,7 +41,7 @@ DD_belatedPNG.fix('.png24');
                         <!--网银支付的tabn内容区-->
                         <div class="b_tab_ui b_tab_one">
                             <div class="e_tab_trigger">
-                                <div class="tab_nav"><a class="trigger_item trigger_item_current">银联在线支付</a></div>
+                                <div class="tab_nav"><a class="trigger_item trigger_item_current">预授权</a></div>
                                 <div class="popup_tips_wrap">
                                     <div class="b_popup_tips">
                                         <div class="tips_contair">
@@ -112,7 +111,7 @@ DD_belatedPNG.fix('.png24');
                                                                 <td>
                                                                     <div class="ops_cardnum">
                                                                         <div class="set input">
-                                                                            <input type="text" name="cardid" id="credit_cardnum" data-jvalidator-pattern="not_empty & creditcardno" class="grey_txt txtbox" placeholder="请输入您的银行卡号" maxlength="30" value="">
+                                                                            <input type="text" name="cardId" id="credit_cardnum" data-jvalidator-pattern="not_empty & creditcardno" class="grey_txt txtbox" placeholder="请输入您的银行卡号" maxlength="30" value="">
                                                                         </div>
                                                                         <div class="set popup_tips_wrap js_tipcontainer"></div>
                                                                     </div>
@@ -195,7 +194,7 @@ DD_belatedPNG.fix('.png24');
                                                         </table>
                                                     </div>
                                                     <div class="e_ops_button">
-                                                        <button class="btn_submit" id="btnSubmit" type="button">确认付款</button>
+                                                        <button class="btn_submit" id="btnSubmit" type="button">申请jd</button>
                                                     </div>
                                                     <div class="e_card_picwrap">
                                                         <div class="card_pic">

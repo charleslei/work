@@ -1,0 +1,73 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<!-- <link href="http://qunarzz.com/payment/prd/styles/unionPay-<%@include file='/include/.ver'%>.css" rel="stylesheet" type="text/css"/> --> 
+ <link href="http://pay1.qunar.com/static/payment/prd/styles/preAuth-2013051616300202.css" rel="stylesheet" type="text/css"/>
+<title>支付</title>
+<!--[if IE 6]>
+<script type="text/javascript" src="/static/js/compatibilityUtils/build/DD_belatedPNG-min.js"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('.png24');
+</script>
+<![endif]-->
+</head>
+<body>
+<div class="q_page_container">
+    <div class="q_page_wrap">
+        <div class="q_page">
+            <div class="b_header b_header_v2">
+                <div class="header_inner">
+                    <div class="e_header_logo png24"></div>
+                    <span class="e_header_title">预授权</span></div>
+            </div>
+            <input id="oldtime" value="${oldtime}" class="hide" type="hidden">
+            <input id="newtime" value="${newtime}" class="hide" type="hidden">
+            <!--选择银行支付-->
+            <div class="b_payfor_content_min">
+                <div class="b_hd_mod">
+                    <div class="e_notice_content notice_state_error">
+                        <div class="icon_state_error"></div>
+                        <div class="notice_txt">
+                            <h3>出错了？</h3>
+                            <div>您的订单信息输入有误，请检查后重试！</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="b_main_pay">
+                    <div class="b_pay_tab">
+                        <!--底部的安全贴士-->
+                        <div class="b_safe_tips">
+                            <p class="lead">安全贴士：</p>
+                            <ul class="liststyle_disc">
+                                <li>请您确认浏览器地址必须为https开头</li>
+                                <li>您的账户信息请妥善保管并尽量避免在网吧等公共场所进行支付</li>
+                            </ul>
+                        </div>
+                        <!--\底部的安全贴士-->
+                    </div>
+                </div>
+                <!--\选择银行支付-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script type="text/javascript" src="http://qunarzz.com/payment/prd/scripts/unionPay-<%@include file='/include/.ver'%>.js"></script>-->
+<script type="text/javascript" src="http://pay1.qunar.com/static/payment/prd/scripts/preAuth-2013051616300202.js"></script>
+<script type="text/javascript">
+(function(){
+	window._ba_utm_init = function(GA){ 
+		window['_ba_utm_l'] = 'pay';
+		window['_ba_utm_s'] = '786';
+		window['_ba_utm_ex'] = {};
+	};
+	//-- load ga script
+	var s = document.createElement('script');
+	s.src = 'http://pay1.qunar.com/static/payment/prd/scripts/ga-2013051616300202.js'; 
+	var head = document.getElementsByTagName('head');
+	if(head&&head[0]) { head[0].appendChild(s); }
+})();
+</script>
+</body>
+</html>
