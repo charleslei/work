@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<title>【去哪儿网】支付出错页面-去哪儿网Qunar.com</title>
+<meta content="" name="keywords" />
+<meta content="" name="description" />
+ <!-- <link href="http://qunarzz.com/payment/prd/styles/global-<%@include file='/include/.ver'%>.css" rel="stylesheet" />
+<link href="http://qunarzz.com/payment/prd/styles/payment-<%@include file='/include/.ver'%>.css" rel="stylesheet" />-->
+<link href="http://qunarzz.com/payment/prd/styles/global-765765757.css" rel="stylesheet" />
+<link href="http://qunarzz.com/payment/prd/styles/payment-765765757.css" rel="stylesheet" /> 
+<!--  <link href="/static/payment/prd/styles/global-<%@include file='/include/.ver'%>.css" rel="stylesheet" />
+<link href="/static/payment/prd/styles/payment-<%@include file='/include/.ver'%>.css" rel="stylesheet" />  -->
+</head>
+<body>
+<div class="pay_header">
+		<h1 class="logo"><a title="“去哪儿”旅游搜索引擎" target="_top" href="http://www.qunar.com/"><span>“去哪儿”旅游搜索引擎</span></a></h1>
+		<h2>支付</h2>
+</div>
+<div class="payment">
+    <h2 class="wrong">出错了？</h2>
+    <div class="box">
+	    <ul>
+	    	<li>${errorInfo }</li>
+	    </ul>
+	</div>
+</div>
+<%@include file='/include/footer.jsp'%>
+ <!--<script type="text/javascript" src="/static/payment/prd/scripts/processfooter-<%@include file='/include/.ver'%>.js"></script>-->
+ <script type="text/javascript" src="http://qunarzz.com/payment/prd/scripts/processfooter-765765757.js"></script>
+<script type="text/javascript">
+(function(){
+	window._ba_utm_init = function(GA){ 
+		window['_ba_utm_l'] = 'pay';
+		window['_ba_utm_s'] = '788';
+		window['_ba_utm_ex'] = {};
+	};
+	//-- load ga script
+	var s = document.createElement('script');
+	s.src = '/static/payment/prd/scripts/ga-<%@include file='/include/.ver'%>.js'; 
+	var head = document.getElementsByTagName('head');
+	if(head&&head[0]) { head[0].appendChild(s); }
+})();
+</script>
+</body>
+</html>

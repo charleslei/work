@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<title>我的快捷支付</title>
+<script type="text/javascript">
+if(typeof QNR=="undefined"){ window.QNR={}; }; QNR.PayInfo={userid:"${userId}"};
+</script>
+<!-- <link href="http://qunarzz.com/payment/prd/styles/quickpaybanklist-<%@include file='/include/.ver'%>.css" rel="stylesheet" type="text/css"/> -->
+<link href="http://qunarzz.com/payment/prd/styles/quickpaybanklist-765765757.css" rel="stylesheet" type="text/css"/>
+<!-- <link href="/static/payment/prd/styles/quickpaybanklist-<%@include file='/include/.ver'%>.css" rel="stylesheet" type="text/css"/> -->
+<style type="text/css">
+.b_tab_ui .b_popup_tips{ left: 130px;}
+</style>
+<!--[if IE 6]>
+<script type="text/javascript" src="/static/js/compatibilityUtils/build/DD_belatedPNG-min.js"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('.png24');
+</script>
+<![endif]-->
+</head>
+<body>
+    <input id="oldtime" value="${oldtime}" class="hide" type="hidden">
+    <input id="newtime" value="${newtime}" class="hide" type="hidden">
+	<div class="q_page_container">
+	    <div class="q_page_wrap">
+	        <div class="q_page">   
+	            <div class="b_header">
+	                <div class="header_inner">
+	                    <div class="e_header_logo png24"></div>
+	                    <span class="e_header_title">支付</span></div>
+	            </div>
+	            <!--选择银行支付-->
+	            <div class="b_payfor_content">
+	                <div class="b_hd_mod">
+	                    <div class="e_notice_content notice_state_success">
+	                        <div class="notice_icon icon_state_success"></div>
+	                        <div class="notice_txt">
+	                            <h3>订单提交成功，请您尽快付款！</h3>
+	                            <div class="detail"><span class="order_num">订单号：<em>${orderNo}</em></span><span class="tc">商户：<em class="tc_name">${merchantName}</em></span></div>
+	                            <div class="pay_sum">应付金额<span class="sum_num"><b>${orderAmount}</b></span><em class="yuan">元</em></div>
+	                        </div>
+	                    </div>
+	                </div>
+	            <div class="b_main_pay">
+	                <div class="b_pay_tab">
+	                    <!--网银支付的tabn内容区-->
+	                    <div class="b_tab_ui">
+	                        <div class="e_tab_trigger">
+                                <div class="tab_nav"><a class="trigger_item trigger_item_current js-tab">信用卡快捷支付</a>
+                                    <!-- <a class="trigger_item">信用卡</a><a class="trigger_item">储蓄卡</a><a class="trigger_item">支付平台</a> -->
+		                            <div class="pop_icon_wrap">
+                                        <div class="txt">安全快捷</div>
+                                        <div class="arrow"></div>
+                                    </div>
+                                </div>
+	                            <div class="popup_tips_wrap">
+	                                <div class="b_popup_tips">
+	                                    <div class="tips_contair">
+	                                        <div class="tips_content">
+	                                            <p>请在<span class="limittime"><em>30</em>分钟</span>内完成付款，否则本次支付请求将自动取消。<span class="countdown">支付订单剩余时间：<em class="mins" id="mins">29</em>分<em class="sec" id="sec">38</em>秒</span></p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <!--快捷支付 开始-->
+                            <div class="e_tab_content js-typepanel" data-type="quickpay">
+                                    <div class="tab_content_inner">
+                                        <div class="b_pinfo_form">
+                                            <form name="quickpayform" id="quickpayform" action="${upopfpayUrl}" method="post" target="_blank">
+                                            <input name="orderId" value="${orderId}" class="hide" js-submit>
+                                            <input name="payId" value="${payId}" class="hide" js-submit>                                            
+                                            <input name="payIdA" value="${payIdA}" class="hide" js-submit>
+                                            <input name="orderIdA" value="${orderIdA}" class="hide" js-submit>
+                                            <input name="orderNo" value="${orderNo}" class="hide" js-submit>
+                                            <input name="merchantCode" value="${merchantCode}" class="hide" js-submit>
+                                            <input name="orderAmount" value="${orderAmount}" class="hide" js-submit>
+                                            <input name="fastPay" value="fastPay" class="hide" js-submit>
+                                                <div class="b_card_list" id="quickCardList">
+                                                    <ul>                                                   
+									            	<c:choose>
+									            	<c:when test="${not empty bankList}">
+                                                    <c:forEach items="${bankList}" var="b" varStatus="vs" begin="0" end="0">
+                                                        <li class="highlight js-choose-item">
+                                                            <div class="e_card_type clrfix">
+                                                                <div class="common_card">&nbsp;</div>
+                                                                <div class="info_card js-choose-card">
+                                                                    <input type="radio" name="bankAndType" value="${b.bankId},${b.cardType}" mobile="${b.mobile}"  checked class="radio_box" >
+                                                                    <label class="banklogo_box" for=""><span class="bank_name js-bank-icon" bank="${b.bankCode}" style="background-position:0 0;"></span><span class="bankcard_info">
+                                                                    		<c:choose>
+	                    							<c:when test="${b.cardType eq '0' }">借记卡</c:when>
+	                    							<c:when test="${b.cardType eq '1' }">信用卡</c:when>
+	                    							<c:otherwise>未知</c:otherwise>
+	                    						</c:choose>
+	            						<span class="encryption">**</span><em class="last_num">
+										<c:if test="${fn:length(b.bankCard) > 4}">
+				                            ${fn:substring(b.bankCard, fn:length(b.bankCard)-4, -1)}
+				                          </c:if>
+				                         </em></span></label>
+                                                                </div>
+                                                                 <a href="javascript:;" class="close">删除</a>
+                                                            </div>
+                                                        </li>
+                                                        </c:forEach>
+                                                        <c:forEach  items="${bankList}" var="b" varStatus="vs" begin="1">
+                                                        <li class="js-choose-item hide">
+                                                            <div class="e_card_type clrfix">
+                                                                <div class="common_card">&nbsp;</div>
+                                                                <div class="info_card js-choose-card">
+                                                                    <input type="radio" name="bankAndType" value="${b.bankId},${b.cardType}" mobile="${b.mobile}" class="radio_box">
+                                                                    <label class="banklogo_box" for=""><span class="bank_name js-bank-icon" bank="${b.bankCode}" style="background-position:0 0;"></span><span class="bankcard_info">
+																	<c:choose>
+				                            							<c:when test="${b.cardType eq '0' }">借记卡</c:when>
+				                            							<c:when test="${b.cardType eq '1' }">信用卡</c:when>
+				                            							<c:otherwise>未知</c:otherwise>
+				                            						</c:choose> 
+				                            						<span class="encryption">**</span><em class="last_num">
+				                            						<c:if test="${fn:length(b.bankCard) > 4}">
+											                            ${fn:substring(b.bankCard, fn:length(b.bankCard)-4, -1)}
+											                          </c:if>
+				                            						</em></span></label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                         </c:forEach>
+                                                         </c:when>
+                                                       </c:choose>
+                                                    </ul>
+                                                   <c:if test="${bankDisplay==1}">
+	                                                   <div class="e_bank_all clrfix">
+	                                                        <div class="info_card">
+	                                                            <span class="all_blind_bank"><a href="#" id="allBindBank">显示全部绑定银行<b class="icon_up"></b></a></span>
+	                                                        </div>
+	                                                    </div>
+                                                    </c:if>                                              
+                                                </div>
+                                                <div class="b_validate_box b_write_card">
+                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                    <c:if test="${vcodeDisplay==1}">
+														<tr>
+															<td class="c2">手机号：</td>
+															<td><div id="mobile-number"></div></td>
+														</tr>                                                        
+                                                        <tr>
+                                                            <td class="c2">短信验证码：</td>
+                                                            <td>
+                                                                <div class="ops_icode">
+                                                                    <div class="set input"><input id="vCode" type="text" class="txtbox" value="" name="vCode" data-jvalidator-pattern="not_empty & vcode" placeholder="请输入验证码" js-submit maxlength="6"></div>
+                                                                    <a placeholder="get-permit" class="btn" href="javascript:void(0);" js-reset-class="get_code" js-sent-class="btn_grey"><em>免费获取验证码</em></a>
+                                                                    <span placeholder="get-permit-message" class="yzm_tip"><span class="icon_correct2"></span>验证码已发送，请查收！</span>
+                                                                    <div class="set popup_tips_wrap js_tipcontainer"  placeholder="get-permit-error" name="vCode"></div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                         </c:if>
+                                                         <c:if test="${paypswDisplay==1}">
+                                                        <tr>
+                                                            <td class="c2">交易密码：</td>
+                                                            <td><div class="ops_tpassword ops_again">
+                                                                    <div class="set input"><input type="password" id="password" class="txtbox" name="paypsw" value="" autocomplete="off" data-jvalidator-pattern="not_empty" placeholder="请输入交易密码" js-submit></div>
+                                                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
+                                                                    <!-- </span><span class="icon_tips_wrap"><em class="icon_tips iwrong"></em><em class="txt_tips">请输入交易密码</em></span> -->
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                         </c:if>
+                                                      </table>
+                                                </div>
+                                                <c:if test="${not empty bankList}">
+                                                <div class="e_ops_button">
+                                                    <button class="btn_submit" id="quickPayBtn" type="button">确认付款</button>
+                                                </div>
+                                                </c:if>
+                                              </form>
+                                           	<div class="b_other_pay clrfix" id="bindCardTip">
+                                            <p class="js-tip-txt">您也可以点击此处“添加新银行卡”；绑定成功后，请“<a href="javascript:void(0)" id="reload-page">刷新</a>”当前页面，选中新卡完成支付。</p>
+                                            <div class="e_pay_way"><a href="${bindCardUrl }" target="_blank"><b class="icon_add"></b>添加新银行卡</a></div>
+                                        	</div>
+                                            
+                                        </div>  
+                                    </div>
+                            </div>
+	                        <!--快捷支付 结束-->  
+	                    </div>
+	                    <!--\网银支付的tabn内容区-->
+	                    <!--底部的安全贴士-->
+	                    <div class="b_safe_tips">
+	                        <p class="lead">安全贴士：</p>
+	                        <ul class="liststyle_disc">
+	                            <li>请您确认浏览器地址必须为https开头</li>
+	                            <li>您的账户信息请妥善保管并尽量避免在网吧等公共场所进行支付</li>
+	                        </ul>
+	                    </div>
+	                    <!--\底部的安全贴士-->
+	                </div>
+	            </div>
+	            <!--\选择银行支付-->
+	        </div>
+	    </div>
+    </div>
+</div>
+ <!--  <script type="text/javascript" src="http://qunarzz.com/payment/prd/scripts/quickPay-<%@include file='/include/.ver'%>.js"></script>-->
+ <script type="text/javascript" src="http://qunarzz.com/payment/dev/scripts/quickPay-765765757.js"></script>
+ <!--<script type="text/javascript" src="/static/payment/prd/scripts/quickPay-<%@include file='/include/.ver'%>.js"></script>-->
+<script type="text/javascript">
+(function(){
+	window._ba_utm_init = function(GA){ 
+		window['_ba_utm_l'] = 'pay';
+		window['_ba_utm_s'] = '787';
+		window['_ba_utm_ex'] = {};
+	};
+	//-- load ga script
+	var s = document.createElement('script');
+	s.src = '/static/payment/prd/scripts/ga-<%@include file='/include/.ver'%>.js'; 
+	var head = document.getElementsByTagName('head');
+	if(head&&head[0]) { head[0].appendChild(s); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+ <!-- <link href="http://qunarzz.com/payment/prd/styles/quickpaySuccess-<%@include file='/include/.ver'%>.css" rel="stylesheet" type="text/css"/>--> 
+<link href="http://qunarzz.com/payment/prd/styles/quickpaySuccess-765765757.css" rel="stylesheet" type="text/css"/> 
+<title>【去哪儿网】支付成功页面-去哪儿网Qunar.com</title>
+<meta content="" name="keywords" />
+<meta content="" name="description" />
+<!--[if IE 6]>
+<script type="text/javascript" src="/static/js/compatibilityUtils/build/DD_belatedPNG-min.js"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('.png24');
+</script>
+<![endif]-->
+</head>
+<body>
+<form id="direct-form" action ="${merchantUrl}" method="post">
+<%
+    Map<String,String> trxMap = (Map<String,String>)request.getAttribute("backMap");
+    Iterator entries = trxMap.entrySet().iterator();  
+    Map.Entry entry;  
+    String name = "";  
+    String value = "";  
+    while (entries.hasNext()) 
+    {  
+    	entry = (Map.Entry) entries.next();  
+		name = (String) entry.getKey();  
+		
+		Object valueObj = entry.getValue();  
+		if(null == valueObj){  
+			value = "";  			
+		}else  
+			value = valueObj.toString();  
+%>
+    <input type="hidden" name="<%=name%>" value="<%=value%>" />
+<%
+    }
+%>
+</form>
+<div class="q_page_container">
+    <div class="q_page_wrap">
+        <div class="q_page">
+            <div class="b_header">
+                <div class="header_inner">
+                    <div class="e_header_logo png24"></div>
+                    <span class="e_header_title">支付</span></div>
+            </div>
+            <!--选择银行支付-->
+            <div class="b_payfor_content">
+                <div class="b_hd_mod">
+                    <div class="e_notice_content notice_state_success_center">
+                        <div class="notice_icon icon_state_success"></div>
+                        <div class="notice_txt">
+                            <div class="pay_sum"><span class="sub_title">您已经成功付款</span><span class="sum_num"><b>${orderAmount}</b></span><em class="yuan">元</em></div>
+                            <p class="recur tint tip-txt">该页面将在<span id="sesc">60</span>秒后自动跳至订单信息页。 <span class="a_span" id="a-direct">立即查看订单信息</span> </p>                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <c:if test="${display==1}">
+            <div class="e_mainpay_bind">
+                <div class="b_quick_bind">
+                    <div class="lg_tip_explain">
+                        <div class="lg_explain_txt">
+                           <a href="javascript:;" class="close"></a> 登陆账户记录支付信息，下次支付更方便快捷
+                        </div>
+                        <div class="lg_explain_arrow">
+                            <span class="bottom1"></span>
+                            <span class="bottom2"></span>
+                        </div> 
+                    </div>                      
+                    <div class="b_write_card">
+                        <a class="btn" href="${bindCardUrl }" id="bindQuickPay"><em>马上登陆</em></a>                
+                    </div>
+                    <a class="b_quick_login" href="javascript:;">免费注册</a>
+                </div>
+            </div>
+            </c:if>
+            <div class="b_main_pay">
+                <div class="e_mainpay_inner clrfix">
+                    <div class="pay_qlogo"></div>
+                    <div class="pay_online">
+                        <div class="online_logo"></div>
+                        <div class="online_txt">本服务由银联在线提供<br />
+                            支持境内外所有带<b></b>标志的银行卡 </div>
+                    </div>
+                </div>
+            </div>
+            <!--底部的安全贴士-->
+            <div class="b_safe_tips">
+                <p class="lead">安全贴士：</p>
+                <ul class="liststyle_disc">
+                    <li>请您确认浏览器地址必须为https开头</li>
+                    <li>您的账户信息请妥善保管并尽量避免在网吧等公共场所进行支付</li>
+                </ul>
+            </div>
+            <!--\底部的安全贴士-->            
+        </div>
+    </div>
+</div>
+<!-- <script type="text/javascript" src="http://qunarzz.com/payment/prd/scripts/quickPaySuccess-<%@include file='/include/.ver'%>.js"></script>-->
+ <script type="text/javascript" src="http://qunarzz.com/payment/dev/scripts/quickPaySuccess-765765757.js"></script>
+ <!--<script type="text/javascript" src="/static/payment/prd/scripts/quickPaySuccess-<%@include file='/include/.ver'%>.js"></script>-->
+<script type="text/javascript">
+(function(){
+	window._ba_utm_init = function(GA){ 
+		window['_ba_utm_l'] = 'pay';
+		window['_ba_utm_s'] = '789';
+		window['_ba_utm_ex'] = {};
+	};
+	//-- load ga script
+	var s = document.createElement('script');
+	s.src = '/static/payment/prd/scripts/ga-<%@include file='/include/.ver'%>.js'; 
+	var head = document.getElementsByTagName('head');
+	if(head&&head[0]) { head[0].appendChild(s); }
+})();
+</script>
+</body>
+</html>
