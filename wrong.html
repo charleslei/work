@@ -5,27 +5,65 @@
 <title>【去哪儿网】支付出错页面-去哪儿网Qunar.com</title>
 <meta content="" name="keywords" />
 <meta content="" name="description" />
- <!-- <link href="http://qunarzz.com/payment/prd/styles/global-<%@include file='/include/.ver'%>.css" rel="stylesheet" />
-<link href="http://qunarzz.com/payment/prd/styles/payment-<%@include file='/include/.ver'%>.css" rel="stylesheet" />-->
-<link href="http://qunarzz.com/payment/prd/styles/global-765765757.css" rel="stylesheet" />
-<link href="http://qunarzz.com/payment/prd/styles/payment-765765757.css" rel="stylesheet" /> 
-<!--  <link href="/static/payment/prd/styles/global-<%@include file='/include/.ver'%>.css" rel="stylesheet" />
-<link href="/static/payment/prd/styles/payment-<%@include file='/include/.ver'%>.css" rel="stylesheet" />  -->
+ <!-- <link href="http://qunarzz.com/payment/prd/styles/quickpaySuccess-<%@include file='/include/.ver'%>.css" rel="stylesheet" type="text/css"/>--> 
+<link href="http://qunarzz.com/payment/prd/styles/quickpaySuccess-765765757.css" rel="stylesheet" type="text/css"/> 
+<style type="text/css">
+	.b_hd_mod .e_notice_content .icon_state_wrong{ top:40px; left:283px; }
+	.b_hd_mod .notice_txt .pay_sum{ padding-top: 20px;}
+</style>
 </head>
 <body>
-<div class="pay_header">
-		<h1 class="logo"><a title="“去哪儿”旅游搜索引擎" target="_top" href="http://www.qunar.com/"><span>“去哪儿”旅游搜索引擎</span></a></h1>
-		<h2>支付</h2>
+<div class="xs_wrap">
+    <div class="xs_header">
+        <div class="login">
+            <p class="welcome"><span>去哪儿网客户服务中心：010-57603866</span></p>
+            <p class="right_link" id="js_Login">您好，夏竹冬雪!</p>
+        </div>
+    </div>
 </div>
-<div class="payment">
-    <h2 class="wrong">出错了？</h2>
-    <div class="box">
-	    <ul>
-	    	<li>${errorInfo }</li>
-	    </ul>
-	</div>
+<div class="q_page_container">
+    <div class="q_page_wrap">
+        <div class="q_page">
+            <div class="b_header">
+                <div class="header_inner">
+                    <div class="e_header_logo png24"></div>
+                    <span class="e_header_title">支付</span></div>
+            </div>
+            <!--选择银行支付-->
+            <div class="b_payfor_content">
+                <div class="b_hd_mod">
+                    <div class="e_notice_content notice_state_success_center">
+                        <div class="notice_icon  icon_state_wrong"></div>
+                        <div class="notice_txt">
+                            <div class="pay_sum"><span class="sub_title">您已经成功付款</span></div>
+                            <p class="recur tint tip-txt">您的订单信息输入有误，请检查后重试</p>                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="b_main_pay">
+                <div class="e_mainpay_inner clrfix">
+                    <div class="pay_qlogo"></div>
+                    <div class="pay_online">
+                        <div class="online_logo"></div>
+                        <div class="online_txt">本服务由银联在线提供<br />
+                            支持境内外所有带<b></b>标志的银行卡 </div>
+                    </div>
+                </div>
+            </div>
+            <!--底部的安全贴士-->
+            <div class="b_safe_tips">
+                <p class="lead">安全贴士：</p>
+                <ul class="liststyle_disc">
+                    <li>请您确认浏览器地址必须为https开头</li>
+                    <li>您的账户信息请妥善保管并尽量避免在网吧等公共场所进行支付</li>
+                </ul>
+            </div>
+            <!--\底部的安全贴士-->            
+        </div>
+    </div>
 </div>
-<%@include file='/include/footer.jsp'%>
  <!--<script type="text/javascript" src="/static/payment/prd/scripts/processfooter-<%@include file='/include/.ver'%>.js"></script>-->
  <script type="text/javascript" src="http://qunarzz.com/payment/prd/scripts/processfooter-765765757.js"></script>
 <script type="text/javascript">
