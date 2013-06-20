@@ -77,7 +77,7 @@
                                 <div class="e_tab_content js-typepanel" data-type="quickpay">
                                     <div class="tab_content_inner">
                                         <div class="b_pinfo_form">
-                                            <form name="quickpayform" id="quickpayform" action="${upopfpayUrl}" method="post" target="_blank">
+                                            <form name="quickpayform" class='quickpayform' id="quickpayform" action="${upopfpayUrl}" method="post" target="_blank">
                                                 <input name="orderId" value="${orderId}" class="hide" js-submit>
                                                 <input name="payId" value="${payId}" class="hide" js-submit>                                            
                                                 <input name="payIdA" value="${payIdA}" class="hide" js-submit>
@@ -95,7 +95,7 @@
                                                         <div class="e_card_type clrfix">
                                                             <div class="common_card">&nbsp;</div>
                                                             <div class="info_card js-choose-card">
-                                                                <input type="radio" checked name="bankAndType" value="${b.bankId},${b.cardType}" mobile="${b.mobile}"  class="radio_box" ><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" bank="ICBC" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">0073</em></span></label>
+                                                                <input type="radio" checked name="bankAndType" value="${b.bankId},${b.cardType}" mobile="13718534208"  class="radio_box" ><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" bank="ICBC" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">0073</em></span></label>
                                                             </div>
                                                             <a href="javascript:;" class="close js_ops_link">删除</a>
                                                         </div>
@@ -106,7 +106,7 @@
                                                         <div class="e_card_type clrfix">
                                                             <div class="common_card">&nbsp;</div>
                                                             <div class="info_card js-choose-card">
-                                                                <input type="radio" name="bankAndType" value="${b.bankId},${b.cardType}" mobile="${b.mobile}"  class="radio_box" ><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" bank="CMB" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">0073</em></span></label>
+                                                                <input type="radio" name="bankAndType" value="${b.bankId},${b.cardType}" mobile="13718534208"  class="radio_box" ><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" bank="CMB" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">0073</em></span></label>
                                                             </div>
                                                             <a href="javascript:;" class="close js_ops_link">删除</a>
                                                         </div>
@@ -130,12 +130,48 @@
 
                                                 </div>
                                                 <div class="b_validate_box b_write_card">
-                                                    <!--
                                                     <table cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr class="js_credit_tr">
+                                                            <td class="c2">有效期：</td>
+                                                            <td><div class="ops_date">
+                                                                    <div class="csparest csparest_province">
+                                                                        <select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month">
+                                                                            <option value="请选择月份">请选择月份</option>
+                                                                            <option value="01">01</option>
+                                                                            <option value="02">02</option>
+                                                                            <option value="03">03</option>
+                                                                            <option value="04">04</option>
+                                                                            <option value="05">05</option>
+                                                                            <option value="06">06</option>
+                                                                            <option value="07">07</option>
+                                                                            <option value="08">08</option>
+                                                                            <option value="09">09</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <span class="time_unit">月</span>
+                                                                    <div class="csparest csparest_province">
+                                                                        <select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year">
+                                                                        </select>
+                                                                    </div>
+                                                                    <span class="time_unit">年</span>
+                                                                </div>
+                                                                <div class="set popup_tips_wrap js_tipcontainer" style="display:none"><span class="icon_tips_wrap"><em class="icon_tips iwrong"></em><em class="icon_tips iright"></em><em class="txt_tips"></em></span></div>
+                                                            </td>
+                                                        </tr>
                                                         <c:if test="${vcodeDisplay==1}">
                                                         <tr>
                                                             <td class="c2">手机号：</td>
-                                                            <td><div id="mobile-number"></div></td>
+                                                            <td>
+                                                                <div id="mobile-number">
+                                                                    <div class="set input">
+                                                                        <input type="text" placeholder="请输入银行预留手机号" value="" class="txtbox" data-jvalidator-pattern="not_empty & mobile" id="mobile" name="mobile" maxlength="13">
+                                                                    </div>
+                                                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
+                                                                </div>
+                                                            </td>
                                                         </tr>                                                        
                                                         <tr>
                                                             <td class="c2">短信验证码：</td>
@@ -160,7 +196,7 @@
                                                     </tr>
                                                     </c:if>
                                                 </table>
-                                                -->
+
                                                 <div class="e_write_inner">
                                                 <table cellpadding="0" cellspacing="0" width="100%">
                                                     <tr style='display:none'>
@@ -202,7 +238,7 @@
                                                         <td class="c1">有效期：</td>
                                                         <td><div class="ops_date">
                                                                 <div class="csparest csparest_province">
-                                                                    <select data-jvalidator-pattern="not_empty" id="expires_month" name="month">
+                                                                    <select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month">
                                                                         <option value="请选择月份">请选择月份</option>
                                                                         <option value="01">01</option>
                                                                         <option value="02">02</option>
@@ -220,7 +256,7 @@
                                                                 </div>
                                                                 <span class="time_unit">月</span>
                                                                 <div class="csparest csparest_province">
-                                                                    <select data-jvalidator-pattern="not_empty" id="expires_year" name="year">
+                                                                    <select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year">
                                                                     </select>
                                                                 </div>
                                                                 <span class="time_unit">年</span>
@@ -250,7 +286,6 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <!-- jsp 判断-->
                                                     <tr>
                                                         <td class="c1">短信验证码：</td>
                                                         <td>
@@ -266,7 +301,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="c1"></td>
-                                                        <td><label><input type="checkbox" name="isBind" checked="checked" value="CREDITCARD" class="radio_box">记住磁卡，下次付款方便</label></td>
+                                                        <td><label><input type="checkbox" name="isBind" checked value="CREDITCARD" class="radio_box">记住磁卡，下次付款方便</label></td>
                                                     </tr>
                                                 </table>
                                                 </div>
