@@ -1,0 +1,526 @@
+@charset "utf-8";
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin:0; padding:0; border:0; font-size:100%; font:inherit; vertical-align:baseline; }
+body {font:normal 12px/1.5 Tahoma, simsun, sans-serif; background:#fff; color:#555; -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%;text-align:center;position:relative;}
+h1, h2, h3, h4, h5, h6 { font-size:100%; }
+address, cite, dfn, em, var { font-style:normal; }
+code, kbd, pre, samp { font-family:"courier new", courier, monospace; }
+small { font-size:12px; }
+ul, ol { list-style:none; }
+a { text-decoration:none; color:#0069ca; }
+a:hover { text-decoration:none; color:#f60; }
+sup { vertical-align:text-top; }
+sub { vertical-align:text-bottom; }
+legend { color:#000; }
+fieldset, img { border:0; }
+button, input, select, textarea { font-size:100%; }
+table { border-collapse:collapse; border-spacing:0; }
+select { vertical-align:middle; }
+input{background-color:#fff;}
+.clr, .clear { clear:both; height:0; overflow:hidden; }
+.fix { *zoom:1; }
+.fix:after { clear:both; display:block; height:0; visibility:hidden; content:"\20"; }
+.clr_after { height:1%; }
+.clr_after:after { clear:both; display:block; height:0; visibility:hidden; content:"."; }
+.fl{float:left;}
+.hide{display:none;}
+.mt8{margin-top:8px;}
+.mtb8{margin:8px 0px;}
+html { margin:0; padding:0; background:#fff url(http://source.qunar.com/common/header/qn_header_text_n1.png) 0 -560px repeat-x; }
+body { margin:0; padding:0; min-height:640px; background:url(http://source.qunar.com/common/header/qn_header_bg.png) 50% 78px no-repeat; }
+.qn_header { margin:2px 0 -422px; padding:0; width:auto; height:500px; font:normal 12px/1.5 arial; background:url(http://source.qunar.com/common/header/qn_header_n2.png) 0 -160px repeat-x; color:#555; }
+.qn_header .inner { position:relative; z-index:2000; margin:0 auto; border-bottom:3px solid #bce7e5; width:980px; height:73px; }
+.qn_header_logo { float:left; display:inline; margin:11px 0 0 16px; width:136px; height:54px; }
+.qn_header_logo a { display:block; width:136px; height:54px; text-indent:-9999em; background:url(http://source.qunar.com/common/header/qn_header_n2.png) 0 0 no-repeat; outline:none; }
+.qn_header_mnav { float:left; display:inline; margin:36px 0 0 23px; width:auto; height:37px; }
+.qn_header_mnav ul { float:left; display:inline; height:37px; overflow:hidden; }
+.qn_header_mnav li { position:relative; z-index:1; float:left; display:inline; height:37px; overflow:hidden; }
+.qn_header_mnav li .split { float:left; display:inline; }
+.qn_header_mnav li a { float:left; display:inline; padding:0 20px; width:36px; height:40px; font:bold 14px/40px simsun; text-align:center; color:#098483; }
+.qn_header_mnav li a:hover { background:url(http://source.qunar.com/common/header/qn_header_n2.png) 10px -73px no-repeat; }
+.qn_header_mnav li .i { position:relative; z-index:1; display:block; margin-top:-40px; height:36px; background:url(http://source.qunar.com/common/header/qn_header_text_n1.png) 0 40px no-repeat; cursor:pointer; }
+.qn_header_mnav li.home .i { background-position:0 0; }
+.qn_header_mnav li.flight .i { background-position:0 -40px; }
+.qn_header_mnav li.hotel .i { background-position:0 -80px; }
+.qn_header_mnav li.tuan .i { background-position:0 -120px; }
+.qn_header_mnav li.package a { width:72px; }
+.qn_header_mnav li.package .i { background-position:0 -160px; }
+.qn_header_mnav li.train a { width:54px; }
+.qn_header_mnav li.train .i { background-position:0 -200px; }
+.qn_header_mnav li.travel .i { background-position:0 -240px; }
+.qn_header_mnav li.home a { color:#333; }
+.qn_header_mnav li.home .i { background-position:0 -280px; }
+.qn_header_mnav .hot { position:absolute; top:6px; right:10px; z-index:1; display:block; width:10px; height:10px; background:url(http://source.qunar.com/common/header/qn_header_n2.png) 0 -59px no-repeat; overflow:hidden; cursor:pointer; }
+.qn_header_mnav .new { position:absolute; top:6px; right:10px; z-index:1; display:block; width:10px; height:10px; background:url(http://source.qunar.com/common/header/qn_header_n2.png) -15px -59px no-repeat; overflow:hidden; cursor:pointer; }
+.qn_header_rnav { position:absolute; top:5px; right:5px; z-index:1; float:right; display:inline; width:200px; font-family:tahoma; text-align:right; }
+.qn_header_rnav a { color:#555; }
+.qn_header_rnav a:hover { color:#f60; }
+.qn_header_rnav .link { position:absolute; top:0; right:0; z-index:1; width:500px; text-align:right; word-spacing:0; }
+.qn_header_rnav .link .username { color:#f60; }
+.qn_header_rnav .client { padding-top:31px; height:37px; }
+.qn_header_rnav .client img { vertical-align:bottom; }
+.qn_header_rnav .qmenu { position:relative; z-index:2; padding-right:10px; background:url(http://source.qunar.com/common/header/qn_header_n2.png) 100% -56px no-repeat; }
+.qn_header_rnav .qmenu:hover { color:#555; }
+.qn_header_rnav .myMenuLink__ { position:relative; z-index:2; }
+.qn_header_rnav .qmenu_ext { position:absolute; right:128px; top:-2px; z-index:1; border:1px solid #666; width:70px; text-align:left; background-color:#fff; }
+.qn_header_rnav .qmenu_ext .qmenu_top { height:20px; border-bottom:1px solid #666; }
+.qn_header_rnav .qmenu_ext li a { display:block; padding-left:6px; height:20px; line-height:20px; }
+.qn_header_rnav .qmenu_ext li a:hover { background-color:#4878da; color:#fff; }
+.qn_header_smenu { margin:0 auto; width:990px; height:35px; }
+.qn_header_smenu li { float:left; display:inline; margin-right:10px; }
+.qn_header_smenu li a { float:left; display:inline; padding:1px 20px 0; height:34px; font:bold 14px/34px simsun; color:#098483; }
+.qn_header_smenu li a:hover { background-color:#fff; color:#098483; }
+.qn_header_smenu li a.active { padding-top:0; border-top:1px solid #1aa2a1; height:34px; line-height:34px; background-color:#fff; color:#333; cursor:default; }
+
+.qn_page{width:980px;margin:0 auto;padding:5px;text-align:left;background-color:#fff;}
+/*面包屑*/
+.pos {margin-bottom:10px; padding:5px 10px 10px; border-bottom:1px solid #ddd;font:12px/1.231 simsun;text-align:left;}
+.pos .zf_help{float:right;margin-right:16px;}
+
+.checkbox{width:13px;height:13px;vertical-align:middle;margin:0px 6px 0px 0px;background-color:#fff;}
+
+.qn_footer { clear:both; margin:0 auto; padding:10px 0; width:979px; line-height:1.231; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#848484; }
+.qn_footer .inner { margin:0 10px; text-align:right; }
+.qn_footer .gs { float:right; margin:0 20px 0 0; }
+.qn_footer .cr { margin-right:65px; padding-bottom:12px; }
+.jx-ie6 .qn_footer .cr{margin-right:60px;}
+.qn_footer .links { margin:0; padding:2px 0 0; list-style:none; }
+.qn_footer .links a,
+.qn_footer .links a:visited { margin:0 5px; text-decoration:none; color:#848484; }
+.qn_footer .links a:hover { color:#f60; }
+.qn_footer .links a.hl,
+.qn_footer .links a.hl:visited { color:#f60; }
+.qn_footer .copyright { margin:0; padding:8px 5px 0 0; }
+.qn_footer .copyright2 { margin:0; padding:8px 5px 0 0; text-align:center; }
+.qn_footer .copyright a,
+.qn_footer .copyright a:visited { text-decoration:none; color:#848484; }
+
+.seo { border-top:1px solid #ddd; }
+.seo .seo_links { clear:both; margin:10px 0 0; padding:0; color:#a7a7a7; }
+.seo .seo_links a,
+.seo .seo_links a:visited { margin-right:6px; text-decoration:none; color:#a7a7a7; }
+.seo .seo_links dt { float:left; padding-left:25px; font-weight:700; }
+.seo .seo_links dd { margin-left:90px; padding:0; word-spacing:5px; }
+.seo .seo_links dd span { float:left; margin-right:6px; white-space:nowrap; }
+.seo .seo_links dd .clr { clear:both; }
+
+.q_header_paycenter { margin-bottom:-427px !important; }
+
+.q_pagecontainer {
+	background: url(http://source.qunar.com/qui/user/bg_bdrex.png) repeat-x scroll 0 0;
+	width: 100%;
+	text-align: left;
+}
+.q_pagewrap {
+	background: url(http://source.qunar.com/qui/user/bg_bd_v1.png) no-repeat scroll center 0;
+	padding-top: 3px;
+	min-width: 990px;
+}
+.q_page {
+	background: #fff;
+	width: 980px;
+	padding: 0 5px;
+	margin: 0 auto;
+}
+/*layout*/
+.l_s175m770 {
+	background: #fff url(http://source.qunar.com/qui/user/bg_bdrey.png) repeat-y scroll 192px 0;
+	width: 970px;
+	padding: 0 5px 20px;
+}
+.l_s175m770 .l_s175 {
+	float: left;
+	width: 175px;
+	padding: 15px 0;
+}
+.l_s175m770 .l_m770 {
+	float: right;
+	width: 770px;
+	padding: 15px 0;
+}
+/*\layout*/
+
+/*breadcrumb*/
+.b_ucbreadcrumb {
+	border-bottom: 1px dotted #c9c9c9;
+	padding-bottom: 4px;
+	margin-bottom: 10px;
+}
+.b_ucbreadcrumb em { padding: 0 5px; }
+/*breadcrumb*/
+
+/*ucsidebar*/
+.q_ucsidebar { }
+.q_ucsidebar li {
+	border-bottom: 1px dotted #a3cac9;
+	font-size: 14px;
+	font-weight: bold;
+}
+.q_ucsidebar li.last { border-bottom: none; }
+.q_ucsidebar li a {
+	display: block;
+	padding: 7px 8px 8px 15px;
+	height: 18px;
+	line-height: 18px;
+	overflow: hidden;
+	color: #555;
+}
+.q_ucsidebar li a:hover { color: #0069CA; }
+.q_ucsidebar li a span {
+	float: right;
+	display: inline;
+	margin-top: 3px;
+}
+.q_ucsidebar dl {
+	padding-bottom: 2px;
+	font-weight: normal;
+	display: none;
+}
+.q_ucsidebar dl dt a { padding: 7px 10px 7px 20px; }
+.q_ucsidebar dl dt em.q_ucsidebar_arrow,
+.q_ucsidebar dl dt em {
+	float: left;
+	display: inline;
+	width: 9px;
+	margin: 3px 11px 0 0;
+	_margin-right: 8px;
+}
+.q_ucsidebar dl dd a { padding: 6px 10px 5px 40px; }
+.q_ucsidebar dl a:hover {
+	background: #e0f4f3;
+	color: #0069CA;
+}
+.q_ucsidebar_account_exp .q_ucsidebar_account span.q_ucsidebar_arrow{ background-position: 0 -198px; }
+.q_ucsidebar_account_exp .q_ucsidebar_account dl{ display: block; }
+/*\ucsidebar*/
+
+/*ucsidebar ico*/
+.q_ucsidebar .q_ucsidebar_ico,
+.q_ucsidebar .q_ucsidebar_arrow {
+	background: url(http://source.qunar.com/qui/user/ico_usercenter.png) no-repeat scroll 0 0;
+	width: 17px;
+	height: 16px;
+	margin: -2px 7px 0 0;
+	display: inline-block;
+	vertical-align: middle;
+}
+.q_ucsidebar_account .q_ucsidebar_ico { background:url(http://source.qunar.com/site/images/new_main/ico_useraccount_v1.png) no-repeat scroll 0 0;}
+.q_ucsidebar .q_ucsidebar_arrow {
+	background-position: 2px -175px;
+	width: 9px;
+	height: 10px;
+	margin-top: 4px;
+}
+/*\ucsidebar ico*/
+
+/*我的帐户*/
+.q_ucsidebar_account dl dd a { padding-left: 54px; }
+.q_ucsidebar_account .q_ucsidebar_item1 dd,
+.q_ucsidebar_account .q_ucsidebar_item2 dd,
+.q_ucsidebar_account .q_ucsidebar_item3 dd{ display: none; }
+.q_ucsidebar_account_item1 .q_ucsidebar_item1 dd,
+.q_ucsidebar_account_item2 .q_ucsidebar_item2 dd,
+.q_ucsidebar_account_item3 .q_ucsidebar_item3 dd{ display: block; }
+.q_ucsidebar_account_item1 .q_ucsidebar_item1 .q_ucsidebar_arrow,
+.q_ucsidebar_account_item2 .q_ucsidebar_item2 .q_ucsidebar_arrow,
+.q_ucsidebar_account_item3 .q_ucsidebar_item3 .q_ucsidebar_arrow{ background-position: 0 -198px; }
+.q_ucsidebar_account_item1_1 .q_ucsidebar_item1_1 a,
+.q_ucsidebar_account_item2_1 .q_ucsidebar_item2_1 a,
+.q_ucsidebar_account_item2_2 .q_ucsidebar_item2_2 a,
+.q_ucsidebar_account_item2_3 .q_ucsidebar_item2_3 a,
+.q_ucsidebar_account_item3_1 .q_ucsidebar_item3_1 a{
+	background: #e0f4f3;
+	color: #0069CA;
+}
+/*\我的帐户*/
+
+.csparest{width:168px;float:left;margin-right:10px;}
+.csSelect{position:relative;z-index:10;width:168px;}
+.csStitle{width:154px;cursor:pointer;border:1px solid #d3d3d3;padding:4px 4px 6px 8px;background:#fff url(http://source.qunar.com/site/images/pay/user_center/icon_MoreNextDays.gif) no-repeat right center;line-height:16px;}
+.csSlist{display:none;position:absolute;background:#fff;width:166px;border:1px solid #d3d3d3;border-top:0;overflow-y:auto;overflow-x:hidden;padding:6px 0px 3px 0px;}
+.csSlist li{padding:0px;line-height:22px;*line-height:18px;border:#fff 1px solid;}
+.csSlist a{display:block;padding:2px 4px 2px 8px;color:#555;outline:none;line-height:18px;}
+.csSlist a:hover{background:#0069ca;color:#fff;}
+
+.input1{width:160px;border:#d3d3d3 1px solid;height:24px;line-height:24px;vertical-align:middle;padding:1px 0px 1px 6px;margin-right:10px;background-color:#fff;}
+
+.bt_submit,.get_code,.re_sent,.btn{background:url(http://source.qunar.com/site/images/pay/user_center/button.png) no-repeat left top;}
+.icon_correct,.arrow,.icon_error,.icon_waring,.icon_correct2{background:url(http://source.qunar.com/site/images/pay/user_center/icon_layer.png) no-repeat left top;}
+
+.cret_pas{float:left;position:relative;z-index:6;margin-left:6px;display:inline;}
+.error_ct{display:inline-block;*display:inline;*zoom:1;background:#fff9ce;border:#ffbc79 1px solid;font-size:12px;}
+.cret_pas .arrow{position:absolute;left:-4px;top:9px;width:5px;height:7px;background-position:0px -109px;display:block;z-index:9;}
+.error_ct p{margin:2px 5px 3px 5px;display:inline-block;*display:inline;*zoom:1;line-height:18px;}
+.error_ct .error_text{}
+.cret_code2{float:left;position:relative;z-index:10;margin-left:6px;display:inline;}
+.cret_code2 .arrow{position:absolute;left:-4px;top:9px;width:5px;height:7px;background-position:0px -143px;display:block;z-index:9;}
+.cret_code2 .code_tip{display:inline-block;*display:inline;*zoom:1;background:#e5f5ff;border:#40b3ff 1px solid;font-size:12px;}
+.cret_code2 .code_tip p{margin:2px 5px 3px 5px;display:inline-block;*display:inline;*zoom:1;line-height:18px;}
+.cret_code2 .code_tip .code_text{}
+.input_text{width:168px;margin-right:10px;background-color:#fff;}
+.yzm_tip{font-size:12px;margin-left:10px;display:inline-block;vertical-align:middle;*vertical-align:top;*margin-top:3px;}
+
+
+.cret_error2{float:left;position:relative;z-index:6;margin-left:6px;display:inline;}
+.cret_error2 .arrow{position:absolute;left:-4px;top:9px;width:5px;height:7px;background-position:0px -109px;display:block;z-index:9;}
+.cret_error2 .error_ct{display:inline-block;*display:inline;*zoom:1;background:#fff9ce;border:#ffbc79 1px solid;font-size:12px;}
+.cret_error2 .error_ct p{margin:2px 5px 3px 5px;display:inline-block;*display:inline;*zoom:1;line-height:18px;}
+.cret_error2 .error_ct .error_text{}
+
+.creat_acout{width:362px;margin-top:8px;}
+
+.icon_correct,.arrow,.icon_error,.icon_waring,.icon_correct2{display:inline-block;*display:inline;*zoom:1;width:18px;height:18px;vertical-align:middle;margin-right:6px;}
+.icon_correct{background-position:0px 5px;height:23px;}
+.icon_error{background-position:0px -37px;*background-position:0px -36px;}
+.icon_waring{background-position:0px -72px;*background-position:0px -71px;}
+.icon_correct2{background-position:0px -173px;width:14px;height:14px;}
+
+.bt_submit{border:0; width:102px; height:30px; background-position:-150px 0px; cursor:pointer; outline:none;margin-top:8px;}
+.bt_submit:hover { background-position:-150px -35px; }
+.bt_submit:active { background-position:-150px -70px; }
+.re_sent{display:inline-block;font-size:12px;font-weight:100;color:#a0a0a0;border:0; width:120px; height:24px;line-height:24px; text-align:center;background-position:0px -272px; cursor:pointer; outline:none;vertical-align:middle;}
+.re_sent:hover { color:#a0a0a0; }
+.re_sent b{font-size:12px;font-weight:100;color:#a0a0a0;}
+.btn{border:0; width:100px; height:30px; background-position: 0px 0px; cursor:pointer; outline:none; }
+.btn:hover { background-position:0px -35px; }
+.btn:active { background-position:0px -70px; }
+.get_code{display:inline-block;font-size:12px;font-weight:100;color:#555;width:122px;height:25px;line-height:22px;line-height:23px \9;border:0;text-align:center;background-position:-161px -139px;cursor:pointer; outline:none;vertical-align:middle;}
+.get_code b{font-size:12px;font-weight:100;color:#555;}
+.get_code:hover{background-position:-161px -169px;color:#036bce;}
+.get_code:hover b{color:#036bce;}
+.get_code:active{background-position:-161px -199px;color:#036bce;}
+.get_code:active b{color:#036bce;}
+
+/**提示信息**/
+.ico_warnS, .ico_delS { background: url(http://source.qunar.com/site/images/hotel/kezhan/ico_prompt.png) no-repeat scroll 0 0; display: inline-block; height: 16px; width: 16px; overflow: hidden; }
+.ico_warnS { background-position: 0 -300px; }
+.ico_delS { background-position: 0 -420px; }
+
+.b_acctips{ padding:10px 0;}
+.b_acctips em{ vertical-align:middle; margin-right:5px;}
+/**\提示信息**/
+.minheight454{min-height:454px;_height:454px;}
+.pos{margin-bottom:7px;}
+.acout_balan{background:#fdf9e5;border:#f8d2a4 1px solid;padding:10px 20px 5px 20px;margin-right:5px;}
+.acout_balan h5{font-weight:700;font-size:14px;line-height:26px;}
+.acout_balan .bt_pr{font-size:14px;}
+.acout_balan .bt_pr b{font-size:30px;font-family:arial;font-weight:700;color:#cc0000;display:inline-block;margin-right:8px;}
+.bt_rechar,.bt_rechth,.bt_withdrawal{background:url(http://source.qunar.com/site/images/pay/user_center/btn3.png) no-repeat left top;}
+.bt_rechar{border:0; width:100px; height:30px; background-position:0 0; cursor:pointer; outline:none;display:inline-block;vertical-align:top;margin:6px 0px 0px 20px ;}
+.bt_rechar:hover { background-position:0 -35px; }
+
+.bt_rechth{border:0; width:100px; height:30px; background-position:-105px 0; cursor:pointer; outline:none;display:inline-block;vertical-align:top;margin:6px 0px 0px 10px;}
+.bt_rechth:hover { background-position:-105px -35px; }
+
+.bt_withdrawal{border:0; width:100px; height:30px; background-position:-210px 0; cursor:pointer; outline:none;display:inline-block;vertical-align:top;margin:6px 0px 0px 10px;}
+.bt_withdrawal:hover { background-position:-210px -35px; }
+.bt_withdrawal_disable,
+.bt_withdrawal_disable:hover { background-position:-210px -70px; cursor:default; }
+
+.btnQuery{background:url(http://source.qunar.com/site/images/pay/user_center/button.png) no-repeat left top;}
+.btnQuery{border:0; width:70px; height:22px; background-position:-339px -139px; cursor:pointer; outline:none;}
+.btnQuery:hover { background-position:-339px -170px; }
+.btnQuery:active { background-position:-339px -201px; }
+
+/**/
+.record_ct{margin:10px 5px 0px 0px;}
+.record_ct .qunar-dp .textbox{padding-bottom:3px \0;}
+.otab { padding:0px 0px 0px 16px; border-bottom:1px solid #51c3bb; height:32px; font:normal 14px/18px simsun; }
+.otab:after { clear:both; display:block; height:0; visibility:hidden; content:"."; }
+.otab li { float:left; padding:6px 15px; border:1px solid #fff; border-bottom:0; color:#0069ca; cursor:pointer; }
+.otab li.active { position:relative; top:1px; padding:5px 15px 7px; border:1px solid #51c3bb; border-bottom:1px solid #fff; font-weight:700; background-color:#fff; color:#065ccb; cursor:default; }
+
+/*查询条件*/
+.return_cord .setbl { margin:20px 0; }
+.return_cord .setbl td.c1 { padding-left:10px; width:60px; }
+.return_cord .setbl td.c2 { width:206px; }
+.return_cord .setbl td.c3 { width:60px; }
+.return_cord .setbl td.c4 { width:206px; }
+.return_cord .setbl td.c5 { width:130px;vertical-align:middle; }
+.return_cord .setbl td.c6 {text-align:right;vertical-align:top;}
+.return_cord .setbl td.c2 .qunar-dp{z-index:2;}
+.return_cord .qunar-dp .q-datepicker .c{overflow:hidden;}
+
+
+.return_cord .csparest{}
+.return_cord .csSelect{position:relative;z-index:10;}
+.return_cord .csStitle{cursor:pointer;border:1px solid #bababa;padding:1px 4px 2px 8px;background:#fff url(http://source.qunar.com/train_tts/icon_MoreNextDays.gif) no-repeat right center;line-height:16px;}
+.return_cord .csSlist{display:none;position:absolute;background:#fff;width:100%;border:1px solid #dddddd;border-top:0;overflow-y:auto;overflow-x:hidden;}
+.return_cord .csSlist a{display:block;padding:1px 4px 2px 8px;color:#555;outline:none;line-height:18px;}
+.return_cord .csSlist a:hover{background:#0069ca;color:#fff;}
+.return_cord .wt120{width:120px;}
+.return_cord .wt120 .csSelect{width:107px;}
+.return_cord .wt120 .csStitle{width:95px;}
+/*充值退还记录列表*/
+.czthbg{margin-right:5px;width:764px;_display:inline;}
+.cz_table{table-layout:fixed;width:100%;}
+.cz_table th.ref1{width:66px;text-align:center;}
+.cz_table th.ref2{width:160px;}
+.cz_table th.ref3{width:112px;}
+.cz_table th.ref4{width:156px;}
+.cz_table th.ref5{width:108px;}
+.cz_table th.ref6{width:92px;}
+.cz_table th{height:28px;line-height:28px;font-weight:100;text-indent:10px;text-align:left;background:url(http://source.qunar.com/site/images/pay/user_center/tkth_bg.png) no-repeat right top;}
+.cz_table th.ref7{width:66px;background-position:left top;}
+.cz_table td{word-wrap: break-word;word-break:break-all;padding:12px 6px 3px 10px;text-align:left;color:#888;}
+.cz_table th.ref1{text-indent:0px;}
+.cz_table td.ref2,.cz_table td.ref3,.cz_table td.ref4{font-family:Arial;}
+.cz_table td.ref1{width:50px;text-align:center;}
+.cz_table td.ref2{width:144px;}
+.cz_table td.ref3{width:96px;}
+.cz_table td.ref4{width:140px;}
+.cz_table td.ref5{width:92px;}
+.cz_table td.ref6{width:76px;}
+.cz_table td.ref7{width:50px;}
+.cz_table tr.even{background-color:#fbfdfe;border-top:#ddd 1px solid;border-bottom:#ddd 1px solid;}
+.cz_table .ref3 a{display:inline-block;color:#555;cursor:pointer;}
+.cz_table .ref3 a:hover{color:#f60;}
+.cz_table .ref3 .dbsort span{background:url(http://source.qunar.com/site/images/pay/user_center/icon_jt.png) no-repeat 0px 0px;}
+.cz_table .ref3 .dbsort span{width:60px;padding-right:15px;display:block;line-height:28px;background-position:100% 10px;border:0px;}
+.cz_table .ref3 .dbsort-asc span{background-position:100% -11px;}
+.cz_table .ref3 .dbsort-desc span{background-position:100% -33px;}
+/*充值记录页*/
+.rechar_recodebg{margin-right:5px;width:764px;_display:inline;}
+.re_table{table-layout:fixed;width:100%;}
+.re_table th.ref1{width:66px;text-align:center;}
+.re_table th.ref2{width:160px;}
+.re_table th.ref3{width:112px;}
+.re_table th.ref4{width:80px;}
+.re_table th.ref5{width:146px;text-align:center;}
+.re_table th.ref6{width:130px;text-align:center;}
+.re_table th{height:28px;line-height:28px;font-weight:100;text-indent:10px;text-align:left;background:url(http://source.qunar.com/site/images/pay/user_center/tkth_bg.png) no-repeat right top;}
+.re_table th.ref7{width:69px;background-position:left top;}
+.re_table td{word-wrap: break-word;word-break:break-all;padding:12px 6px 3px 10px;text-align:left;color:#888;}
+.re_table th.ref1{text-indent:0px;}
+.re_table td.ref2,.re_table td.ref3,.re_table td.ref4{font-family:Arial;}
+.re_table td.ref1{width:50px;text-align:center;}
+.re_table td.ref2{width:144px;}
+.re_table td.ref3{width:96px;}
+.re_table td.ref4{width:64px;}
+.re_table td.ref5{width:130px;text-align:center;}
+.re_table td.ref6{width:114px;text-align:center;}
+.re_table td.ref7{width:53px;}
+.re_table td.ref4{color:#067e00;}
+.re_table .ref3 a{display:inline-block;color:#555;cursor:pointer;}
+.re_table .ref3 a:hover{color:#f60;}
+.re_table .ref3 .dbsort span{background:url(http://source.qunar.com/site/images/pay/user_center/icon_jt.png) no-repeat 0px 0px;}
+.re_table .ref3 .dbsort span{width:60px;padding-right:15px;display:block;line-height:28px;background-position:100% 10px;border:0px;}
+.re_table .ref3 .dbsort-asc span{background-position:100% -11px;}
+.re_table .ref3 .dbsort-desc span{background-position:100% -33px;}
+.re_table tr.even{background-color:#fbfdfe;border-top:#ddd 1px solid;border-bottom:#ddd 1px solid;}
+
+
+/*收支明细*/
+.detail_paybg{margin-right:5px;width:764px;_display:inline;}
+.det_table{table-layout:fixed;width:100%;}
+.det_table th.ref1{width:66px;text-align:center;}
+.det_table th.ref2{width:162px;}
+.det_table th.ref3{width:112px;}
+.det_table th.ref4{width:106px;}
+.det_table th.ref5{width:78px;text-align:center;}
+.det_table th.ref6{width:83px;text-align:center;}
+.det_table th.ref7{width:97px;text-align:center;}
+.det_table th{height:28px;line-height:28px;font-weight:100;text-indent:10px;text-align:left;background:url(http://source.qunar.com/site/images/pay/user_center/tkth_bg.png) no-repeat right top;}
+.det_table th.ref8{width:60px;background-position:left top;}
+.det_table td{word-wrap: break-word;word-break:break-all;padding:12px 6px 3px 10px;text-align:left;color:#888;}
+.det_table th.ref1{text-indent:0px;}
+.det_table td.ref1,.det_table td.ref2,.re_table td.ref3,.re_table td.ref5,.re_table td.ref6,.re_table td.ref7{font-family:Arial;}
+.det_table td.ref1{width:50px;text-align:center;}
+.det_table td.ref2{width:146px;}
+.det_table td.ref3{width:96px;}
+.det_table td.ref4{width:90px;}
+.det_table td.ref5{width:62px;text-align:center;}
+.det_table td.ref6{width:67px;text-align:center;}
+.det_table td.ref7{width:81px;text-align:center;}
+.det_table td.ref8{width:46px;}
+.det_table td.ref5{color:#067e00;}
+.det_table td.ref6{color:#ff6600;}
+.det_table .ref3 a{display:inline-block;color:#555;cursor:pointer;}
+.det_table .ref3 a:hover{color:#f60;}
+.det_table .ref3 .dbsort span{background:url(http://source.qunar.com/site/images/pay/user_center/icon_jt.png) no-repeat 0px 0px;}
+.det_table .ref3 .dbsort span{width:60px;padding-right:15px;display:block;line-height:28px;background-position:100% 10px;border:0px;}
+.det_table .ref3 .dbsort-asc span{background-position:100% -11px;}
+.det_table .ref3 .dbsort-desc span{background-position:100% -33px;}
+.det_table tr.even{background-color:#fbfdfe;border-top:#ddd 1px solid;border-bottom:#ddd 1px solid;}
+
+.norecode_tip{padding:15px 20px;}
+.norecode_tip .iner_re{padding:0px 0px 0px 21px;background:url(http://source.qunar.com/site/images/pay/user_center/icon_layer.png) no-repeat 0px -333px;*background-position:0px -335px;_background-position:0px -333px;}
+
+/*提现纪录*/
+.withdraw_paybg{margin-right:5px;width:764px;_display:inline;}
+.withdraw_table{table-layout:fixed;width:100%;}
+.withdraw_table th.ref1{width:66px;text-align:center;text-indent:0;}
+.withdraw_table th.ref2{width:162px;}
+.withdraw_table th.ref3{width:112px;}
+.withdraw_table th.ref4{width:106px;}
+.withdraw_table th.ref5{width:90px;text-align:center;text-indent:0;}
+.withdraw_table th.ref6{width:100px;text-align:center;text-indent:0;}
+.withdraw_table th.ref7{width:80px;text-align:center;text-indent:0; background-position:left top;}
+.withdraw_table th{height:28px;line-height:28px;font-weight:100;text-indent:10px;text-align:left;background:url(http://source.qunar.com/site/images/pay/user_center/tkth_bg.png) no-repeat right top;}
+.withdraw_table th.ref8{width:60px;background-position:left top;}
+.withdraw_table td{word-wrap: break-word;word-break:break-all;padding:12px 6px 3px 10px;text-align:left;color:#888;}
+.withdraw_table th.ref1{text-indent:0px;}
+.withdraw_table td.ref1,.det_table td.ref2,.re_table td.ref3,.re_table td.ref5,.re_table td.ref6,.re_table td.ref7{font-family:Arial;}
+.withdraw_table td.ref1{width:50px;text-align:center;}
+.withdraw_table td.ref2{width:146px;}
+.withdraw_table td.ref3{width:96px;}
+.withdraw_table td.ref4{width:90px;}
+.withdraw_table td.ref5{width:62px;text-align:center;}
+.withdraw_table td.ref6{width:67px;text-align:center;}
+.withdraw_table td.ref7{width:80px;text-align:left;}
+.withdraw_table td.ref8{width:46px;}
+.withdraw_table td.ref5{color:#067e00;}
+.withdraw_table td.ref6{color:#ff6600;}
+.withdraw_table .ref3 a{display:inline-block;color:#555;cursor:pointer;}
+.withdraw_table .ref3 a:hover{color:#f60;}
+.withdraw_table .ref3 .dbsort span{background:url(http://source.qunar.com/site/images/pay/user_center/icon_jt.png) no-repeat 0px 0px;}
+.withdraw_table .ref3 .dbsort span{width:60px;padding-right:15px;display:block;line-height:28px;background-position:100% 10px;border:0px;}
+.withdraw_table .ref3 .dbsort-asc span{background-position:100% -11px;}
+.withdraw_table .ref3 .dbsort-desc span{background-position:100% -33px;}
+.withdraw_table tr.even{background-color:#fbfdfe;border-top:#ddd 1px solid;border-bottom:#ddd 1px solid;}
+
+.norecode_tip{padding:15px 20px;}
+.norecode_tip .iner_re{padding:0px 0px 0px 21px;background:url(http://source.qunar.com/site/images/pay/user_center/icon_layer.png) no-repeat 0px -333px;*background-position:0px -335px;_background-position:0px -333px;}
+
+/*分页*/
+.rech_page{ padding:25px 0px 25px; font:12px tahoma; text-align:right;margin:0px 5px 0px 0px;}
+.rech_page a,.rech_page em{ display:inline-block; height:18px; padding:0 6px; line-height:18px; border:1px solid #dfdfdf; margin-right:5px; text-align:center; background:url(http://source.qunar.com/site/images/pay/user_center/tt_pagebg.png) repeat-x 0 0; color:#555; cursor:pointer; vertical-align:middle;}
+.rech_page a:hover {color:#0f68c2; border:1px solid #0e72d1; }
+.rech_page em{ color:#fd0263; border:1px solid #fd0a68; font-weight:bold;}
+.rech_page .tt_dot{ display:block;  height:15px;  margin-right:5px; padding:5px 0 0 0;}
+.rech_page a.pre,.rech_page a.next{ width:48px; position:relative;}
+.rech_page a.pre img,.rech_page a.next img{ position:absolute; top:5px;}
+.rech_page a.pre img{ left:6px;}
+.rech_page a.next img{ left:48px;}
+.rech_page a.pre span,.rech_page a.next span{ position:absolute; top:0; *top:1px!important; *top:0; display:block; width:40px;}
+.rech_page a.pre span{ left:14px;}
+.rech_page a.next span{ left:6px;}
+.rech_page a.next{ margin-right:0;}
+.rech_page .disable,.rech_page .disable:hover{border:1px solid #ececec;background-color:#ececec;color:#aaa;cursor:default;}
+.rech_page .disable span{cursor:default;}
+.rech_page cite{display:inline-block;padding:0px 8px 0px 3px;}
+
+.pos{margin-bottom:7px;}
+.user_content{min-height:360px;_height:360px;}
+.creat_pasform .title{font-size:14px;font-weight:700;padding:3px 0px 8px 10px;background:url(http://source.qunar.com/site/images/pay/user_center/dotline_bottom.gif) repeat-x left bottom;}
+.creat_pasform .open_sucstip{display:inline-block;font-size:12px;font-weight:100;margin-left:50px;background:#f0ffe5;border:#4dbf00 1px solid;padding:2px 6px 5px 6px;}
+.creat_pasform .open_errorstip{display:inline-block;margin-top:-2px;font-size:12px;font-weight:100;margin-left:50px;background:#fff9ce;border:#ffbc79 1px solid;padding:2px 6px 5px 6px;}
+
+
+.creat_pasform{}
+.creat_pasform h3{font-size:14px;font-weight:700;margin-bottom:10px;}
+.creat_pasform table{margin:5px 10px;}
+.creat_pasform table td{vertical-align:middle;padding:8px 0px 0px 0px;*padding-top:6px;font-size:14px;}
+.creat_pasform .ct_1{text-align:right;width:90px;padding-right:10px;}
+.creat_pasform .agree{font-size:12px;display:inline-block;line-height:15px;vertical-align:middle;}
+
+.faq_anser{margin:20px 30px;}
+.faq_anser h3{font-size:12px;font-weight:700;margin-bottom:8px;}
+.faq_anser ul{}
+.faq_anser ul li{line-height:20px;}
+
+
+
+
+
+
+.pay_ctn{background-color:#F4FBFC}
