@@ -501,7 +501,7 @@ body { margin:0; padding:0; min-height:640px; background:url(http://source.qunar
 
 .pos{margin-bottom:7px;}
 .user_content{min-height:360px;_height:360px;}
-.creat_pasform .title{font-size:14px;font-weight:700;padding:3px 0px 8px 10px;background:url(http://source.qunar.com/site/images/pay/user_center/dotline_bottom.gif) repeat-x left bottom;}
+.creat_pasform .title{font-size:14px;font-weight:700;padding:3px 0px 8px 10px;}
 .creat_pasform .open_sucstip{display:inline-block;font-size:12px;font-weight:100;margin-left:50px;background:#f0ffe5;border:#4dbf00 1px solid;padding:2px 6px 5px 6px;}
 .creat_pasform .open_errorstip{display:inline-block;margin-top:-2px;font-size:12px;font-weight:100;margin-left:50px;background:#fff9ce;border:#ffbc79 1px solid;padding:2px 6px 5px 6px;}
 
@@ -518,6 +518,37 @@ body { margin:0; padding:0; min-height:640px; background:url(http://source.qunar
 .faq_anser ul{}
 .faq_anser ul li{line-height:20px;}
 
+/*模拟select*/
+.csparest{float:left;}
+.csstatu{position:relative; z-index:10;}
+/*
+.csSelect{}
+.csStitle{cursor:pointer;border:1px solid #bababa;padding:2px 4px 2px 8px;background:#fff url(/images/tts/images/demo/icon_MoreNextDays.gif) no-repeat right center;line-height:16px;}
+.csSlist{display:none;position:absolute;background:#fff;width:100%;border:1px solid #bababa;border-top:0;overflow-y:auto;overflow-x:hidden;}
+.pas_list .csSlist li{padding-bottom:0px;}
+.csSelect .csSlist li{width:100%;clear:both;}
+.csSlist a{display:block;padding:2px 4px 2px 8px;color:#555;outline:none;line-height:18px;}
+.csSlist a:hover{background:#0069ca;color:#fff;}*/
+
+.yselector{background-color:#fff;width:120px;}
+.yselector_arraw{width:20px;border-left:1px dotted #bababa;float:right; margin-top:2px; margin-right:-20px; display: inline; height:15px;overflow: hidden; margin-bottom:-15px;}
+.yselector_arraw b{border-width:4px;border-style:solid;border-color:#555 #fff #fff #fff;width:0;height:0;font-size:0;line-height:0;display:block;margin:7px 0 0 6px;}
+.yselector_box{cursor:pointer;border:1px solid #bababa;padding:2px 20px 2px 2px;_height:1%;overflow: hidden;}
+.yselector_input{display:block;height:20px;line-height:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding:0 2px;}
+
+/* ie6 hack */
+* html .yselector_arraw {width:40px;border-width:2px;height:30px;zoom:0.5;}
+* html .yselector_arraw b{border-width:8px;margin-left:12px;margin-top:14px;}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .yselector_input:focus {outline-width:1px;outline-style:dotted;outline-color:#bababa;}
+}
+.yselector_suggestwrap {position:relative;z-index:13;}
+.yselector_suggest{overflow-y:auto;overflow-x:hidden;position: absolute;width:118px;border:1px solid #bababa;background-color:#fff;padding: 0 !important;}
+.yselector_suggest ul {width:auto;height:auto;margin:0;padding: 0 !important;border:0;}
+.yselector_suggest a{background-color:#fff;color:#555;display:block;line-height:24px;height:24px;padding:0 5px 0 4px !important;outline:0;text-overflow:ellipsis;overflow: hidden;}
+.yselector_suggest a:hover, .yselector_suggest a.hover{color:#fff;background-color:#4778da;}
+.yselector_suggest li{overflow:hidden;white-space:nowrap;padding:0;float:none !important;clear:both;width:100%;display:block;padding-top:0 !important;zoom:1;}
 
 
 
@@ -532,6 +563,7 @@ body { margin:0; padding:0; min-height:640px; background:url(http://source.qunar
 .pay_ctn .li .modify_mobile{background:url();}
 .pay_ctn .li .horize{float:left;padding-right:20px;}
 
+.oper{display:none}
 .oper .step .item{float:left;text-align:center;width:25%;height:30px;background:url() no-repeat}
 .oper .step .active{background:url(./img/11.png) no-repeat}
 
