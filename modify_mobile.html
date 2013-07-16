@@ -53,33 +53,35 @@
               <div class="creat_pasform" id='mobile_stat'>
                 <div class="title">我的账户手机绑定</div>
                 <div class='pay_ctn'>
-                  <div class='li'><span>已绑定手机号：</span><span>158****1000</span><a id='modify_mobile' class='modify_mobile' href='javascript:;'>修改手机号</a></div>
-                  <div class='li'><span>手机号状态：</span><span class='green'>可用</span><a href='javascript:;' class='show_all'>查看全部</a></div>
-                  <ol class='li ls_msg'>
-                    <li class='item'>您于2013-06-12日提交修改手机号码的申请已经通过申请</li>
-                    <li class='item'>您于2013-06-11日提交修改手机号码的申请未被通过，提供的身份证信息与注册信息不符，请重新提供</li>
-                    <li class='item'>您于2013-06-09日成功绑定158****1035手机</li>
-                  </ol>
-                  <div class='li'><span>将 158****1035同步为注册账户的手机号，同步后该手机号可用于去哪儿网登录</span><a href='javascript:;' class=''>同步</a></div>
-                  <div class='li'><span>绑定手机号免费享受一下服务：</span></div>
-                  <ul class='li fix'>
-                    <li class='horize'>手机找回密码</li>
-                    <li class='horize'>免费获取短信验证码</li>
-                    <li class='horize'>绑定快捷银行卡等</li>
-                  </ul>
+                  <div class='clr999'>
+                    <div class='li'><span>已绑定手机号：</span><span class='active'>158****1000</span><a id='modify_mobile' class='modify_mobile' href='javascript:;'>修改手机号</a></div>
+                    <div class='li'><span>手机号状态：</span><span class='green font14'>可用</span><a href='javascript:;' class='show_all'>查看全部</a></div>
+                    <ol class='li ls_msg'>
+                      <li class='item'>您于2013-06-12日提交修改手机号码的申请已经通过申请</li>
+                      <li class='item'>您于2013-06-11日提交修改手机号码的申请未被通过，提供的身份证信息与注册信息不符，请重新提供</li>
+                      <li class='item'>您于2013-06-09日成功绑定158****1035手机</li>
+                    </ol>
+                    <div class='li'><span>将 158****1035同步为注册账户的手机号，同步后该手机号可用于去哪儿网登录</span><a href='javascript:;' class='sync1'><span class='hide'>同步</span></a></div>
+                    <div class='li'><span>绑定手机号免费享受一下服务：</span></div>
+                    <ul class='li fix'>
+                      <li class='horize'>手机找回密码</li>
+                      <li class='horize'>免费获取短信验证码</li>
+                      <li class='horize'>绑定快捷银行卡等</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
               <div class='oper' id='oper'>
                 <div class='step fix' id='stepEle'><span class='item'>选择方式</span><span class='item'>确认原手机信息</span><span class='item'>新手机验证</span><span class='item'>修改成功</span></div>
                 <!--first-->
                 <div class='pay_ctn' step='step0'>
-                  <div>选择158****1035手机号使用状态</div>
+                  <div class='font14'>选择<span class='mb'>158****1035</span>手机号使用状态</div>
                   <table cellpadding="0" cellspacing="0">
-                    <tr><td class='c1'><input type="radio" name='operType' checked value="0"/></td><td>可以接收短信</td></tr>
-                    <tr><td></td><td><span>原手机号码，可以接收短信验证码</span></td></tr>
-                    <tr><td class='c1'><input type="radio" name='operType' value="1"/></td><td>无法接收短信</td></tr>
-                    <tr><td></td><td><span>原手机号码不可用，使用身份证或护照照片人工审核修改</span></td></tr>
-                    <tr><td></td><td class='top20'><a href='javascript:;' class='next' id='select_type'>下一步</a></td></tr>
+                    <tr><td class='c1'><input type="radio" name='operType' checked value="0"/></td><td><span class='font14 active'>可以接收短信</span></td></tr>
+                    <tr><td></td><td><span class='clr999'>原手机号码，可以接收短信验证码</span></td></tr>
+                    <tr><td class='c1'><input type="radio" name='operType' value="1"/></td><td><span class='font14'>无法接收短信</td></tr>
+                    <tr><td></td><td><span class='clr999'>原手机号码不可用，使用身份证或护照照片人工审核修改</span></td></tr>
+                    <tr><td></td><td class='top20'><a href='javascript:;' class='next' id='select_type'><span class='hide'>下一步</span></a></td></tr>
                   </table>
                 </div>
 
