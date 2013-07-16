@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />	
@@ -74,43 +74,43 @@
                 <!--first-->
                 <div class='pay_ctn' step='step0'>
                   <div>选择158****1035手机号使用状态</div>
-                  <table>
-                    <tr><td rowspan="2"><input type="radio" name='operType' checked value="0"/></td><td>可以接收短信</td></tr>
-                    <tr><td><span>原手机号码，可以接收短信验证码</span></td></tr>
-                    <tr><td rowspan="3"><input type="radio" name='operType' value="1"/></td><td>无法接收短信</td></tr>
-                    <tr><td><span>原手机号码不可用，使用身份证或护照照片人工审核修改</span></td></tr>
-                    <tr><td><a href='javascript:;' class='next' id='select_type'>下一步</a></td></tr>
+                  <table cellpadding="0" cellspacing="0">
+                    <tr><td class='c1'><input type="radio" name='operType' checked value="0"/></td><td>可以接收短信</td></tr>
+                    <tr><td></td><td><span>原手机号码，可以接收短信验证码</span></td></tr>
+                    <tr><td class='c1'><input type="radio" name='operType' value="1"/></td><td>无法接收短信</td></tr>
+                    <tr><td></td><td><span>原手机号码不可用，使用身份证或护照照片人工审核修改</span></td></tr>
+                    <tr><td></td><td class='top20'><a href='javascript:;' class='next' id='select_type'>下一步</a></td></tr>
                   </table>
                 </div>
 
                 <!--second-->
                 <div class='pay_ctn hide' type='type0'>
                   <table>
-                    <tr><td>原手机号码：</td><td>158****1035</td></tr>
-                    <tr><td>证件类型：</td><td><select id='id_type'><option value=''>身份证</option><option value=''>护照</option></select></td></tr>
-                    <tr><td>证件编号：</td><td><input type='text' placeholder='请输入注册时填写的身份证号'></td></tr>
-                    <tr><td>证件编号：</td><td><input type='text' placeholder='请输入注册时填写的护照号'></td></tr>
-                    <tr><td>交易密码：</td><td><input type='text' placeholder='请输入交易密码'></td></tr>
-                    <tr><td>短信验证码：</td><td><input type='text' placeholder='请输入验证码'></td></tr>
-                    <tr><td></td><td><a href='javascript:;' class='prev'>上一步</a><a href='javascript:;' class='next'>下一步</a></td></tr>
+                    <tr><td class='c1'>原手机号码：</td><td>158****1035</td></tr>
+                    <tr><td class='c1'>证件类型：</td><td><select id='id_type'><option value=''>身份证</option><option value=''>护照</option></select></td></tr>
+                    <tr><td class='c1'>证件编号：</td><td><input type='text' class='input1' placeholder='请输入注册时填写的身份证号'></td></tr>
+                    <tr><td class='c1'>证件编号：</td><td><input type='text' class='input1' placeholder='请输入注册时填写的护照号'></td></tr>
+                    <tr><td class='c1'>交易密码：</td><td><input type='password' class='input1' placeholder='请输入交易密码'></td></tr>
+                    <tr><td class='c1'>短信验证码：</td><td><input type='text' class='input1' placeholder='请输入验证码'></td></tr>
+                    <tr><td></td><td class='top20'><a href='javascript:;' class='prev'>上一步</a><a href='javascript:;' class='next'>下一步</a></td></tr>
                   </table>
                 </div>
 
                 <!--third-->
                 <div class='pay_ctn hide' type='type0'>
                   <table>
-                    <tr><td>新手机号码：</td><td>请输入新的手机号码</td></tr>
-                    <tr><td>短信验证码：</td><td>请输入验证码</td></tr>
-                    <tr><td></td><td><a href='javascript:;' class='prev'>上一步</a><a href='javascript:;' class='next'>下一步</a></td></tr>
+                    <tr><td class='c1'>新手机号码：</td><td><input type='text' class='input1' placeholder='请输入新的手机号码'></td></tr>
+                    <tr><td class='c1'>短信验证码：</td><td><input type='text' class='input1' placeholder='请输入验证码'></td></tr>
+                    <tr><td></td><td class='top20'><a href='javascript:;' class='prev'>上一步</a><a href='javascript:;' class='next'>下一步</a></td></tr>
                   </table>
                 </div>
 
                 <!--forth-->
                 <div class='pay_ctn hide' type='type0'>
                   <table>
-                    <tr><td rowspan="3"><span>success</span></td><td>修改成功</td></tr>
-                    <tr><td>已经成功将我的账户手机号号码修改为158***1035<br/>将158****1035同步为注册账户的手机号，同步后该手机号可用于去哪儿网登陆同步暂不同步</td></tr>
-                    <tr><td><a href="javascript:;">同步</a><a href='javascript:;'>暂不同步</a></td></tr>
+                    <tr><td class='c1' rowspan='2'><span>success</span></td><td><span>修改成功</span></td></tr>
+                    <tr><td><span>已经成功将我的账户手机号号码修改为158***1035</span><br><span>将158****1035同步为注册账户的手机号，同步后该手机号可用于去哪儿网登陆同步暂不同步</span></td></tr>
+                    <tr><td></td><td class='top20'><a href="javascript:;">同步</a><a href='javascript:;'>暂不同步</a></td></tr>
                   </table>
                 </div>
 
@@ -118,8 +118,8 @@
                 <div class='pay_ctn hide' type='type1'>
                   <div>为了确保账户信息的安全，请您确认交易密码</div>
                   <table>
-                    <tr><td>交易密码：</td><td>请输入交易密码</td></tr>
-                    <tr><td></td><td><a href='javascript:;' class='prev'>上一步</a><a href='javascript:;' class='next'>下一步</a></td></tr>
+                    <tr><td class='c1'>交易密码：</td><td><input type='password' class='input1' placeholder='请输入交易密码'></td></tr>
+                    <tr><td></td><td class='top20'><a href='javascript:;' class='prev'>上一步</a><a href='javascript:;' class='next'>下一步</a></td></tr>
                   </table>
                 </div>
 
@@ -127,19 +127,19 @@
                 <div class='pay_ctn hide' type='type1'>
                   <div>请您提供二代身份证或护照正面彩色照片，大小不超过2M，照片格式支持JPG、BMP</div>
                   <table>
-                    <tr><td>上传证件照：</td><td>证件图片</td></tr>
-                    <tr><td>新手机号码：</td><td>请输入新的手机号码</td></tr>
-                    <tr><td>短信验证码：</td><td>请输入验证码</td></tr>
-                    <tr><td></td><td><a href='javascript:;' class='prev'>上一步</a><a href='javascript:;' class='next'>下一步</a></td></tr>
+                    <tr><td class='c1'>上传证件照：</td><td>证件图片</td></tr>
+                    <tr><td class='c1'>新手机号码：</td><td><input type='password' class='input1' placeholder='请输入新的手机号码'></td></tr>
+                    <tr><td class='c1'>短信验证码：</td><td><input type='password' class='input1' placeholder='请输入验证码'></td></tr>
+                    <tr><td></td><td class='top20'><a href='javascript:;' class='prev'>上一步</a><a href='javascript:;' class='next'>下一步</a></td></tr>
                   </table>
                 </div>
 
                 <!--seven-->
                 <div class='pay_ctn hide' type='type1'>
                   <table>
-                    <tr><td rowspan="3"><span>success</span></td><td>恭喜您已成功提交申请</td></tr>
+                    <tr><td class='c1' rowspan="2"><span>success</span></td><td>恭喜您已成功提交申请</td></tr>
                     <tr><td>工作人员会在2个工作日内审核您的申请，请注意查看审核结果</td></tr>
-                    <tr><td><a href="javascript:;">完成</a></td></tr>
+                    <tr><td></td><td class='top20'><a href="javascript:;">完成</a></td></tr>
                   </table>
                 </div>
 

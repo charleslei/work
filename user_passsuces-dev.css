@@ -555,9 +555,12 @@ body { margin:0; padding:0; min-height:640px; background:url(http://source.qunar
 
 
 .pay_ctn{background-color:#F4FBFC;color:#999;padding:15px;}
+.pay_ctn table{width:100%}
+.pay_ctn .top20{padding-top: 20px}
+.pay_ctn .block{display:block}
 .pay_ctn .li{margin-bottom:15px;position:relative}
 .pay_ctn .li .green{color:#4BBE40}
-.pay_ctn .ls_msg{ background: #FFFEDF; border: 1px solid #F8D3A7; }   
+.pay_ctn .ls_msg{ background: #FFFEDF; border: 1px solid #F8D3A7; }
 .pay_ctn .ls_msg .item{padding: 6px 10px;}
 .pay_ctn .li .show_all{position:absolute;right:0;}
 .pay_ctn .li .modify_mobile{background:url();}
@@ -566,4 +569,4 @@ body { margin:0; padding:0; min-height:640px; background:url(http://source.qunar
 .oper{display:none}
 .oper .step .item{float:left;text-align:center;width:25%;height:30px;background:url() no-repeat}
 .oper .step .active{background:url(./img/11.png) no-repeat}
-
+.pay_ctn .c1{ padding-top:20px; width: 100px; padding-right: 5px; text-align: right;color: #999; overflow: hidden; }
