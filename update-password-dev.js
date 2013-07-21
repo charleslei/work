@@ -1664,6 +1664,655 @@ $.fn.extend({
 
 })(this);
 
+(function($) {
+
+    $.extend({
+        jvalidator: {
+            
+            version : '0.2.2' , 
+            
+            PATTERN : {} ,
+            
+            LOG : [],
+            
+            addPattern : function( pattern ) {
+                if(!pattern.name) return;
+                $.jvalidator.PATTERN[pattern.name] = pattern;
+            },
+            
+            log : function(text){
+                $.jvalidator.LOG.push(text);
+            }
+            
+		}
+    });
+    
+    //-------
+    
+    var AsyncRequest = function(){
+        this.reqs = [];
+        this.status = 0;    //0-waithing,1-running
+    }
+
+    AsyncRequest.prototype.addRequest = function(func){
+        if(this.status!=0) return;
+        this.reqs.push(func);
+    }
+
+    AsyncRequest.prototype.go = function(){
+        if(this.status!=0) return;
+        
+        this.status = 1;    
+        var self = this;
+        var reqs = this.reqs;
+        var len = this.reqs.length;
+        
+        for(var i=0;i<reqs.length;i++){
+            var req = reqs[i];
+
+            if(this.status==0) return;
+            req(function(){
+                //async_continue
+                len--;
+                if(len==0){
+                    self.finish();
+                } 
+            });
+            
+        }
+    }
+
+    AsyncRequest.prototype.finish = function(asyncResult){
+        this.status = 0;
+        if(this.onfinished){
+            this.onfinished(asyncResult);
+        }
+    }
+
+    AsyncRequest.prototype.clear = function(){
+        if(this.status!=0) return;
+        this.reqs = [];
+    }
+    
+    //-------
+   
+    var jvalidatorGroup = function( setting ){
+        this.setting = setting;
+        this._jvs = []; 
+        this._selector = null;
+        this.async = new AsyncRequest();
+    }
+    
+    jvalidatorGroup.prototype.refresh = function(){
+        
+        if( !this._selector ) return;
+        
+        var self = this;
+        
+        this._jvs = [];
+        
+        $( this._selector ).each(function(){
+            
+            var jv = $(this).data('jvalidator');
+            
+            if( !jv ) {
+                jv = new jvalidator( this , self.setting );
+                $(this).data('jvalidator',jv);
+            }
+            
+            self._jvs.push( jv );  
+            
+        });
+    
+    }
+    
+    jvalidatorGroup.prototype.append = function( selectors ){
+    
+        if( !selectors ) return;
+ 
+        this._selector = this._selector ? this._selector.add( selectors ) : selectors;
+        
+        this.refresh();
+ 
+    }
+    
+    jvalidatorGroup.prototype.remove = function( selectors ){
+    
+        if( !selectors ) return;
+        
+        if( this._selector ){
+        
+            this._selector = this._selector.not( selectors );
+            
+            this.refresh();
+        
+        }
+        
+    }
+     
+    jvalidatorGroup.prototype.validateAll = function(validateAllCallback){
+        
+        var self = this;
+        var jvs = this._jvs;
+        var async = this.async;
+        var all = true;
+                
+        async.clear();
+        async.onfinished = function(){
+            if(validateAllCallback){ 
+                validateAllCallback(all); 
+            }
+        }
+        
+        
+        //check all empty 
+        var isAllEmtpy = true;
+        for( var i = 0; i < jvs.length; i++ ) {
+            var item = jvs[i];
+            if( item && item.exists() && item.visible() ) {
+                isAllEmtpy = false;
+            }
+        }
+        if( isAllEmtpy ) {
+            
+            if( validateAllCallback ) {
+                validateAllCallback(all); 
+            }
+
+        } else {
+        
+            for(var i=0; i<jvs.length; i++){
+                
+                var jv = jvs[i];
+                
+                if( !jv || !jv.exists() || !jv.visible() ) continue;
+                
+                (function(jv){
+                    async.addRequest(function(async_continue){
+                        jv.check(function( checkResult ){
+                            if(!checkResult){ all = checkResult; }
+                            async_continue();
+                        });
+                    });
+                
+                })(jv);
+            }
+
+            async.go();
+        
+        }
+        
+    } 
+    
+    //----
+      
+    var jvalidator = function( el , setting ){
+        var self = this;
+        this.invalid_pattern = [];
+        this.el = el;
+        this.setting = setting;
+        this.async = new AsyncRequest();
+        
+        //validation_events
+        var validation_events = this.setting['validation_events'] || [];
+        $.each( validation_events , function(idx,evtName){
+            $(el).bind( evtName , function(){
+                self.check();
+            });
+        });
+        
+        //custom events
+        var on_events = this.setting['on'] || {};
+        $.each( on_events , function( key , value ){ 
+            $(self).bind( key , value );
+        });
+        
+        //blur and focus
+        $(el).blur(function(){
+           $(self).trigger('blur'); 
+        });
+        
+    }
+    
+    //?ж??Ƿ????ڣģϣ????ڣ?
+    jvalidator.prototype.exists = function(){
+        return jQuery(this.el).closest('body').size();
+    }
+
+    //?ж??Ƿ?չʾ
+    jvalidator.prototype.visible = function(){
+        return (jQuery(this.el).filter(':visible').length > 0) || (jQuery(this.el).attr('data-jvalidator-force') === 'true'); //?ӻ?ͷҪ??
+    }
+
+    
+    jvalidator.prototype._checkPattern = function(resultTable){
+        var $el = $(this.el);
+        var pattern = $el.attr("data-jvalidator-pattern") || "";
+                
+        var code = pattern.replace(/ /g,'').replace(/\|/g,'||').replace(/\&/g,'&&');
+            code = code.replace(/([^|&\(\)]+)/g, function(str, v1) {
+		    	return ( typeof resultTable[v1] != 'undefined' ) ? resultTable[v1] : "true";
+			});
+
+		return eval(code);
+    }
+    
+    jvalidator.prototype.check = function( checkCallback ){
+        
+        var self = this;
+        var $el = $(this.el);
+        var async = this.async;
+        var patternstr = ( $el.attr("data-jvalidator-pattern") || "" ).replace(/\(/g,'').replace(/\)/g,'').replace(/\|/g,',').replace(/\&/g,',');
+        var patterns = patternstr ? patternstr.split(',') : [];
+        var val = $el.val();
+        var resultTable = {};
+        this.invalid_pattern = [];
+
+        async.clear();
+        async.onfinished = function(requestResult){
+            var valid = self._checkPattern(resultTable);
+            if ( checkCallback ) { checkCallback( valid ); }
+            self.after_check( valid );
+        }
+
+        for(var i=0; i<patterns.length; i++){
+            var pname = $.trim( patterns[i] );
+            var p = $.jvalidator.PATTERN[pname];
+            if(!p) { 
+                $.jvalidator.log('?Ҳ???ģʽ['+pname+']');
+                continue; 
+            }
+
+            (function(p,pname){
+                        
+            async.addRequest(function(async_continue){
+                p.validate.call( self.el , val , function( valid , message ){
+                    if(!valid){
+                        p.message = message || p.message;
+                        self.invalid_pattern.push(p);
+                    }
+                    resultTable[pname] = valid;
+                    async_continue();
+                });
+            });
+            
+            })(p,pname);
+        }
+        
+        async.go();
+        
+    }
+    
+    jvalidator.prototype.after_check = function( valid ) { 
+        if ( valid ) {
+            $(this).trigger('valid', [ this.el ] );
+        } else {
+            $(this).trigger('invalid', [ this.el, this.invalid_pattern ] );
+        }
+    }
+    
+    //-----
+    
+    $.fn.jvalidator = function( setting ){
+ 
+        setting = $.extend({ 
+        }, setting || {});
+
+        var group = new jvalidatorGroup( setting );
+        
+        group.append( this ); 
+        
+        return group;
+    }
+    
+    $('textarea[maxlength]').unbind().bind('keydown', function(ev){ 
+        var area=$(this);
+        var max=parseInt(area.attr("maxlength"), 10);
+        if(max > 0){ 
+            if(area.val().length>max){ 
+                area.val(area.val().slice(0, max)); 
+            } 
+        }
+    });
+    
+})(jQuery);
+
+function isValidIdNo(num) {
+    var num = num.toUpperCase();
+    //????֤????Ϊ15λ????18λ??15λʱȫΪ???֣?18λǰ17λΪ???֣?????һλ??У??λ??????Ϊ???ֻ??ַ?X??   
+    if (!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num))) {
+        //alert('??????????֤?ų??Ȳ??ԣ????ߺ??벻???Ϲ涨??\n15λ????ӦȫΪ???֣?18λ????ĩλ????Ϊ???ֻ?X??');
+        return false;
+    }
+    //У??λ????ISO 7064:1983.MOD 11-2?Ĺ涨???ɣ?X??????Ϊ??????10?? 
+    //?????ֱ????????????ں?У??λ 
+    var len, re;
+    len = num.length;
+    if (len == 15) {
+        re = /^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/i;
+        var arrSplit = num.match(re);
+
+        //?????????????Ƿ???ȷ 
+        var dtmBirth = new Date('19' + arrSplit[2] + '/' + arrSplit[3] + '/' + arrSplit[4]);
+        var bGoodDay;
+        bGoodDay = (dtmBirth.getYear() == Number(arrSplit[2])) && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3])) && (dtmBirth.getDate() == Number(arrSplit[4]));
+        if (!bGoodDay) {
+            //alert('??????????֤???????????ڲ??ԣ?');
+            return false;
+        }
+        else {
+            //??15λ????֤ת??18λ 
+            //У??λ????ISO 7064:1983.MOD 11-2?Ĺ涨???ɣ?X??????Ϊ??????10?? 
+            var arrInt = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+            var arrCh = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+            var nTemp = 0, i;
+            num = num.substr(0, 6) + '19' + num.substr(6, num.length - 6);
+            for (i = 0; i < 17; i++) {
+                nTemp += num.substr(i, 1) * arrInt[i];
+            }
+            num += arrCh[nTemp % 11];
+            return true;
+        }
+    }
+    if (len == 18) {
+        re = /^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/i;
+        var arrSplit = num.match(re);
+
+        //?????????????Ƿ???ȷ 
+        var dtmBirth = new Date(arrSplit[2] + "/" + arrSplit[3] + "/" + arrSplit[4]);
+        var bGoodDay;
+        bGoodDay = (dtmBirth.getFullYear() == Number(arrSplit[2])) && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3])) && (dtmBirth.getDate() == Number(arrSplit[4]));
+        if (!bGoodDay) {
+            //alert(dtmBirth.getYear());
+            //alert(arrSplit[2]);
+            //alert('??????????֤???????????ڲ??ԣ?');
+            return false;
+        }
+        else {
+            //????18λ????֤??У?????Ƿ???ȷ?? 
+            //У??λ????ISO 7064:1983.MOD 11-2?Ĺ涨???ɣ?X??????Ϊ??????10?? 
+            var valnum;
+            var arrInt = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+            var arrCh = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+            var nTemp = 0, i;
+            for (i = 0; i < 17; i++) {
+                nTemp += num.substr(i, 1) * arrInt[i];
+            }
+            valnum = arrCh[nTemp % 11];
+            if (valnum != num.substr(17, 1)) {
+                //alert('18λ????֤??У???벻??ȷ??'); //Ӧ??Ϊ?? + valnum
+                return false;
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+if(typeof QNR=="undefined"){
+	var QNR={};
+}
+
+QNR.patterns={
+	creditcard: {
+		test: function(cardNo){
+			cardNo=cardNo||'';
+			var cache = [], cardNoArr= cardNo.split(''),
+				temp, cardNoTemp, cardNoArrLen = cardNoArr.length,
+				sum = 0, cacheLen;
+            /*???ÿ?У????????
+            *1???ӵ????ڶ?λ??ʼ??ÿ????һλ*2???????˻?Ϊ��λ????????????
+            *2???õ??ĳ˻???1??δ?????????????ӣ?????????һλ????ȡ??????????????0??β??????
+            *3????2?õ??????ּ?ȥ2?????ӵĺͣ??õ??????ֵ??????ÿ?????һλ
+            */   
+            if(cardNoArrLen < 1){
+            	return false;
+            }
+            var lastnumber = cardNoArr[cardNoArrLen-1];
+            var cacuIndex = cardNoArrLen - 2;
+            var curIndex = cardNoArrLen - 1;
+            while(curIndex--){
+            	var mod = cacuIndex-curIndex;
+				if (mod % 2){
+					cache.push(parseInt(cardNoArr[curIndex]));
+				} else {
+					cardNoTemp = cardNoArr[curIndex] * 2;
+
+					if (cardNoTemp.toString().length == 1) {
+						cache.push(cardNoArr[curIndex] * 2);
+					} else {
+						temp = cardNoTemp.toString().split('');
+						cache.push(parseInt(temp[0], 10) + parseInt(temp[1], 10));
+					}
+				}
+            }
+			cacheLen = cache.length;
+			while(cacheLen--) {
+				sum += cache[cacheLen];
+			}			
+			var ceil = Math.ceil(sum/10) ;            
+            return (ceil*10 - sum) ==  lastnumber;
+		}
+	},
+	
+	mobile: {
+		test: function(str){
+			var v=(str||'').split(' ').join('');
+			return /^1\d{10}$/i.test(v);
+		}
+	},
+	
+	idcard: {
+		test: function(num) {	
+
+			num = num.toUpperCase();  				
+			//????֤????Ϊ15λ????18λ??15λʱȫΪ???֣?18λǰ17λΪ???֣?????һλ??У??λ??????Ϊ???ֻ??ַ?X??   
+			if (!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num))) { 
+				return false; 
+			}
+			//У??λ????ISO 7064:1983.MOD 11-2?Ĺ涨???ɣ?X??????Ϊ??????10?? 
+			//?????ֱ????????????ں?У??λ 
+			var len, re; 
+			len = num.length; 
+			if (len == 15) {
+				
+				re = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/); 
+				var arrSplit = num.match(re); 
+
+				//?????????????Ƿ???ȷ 
+				var dtmBirth = new Date('19' + arrSplit[2] + '/' + arrSplit[3] + '/' + arrSplit[4]); 
+				var bGoodDay = (dtmBirth.getYear() == Number(arrSplit[2])) && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3])) && (dtmBirth.getDate() == Number(arrSplit[4])); 
+				
+				if (!bGoodDay) { 
+					return false; 
+				} else {				
+					return 1;
+				}   
+			}
+			
+			if (len == 18) {
+				
+				re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/); 
+				var arrSplit = num.match(re); 
+
+				//?????????????Ƿ???ȷ 
+				var dtmBirth = new Date(arrSplit[2] + "/" + arrSplit[3] + "/" + arrSplit[4]); 
+				var bGoodDay = (dtmBirth.getFullYear() == Number(arrSplit[2])) && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3])) && (dtmBirth.getDate() == Number(arrSplit[4])); 
+
+				if (!bGoodDay) { 
+					return false; 
+				} else { 
+					//????18λ????֤??У?????Ƿ???ȷ?? 
+					//У??λ????ISO 7064:1983.MOD 11-2?Ĺ涨???ɣ?X??????Ϊ??????10?? 
+					var valnum; 
+					var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2); 
+					var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'); 
+					var nTemp = 0, i; 
+					for(i = 0; i < 17; i ++) { 
+						nTemp += num.substr(i, 1) * arrInt[i]; 
+					} 
+					
+					valnum = arrCh[nTemp % 11];
+					if (valnum != num.substr(17, 1)) { 
+						return false; 
+					} 
+					
+					return 1; 
+				} 
+			}
+			
+			return false; 
+		}
+	}
+};
+
+//??????
+if(typeof QNR=="undefined"){
+	var QNR={};
+}
+
+QNR.phoneValid=function(_config){
+
+	var isSending=false;
+
+	var config=$.extend({
+		before: function(){
+		},
+		after: function(){
+		},
+		url: "",
+		paramRender: function(){
+			return {};
+		},
+		locker: function(){
+			return true;
+		},
+		
+		callback: function(){
+			return true;
+		},
+		
+		onsend: function(){
+		},
+		
+		button: "#get-permit",
+		
+		message: "[js-place-holder='get-permit-message']"
+	},_config);
+
+	var m=$(config.button),_msg=$(config.message).remove().removeClass("hide").removeClass("fl");
+	var _oricls=m.attr("js-reset-class"), _sentcls=m.attr("js-sent-class");
+	var locked=false;
+	
+	var timer=function(t){
+		var l=parseInt(t);
+		
+		if(!l){
+			unlock();
+			return;
+		}
+		
+		m.html(""+l+"?????????·???");
+		l--;
+		
+		setTimeout(function(){
+			timer(l);
+		},1000);
+	}
+	
+	var lock=function(onlylock){
+		locked=true;
+		
+		m.removeClass(_oricls);
+		m.addClass(_sentcls);
+		
+		try{
+			config.after();
+		}catch(e){
+		}
+		
+		if(onlylock===true){
+			return;
+		}
+		
+		m.parent().append(_msg);
+	}
+	
+	var unlock=function(){
+		m.removeClass(_sentcls);
+		m.addClass(_oricls);
+		
+		m.html("???»?ȡ??֤??");
+		
+		try{
+			config.before();
+		}catch(e){
+		}
+		locked=false;
+		
+		_msg.remove();
+	}
+	
+	var send=function(){
+
+		if(locked||!config.locker(this)||isSending){
+			return;
+		}
+		
+		try{
+			config.onsend();
+		}catch(e){
+		}
+		
+		isSending=true;
+	
+		$.ajax({
+			url:config.url,
+			dataType:"json",
+			type:"POST",
+			async: false,
+			data:config.paramRender(this),
+			success:function(data){
+			
+				if(config.callback(data)){
+					lock();
+					timer(60);
+				}
+				
+			}
+		});
+		
+		isSending=false;
+	}
+	
+	m.bind("click",send);
+	
+	return {
+		lock: function(){
+			lock(true);
+		}
+	};
+};
+(function(t){"use strict";function e(t,e,r){return t.addEventListener?t.addEventListener(e,r,!1):t.attachEvent?t.attachEvent("on"+e,r):void 0}function r(t,e){var r,n;for(r=0,n=t.length;n>r;r++)if(t[r]===e)return!0;return!1}function n(t,e){var r;t.createTextRange?(r=t.createTextRange(),r.move("character",e),r.select()):t.selectionStart&&(t.focus(),t.setSelectionRange(e,e))}function a(t,e){try{return t.type=e,!0}catch(r){return!1}}t.Placeholders={Utils:{addEventListener:e,inArray:r,moveCaret:n,changeType:a}}})(this),function(t){"use strict";function e(t){var e;return t.value===t.getAttribute(S)&&"true"===t.getAttribute(I)?(t.setAttribute(I,"false"),t.value="",t.className=t.className.replace(R,""),e=t.getAttribute(P),e&&(t.type=e),!0):!1}function r(t){var e;return""===t.value?(t.setAttribute(I,"true"),t.value=t.getAttribute(S),t.className+=" "+k,e=t.getAttribute(P),e?t.type="text":"password"===t.type&&H.changeType(t,"text")&&t.setAttribute(P,"password"),!0):!1}function n(t,e){var r,n,a,u,i;if(t&&t.getAttribute(S))e(t);else for(r=t?t.getElementsByTagName("input"):r,n=t?t.getElementsByTagName("textarea"):n,i=0,u=r.length+n.length;u>i;i++)a=r.length>i?r[i]:n[i-r.length],e(a)}function a(t){n(t,e)}function u(t){n(t,r)}function i(t){return function(){f&&t.value===t.getAttribute(S)&&"true"===t.getAttribute(I)?H.moveCaret(t,0):e(t)}}function l(t){return function(){r(t)}}function c(t){return function(e){return p=t.value,"true"===t.getAttribute(I)?!(p===t.getAttribute(S)&&H.inArray(C,e.keyCode)):void 0}}function o(t){return function(){var e;"true"===t.getAttribute(I)&&t.value!==p&&(t.className=t.className.replace(R,""),t.value=t.value.replace(t.getAttribute(S),""),t.setAttribute(I,!1),e=t.getAttribute(P),e&&(t.type=e)),""===t.value&&(t.blur(),H.moveCaret(t,0))}}function s(t){return function(){t===document.activeElement&&t.value===t.getAttribute(S)&&"true"===t.getAttribute(I)&&H.moveCaret(t,0)}}function d(t){return function(){a(t)}}function g(t){t.form&&(x=t.form,x.getAttribute(U)||(H.addEventListener(x,"submit",d(x)),x.setAttribute(U,"true"))),H.addEventListener(t,"focus",i(t)),H.addEventListener(t,"blur",l(t)),f&&(H.addEventListener(t,"keydown",c(t)),H.addEventListener(t,"keyup",o(t)),H.addEventListener(t,"click",s(t))),t.setAttribute(j,"true"),t.setAttribute(S,y),r(t)}var v,b,f,h,p,m,A,y,E,x,T,N,L,w=["text","search","url","tel","email","password","number","textarea"],C=[27,33,34,35,36,37,38,39,40,8,46],B="#ccc",k="placeholdersjs",R=RegExp("\\b"+k+"\\b"),S="data-placeholder-value",I="data-placeholder-active",P="data-placeholder-type",U="data-placeholder-submit",j="data-placeholder-bound",V="data-placeholder-focus",q="data-placeholder-live",z=document.createElement("input"),D=document.getElementsByTagName("head")[0],F=document.documentElement,G=t.Placeholders,H=G.Utils;if(void 0===z.placeholder){for(v=document.getElementsByTagName("input"),b=document.getElementsByTagName("textarea"),f="false"===F.getAttribute(V),h="false"!==F.getAttribute(q),m=document.createElement("style"),m.type="text/css",A=document.createTextNode("."+k+" { color:"+B+"; }"),m.styleSheet?m.styleSheet.cssText=A.nodeValue:m.appendChild(A),D.insertBefore(m,D.firstChild),L=0,N=v.length+b.length;N>L;L++)T=v.length>L?v[L]:b[L-v.length],y=T.getAttribute("placeholder"),y&&H.inArray(w,T.type)&&g(T);E=setInterval(function(){for(L=0,N=v.length+b.length;N>L;L++)T=v.length>L?v[L]:b[L-v.length],y=T.getAttribute("placeholder"),y&&H.inArray(w,T.type)&&(T.getAttribute(j)||g(T),(y!==T.getAttribute(S)||"password"===T.type&&!T.getAttribute(P))&&("password"===T.type&&!T.getAttribute(P)&&H.changeType(T,"text")&&T.setAttribute(P,"password"),T.value===T.getAttribute(S)&&(T.value=y),T.setAttribute(S,y)));h||clearInterval(E)},100)}G.disable=a,G.enable=u}(this);
+
+
+(function(){
+
+	var _val=$.fn.val;
+
+	$.fn.val=function(){
+
+		var v=_val.apply(this,Array.prototype.slice.call(arguments,0));
+
+		if(this.attr('placeholder') && v==this.attr('placeholder')){
+			return '';
+		}
+		return v;
+
+	}
+})();
+
+
 if(typeof QNR=="undefined"){
   var QNR={};
 }
@@ -1678,11 +2327,13 @@ QNR.StepByStep=function(id, id1){
     this.step1 = {'0': '选择方式', '1': '确认信息', '2': '填写申请', '3': '修改成功'};
     this.con0 = con.find("div[type='type0']");
     this.con1 = con.find("div[type='type1']");
-    this.baseURL = './img/stepBg_{p}.png';
+    this.baseURL = 'url(./img/t{p}.png)';
     this.currentDesc = this.step0;
     this.currentCon = this.con0;
     this.firstStep = con.find('div[step="step0"]');
-    this.stepNum = 0;
+    this.stepNum = -1;
+    this.children = this.title.find('span');
+    this.currentSpan = '';
 
   }
 
@@ -1690,6 +2341,11 @@ QNR.StepByStep=function(id, id1){
     changeStep: function(dir){
       this.stepNum = dir ? (this.stepNum < 3 ? this.stepNum + 1 : this.stepNum) : (this.stepNum > 0 ? this.stepNum - 1: this.stepNum);
       this.title.css('background-image', this.baseURL.replace(/{p}/g, this.stepNum));
+      this.currentSpan = this.children.eq(this.stepNum);
+      this.currentSpan.css('color', '#FFF');
+      this.currentSpan.prevAll().css('color','#0088A4')
+      this.currentSpan.nextAll().css('color','#666')
+
       this.firstStep.hide();
       this.currentCon.hide();
       if(this.stepNum == 0){
@@ -1718,11 +2374,18 @@ QNR.StepByStep=function(id, id1){
 $(function(){
   var oper = $('#oper'),
       modify_mobile = $('#modify_mobile'),
-      mobile_stat = $('#mobile_stat'),
-      select_type = $('#select_type'),
+      mobileStat = $('#mobile_stat'),
+      selectType = $('#select_type'),
+      typeDesc = $('.type_desc'),
       operType = $('input[name=operType]');
+  var validPreMobile = $('#validPreMobile');
   var stepByStep = QNR.StepByStep('stepEle','oper' );
   var stepNum = '';
+  var baseurl = '/payServer/';
+
+  var getVCode = $('#get_vcode');
+  var getVCode1 = $('#get_vcode1');
+  //var getVCode = $('#get_vcode');
 
   var next = $('.next');
   var prev = $('.prev');
@@ -1730,29 +2393,76 @@ $(function(){
 
   idType.yselector({
     onchange: function(obj){
-      //expire_M_Y(this); 
+      var $this = idType,
+          val = obj.value,
+          prtTab = $this.parents('table'),
+          trs = prtTab.find('tr[data-c]');
+      trs.hide();
+      trs.eq(val).show();
     }});
 
+  next.click(function(e){
+    var $this = $(this),
+        prtForm = $this.parents('form'),
+        dataIpt = prtForm.serializeArray();
 
+    if($this.is('#validPreMobile')){
+      //TODO:
+      //formChecker.validateAll(function(ret){
+      //  if(ret) stepByStep.changeStep(true);
+      //});
+      stepByStep.changeStep(true);
+      e.preventDefault();
+    }else if($this.is('#validNewMobile')){
+      //TODO:
+      //formChecker.validateAll(function(ret){
+      //  if(ret) stepByStep.changeStep(true);
+      //});
+      stepByStep.changeStep(true);
+      e.preventDefault();
 
-  next.click(function(){
-    stepByStep.changeStep(true);
+    }else if($this.is('#validNewMobile')){
+      //TODO:
+      //formChecker.validateAll(function(ret){
+      //  if(ret) stepByStep.changeStep(true);
+      //});
+      stepByStep.changeStep(true);
+      e.preventDefault();
+
+    }else{
+      stepByStep.changeStep(true);
+    }
   })
+
   prev.click(function(){
     stepByStep.changeStep(false);
   })
 
   $('#modify_mobile').click(function(){
-    mobile_stat.hide();
+    mobileStat.hide();
     oper.show();
+    stepByStep.changeStep(true);
   });
 
   operType.bind('change', function(){
-    var val = this.value;
+    var $this = $(this), val = $this.val(),
+        prt_table = $this.parents('table');
     stepByStep.changeDesc(val);
+    prt_table.find('.type_desc').removeClass('active');
+    $this.parent().siblings().find('span').addClass('active');
   })
 
-  select_type.click(function(){
+  typeDesc.click(function(){
+	var ipt = $(this).parent().siblings().find('input');
+    ipt.click();
+	var $this = ipt, val = $this.val(),
+        prt_table = $this.parents('table');
+    stepByStep.changeDesc(val);
+    prt_table.find('.type_desc').removeClass('active');
+    $this.parent().siblings().find('span').addClass('active');
+  })
+
+  selectType.click(function(){
     var $this = $(this),
         val = $($this.parents('table').find('input:checked')).val();
 
@@ -1763,4 +2473,143 @@ $(function(){
 
   })
 
+  QNR.phoneValid({
+    url: baseurl+"SendVcodeNoUid.do",
+    button: getVCode,
+    message: '',
+    callback: function(data){
+      var m="status";
+      if(data.ret){
+        if(parseInt(data.data[m])==1){
+          _error.hide();
+          return true;
+        }else if(parseInt(data.data[m])==2){
+          _showError(tips.vcode.limit);
+          return false;
+        }else if(parseInt(data.data[m])==3){
+          _showError(tips.vcode.frequent);
+          return false;
+        }
+      }else{
+        _error.removeClass("popup_tips_wrap_clr");
+        var _msg = quickPayTemplate.icon_wrong.join('');
+        _error.html( _msg.replace(/\{content\}/g,  tips.vcode.sendFail) );
+        return false;
+      }
+
+      return false;
+    },
+    locker: function(obj){
+      var _mobileObj = $(obj).parents('table').find('#mobile');
+      if(_mobileObj.length){
+        _mobile = mobileObj.val();
+        if(!_mobile){
+          $('#mobile').trigger('blur');
+        }
+        return QNR.patterns.mobile.test(_mobile);
+      }else{
+        return true;
+      }
+    },
+
+    paramRender: function(obj){
+      var _self = this;
+      var $mobile = $(obj).parents('table').find('#mobile');
+      if($mobile.length){
+        var _mobile = ($mobile.val()).replace(/\s/g, '');
+        $mobile.trigger('blur');
+        return {mobile:_mobile, messageType: 1};
+      }else{
+        return{mobile:'', messageType: 1};
+      }
+    }
+  });
+
+  //validate
+  $.jvalidator.addPattern({
+    name: 'not_empty',
+    message: '不能为空',
+    validate: function(value, callback) {
+      callback($.trim(value) != '');
+    }
+  });
+  $.jvalidator.addPattern({
+    name: 'idcard',
+    message: '输入的身份证错误，请核对后重新填写',
+    validate: function(value, callback) {
+      callback( QNR.patterns.idcard.test(value) );
+    }
+  });
+  $.jvalidator.addPattern({
+    name: 'mobile',
+    message: '请输入正确的手机号',
+    validate: function(value, callback) {
+      callback( QNR.patterns.mobile.test(value) );
+    }
+  });
+  //TODO:护照号的规则
+  $.jvalidator.addPattern({
+    name: 'kkk',
+    message: '请输入正确的手机号',
+    validate: function(value, callback) {
+      callback( QNR.patterns.mobile.test(value) );
+    }
+  });
+  $.jvalidator.addPattern({
+    name: 'vcode',
+    message: '请输入正确的验证码',
+    validate: function(value, callback) {
+      var isMatch=/^[\d]{6}$/.test($.trim(value));
+      $('[placeholder="get-permit-message"]').remove();
+      var _mobile= _mobile;
+
+      //这里不传递验证码，由后端根据用户名查找
+      if(isMatch&&QNR.patterns.mobile.test(mobile)){
+        $.ajax({
+          url: baseurl+'CheckVcodeNoUid.do',
+          data: {
+            mobile: mobile,
+            vcode: value,
+            messageType: 1
+          },
+          type: 'post',
+          dataType: 'json',
+          success: function(data){
+            if(data&&data.ret){
+              callback(true);
+            }else{
+              callback(false);
+            }
+          }
+        });
+      }else{
+        callback(isMatch);
+      }
+    }
+  });
+
+
+  var formChecker = oper.find('[data-jvalidator-pattern]').jvalidator({
+    validation_events:['blur'],
+      on:{
+        invalid: function(evt,el,ps){
+          showRes(el,ps[0].message,'validate_wrong');
+        },
+        valid: function(evt,el,ps){
+          showRes(el,'', 'validate_right');
+        }
+      }
+  });
+
+  function showRes(e,msg, cls){
+    var elePrt = $(e).parent(),
+        ele = elePrt.find('[validate_res]');
+    if(!ele.length){
+      ele = $("<span validate_res></span>");
+      elePrt.append(ele);
+    }
+    ele.removeAttr('class');
+    ele.addClass(cls);
+    ele.html(msg).show();
+  }
 })
