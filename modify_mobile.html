@@ -63,7 +63,7 @@
                       <li class='item'>您于2013-06-11日提交修改手机号码的申请未被通过，提供的身份证信息与注册信息不符，请重新提供</li>
                       <li class='item'>您于2013-06-09日成功绑定158****1035手机</li>
                     </ol>
-                    <div class='li'><span>将 158****1035同步为注册账户的手机号，同步后该手机号可用于去哪儿网登录</span><a href='javascript:;' class='sync1'><span class='hide'>同步</span></a></div>
+                    <div class='li'><span>将 158****1035同步为注册账户的手机号，同步后该手机号可用于去哪儿网登录</span><button type="button" class='sync1'><span>同步</span></button></div>
                     <div class='li'><span>绑定手机号免费享受一下服务：</span></div>
                     <ul class='li fix'>
                       <li class='horize'>手机找回密码</li>
@@ -96,7 +96,7 @@
                       <tr data-c='0'><td class='c1'>证件编号：</td><td><input name='id' type='text' data-jvalidator-pattern='not_empty & idcard' class='input1' placeholder='请输入注册时填写的身份证号' maxlength="18"><span validate_res class='hide'></span></td></tr>
                       <tr data-c='1'><td class='c1'>证件编号：</td><td><input name='id' type='text' data-jvalidator-pattern='not_empty' class='input1' placeholder='请输入注册时填写的护照号'></td></tr>
                       <tr><td class='c1'>交易密码：</td><td><input type='password' name='pwd' class='input1' data-jvalidator-pattern='not_empty' ></td></tr>
-                      <tr><td class='c1'>短信验证码：</td><td><input type='text' name='vcode' class='input2' data-jvalidator-pattern='not_empty & vcode' placeholder='请输入验证码' maxlength="6"><a href='javascript:;' class='get_code' id='get_vcode'><span>免费获取</span></a></td></tr>
+                      <tr><td class='c1'>短信验证码：</td><td><input type='text' name='vcode' class='input2' data-jvalidator-pattern='not_empty & vcode' placeholder='请输入验证码' maxlength="6"><button type="button" class='get_code' id='get_vcode'><span>免费获取</span></button></td></tr>
                       <tr><td></td><td class='top20'><button type="button" class='btn_step prev rt10 fl'><span class='font14 clr999'>上一步</span></button><button type="submit" class='btn_step next fl' id='validPreMobile'><span class='font14'>下一步</span></button></td></tr>
                     </table>
                   </form>
@@ -107,7 +107,7 @@
                   <form action="https://localhost/do.do" method="post">
                     <table>
                       <tr><td class='c1'>新手机号码：</td><td><input name='mobile' maxlength="11" data-jvalidator-pattern='not_empty & mobile' type='text' class='input1' placeholder='请输入新的手机号码'></td></tr>
-                      <tr><td class='c1'>短信验证码：</td><td><input type='text' name='vcode' class='input2' data-jvalidator-pattern='not_empty & vcode' placeholder='请输入验证码' maxlength='6'><a href='javascript:;' class='get_code' id='get_vcode1'><span>免费获取</span></a></td></tr>
+                      <tr><td class='c1'>短信验证码：</td><td><input type='text' name='vcode' class='input2' data-jvalidator-pattern='not_empty & vcode' placeholder='请输入验证码' maxlength='6'><button type='button' class='get_code' id='get_vcode1'><span>免费获取</span></button></td></tr>
                       <tr><td></td><td class='top20'><button type="button" class='btn_step prev rt10 fl'><span class='font14 clr999'>上一步</span></button><button type="submit" class='btn_step next fl' id='validNewMobile'><span class='font14'>下一步</span></button></td></tr>
                     </table>
                   </form>
@@ -134,12 +134,14 @@
                 <!--six-->
                 <div class='pay_ctn hide' type='type1'>
                   <div><span class='info font14'>请您提供二代身份证或护照正面彩色照片，大小不超过2M，照片格式支持JPG、BMP</span></div>
-                  <table>
-                    <tr><td class='c1'>上传证件照：</td><td>证件图片</td></tr>
-                    <tr><td class='c1'>新手机号码：</td><td><input type='text' name='mobile' maxlength="11" class='input1' data-jvalidator-pattern='note_no & mobile' placeholder='请输入新的手机号码'></td></tr>
-                    <tr><td class='c1'>短信验证码：</td><td><input type='password' name='vcode' class='input2' data-jvalidator-pattern='not_empty & vcode' placeholder='请输入验证码' maxlength='6'><a href='javascript:;' class='get_code' id='get_vcode2'><span>免费获取</span></a></td></tr>
-                    <tr><td></td><td class='top20'><button type='button' class='btn_step prev rt10 fl'><span class='font14 clr999'>上一步</span></button><button type='button' class='btn_step next fl'><span class='font14'>下一步</span></button></td></tr>
-                  </table>
+                  <form action="https://localhost/do.do" method="post">
+                    <table>
+                      <tr><td class='c1'>上传证件照：</td><td>证件图片</td></tr>
+                      <tr><td class='c1'>新手机号码：</td><td><input type='text' name='mobile' maxlength="11" class='input1' data-jvalidator-pattern='note_no & mobile' placeholder='请输入新的手机号码'></td></tr>
+                      <tr><td class='c1'>短信验证码：</td><td><input type='password' name='vcode' class='input2' data-jvalidator-pattern='not_empty & vcode' placeholder='请输入验证码' maxlength='6'><button type="button" class='get_code' id='get_vcode2'><span>免费获取</span></button></td></tr>
+                      <tr><td></td><td class='top20'><button type='button' class='btn_step prev rt10 fl'><span class='font14 clr999'>上一步</span></button><button type='button' class='btn_step next fl'><span class='font14'>下一步</span></button></td></tr>
+                    </table>
+                  </form>
                 </div>
 
                 <!--seven-->
