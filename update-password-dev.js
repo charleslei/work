@@ -2401,6 +2401,20 @@ $(function(){
       trs.eq(val).show();
     }});
 
+  function valideRequest(url, data, callback){
+    $.ajax({
+      url: url,
+      data: data,
+      type: 'POST',
+      dataType: 'JSON',
+      success: function(e){
+        callback();
+      },
+      fail: function(){
+      }
+    })
+  }
+
   next.click(function(e){
     var $this = $(this),
         prtForm = $this.parents('form'),
@@ -2408,9 +2422,14 @@ $(function(){
 
     if($this.is('#validPreMobile')){
       //TODO:
-      //formChecker.validateAll(function(ret){
-      //  if(ret) stepByStep.changeStep(true);
-      //});
+      formChecker.validateAll(function(ret){
+        if(ret){
+          //TODO:
+          valideRequest(url, dataIpt, function(e){
+            stepByStep.changeStep(true);
+          })
+        }
+      });
       stepByStep.changeStep(true);
       e.preventDefault();
     }else if($this.is('#validNewMobile')){
@@ -2421,7 +2440,15 @@ $(function(){
       stepByStep.changeStep(true);
       e.preventDefault();
 
-    }else if($this.is('#validNewMobile')){
+    }else if($this.is('#checkPwd')){
+      //TODO:
+      //formChecker.validateAll(function(ret){
+      //  if(ret) stepByStep.changeStep(true);
+      //});
+      stepByStep.changeStep(true);
+      e.preventDefault();
+
+    }else if($this.is('#checkID')){
       //TODO:
       //formChecker.validateAll(function(ret){
       //  if(ret) stepByStep.changeStep(true);
@@ -2453,10 +2480,10 @@ $(function(){
   })
 
   typeDesc.click(function(){
-	var ipt = $(this).parent().siblings().find('input');
+    var ipt = $(this).parent().siblings().find('input');
     ipt.click();
-	var $this = ipt, val = $this.val(),
-        prt_table = $this.parents('table');
+    var $this = ipt, val = $this.val(),
+    prt_table = $this.parents('table');
     stepByStep.changeDesc(val);
     prt_table.find('.type_desc').removeClass('active');
     $this.parent().siblings().find('span').addClass('active');
@@ -2471,6 +2498,33 @@ $(function(){
     }else{
     }
 
+  })
+
+  $('#showAll').click(function(){
+    var $this = $(this), ctn = $('.ls_msg');
+    var hideEle = ctn.find('.hide');
+    hideEle.show(200).removeClass('hide');
+    $this.hide();
+  })
+  //sync
+  $('#syncMobile, #syncMobile1').click(function(){
+    var url = '';
+    $.ajax({
+      url: url,
+      type: 'POST',
+      dataType: 'JSON',
+      success: function(e){
+        //TODO: 
+        //alert
+      },
+      fail: function(e) {
+        //
+      }
+    })
+  });
+  $('#nosync').click(function(){
+    //TODO:
+    //nosync
   })
 
   QNR.phoneValid({
