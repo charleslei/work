@@ -2245,6 +2245,7 @@ if(typeof QNR=="undefined"){
                   //初始化银行信息
                   this._initBankIcon();
                   this._initBankCode();
+                  this.initDebitCard();
                   //初始化页面事件			
                   this._initEvent();
 
@@ -2270,6 +2271,23 @@ if(typeof QNR=="undefined"){
                          });
                          me._checkBindCardShown();
                      },
+        initDebitCard: function(){
+          $('#debit_card li label,#platform li label').click(function(){
+            var $this = $(this);
+            $this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
+          })
+          var hide_ele = $('#allcards .hide');
+          $('#show_and_hide .up, #show_and_hide .down').click(function(){
+            var $this = $(this);
+            if($this.is('.down')){
+              hide_ele.show();
+            }else{
+              hide_ele.hide();
+            }
+            $this.hide().siblings().show();
+            return false;
+          })
+        },
 
         _initEvent : function(){
                          var me = this;
@@ -3076,3 +3094,15 @@ $(function(){
     });
 })
 
+
+
+// TODO: own 
+$(function(){
+  var tabs = $('.trigger_item'), ctns = $('.e_tab_content'),cls = 'trigger_item_current';
+  tabs.click(function(e){
+    var $this = $(this);
+    var idx = tabs.index($this);
+    tabs.removeClass(cls).eq(idx).addClass(cls);
+    ctns.hide().eq(idx).show();
+  })
+})

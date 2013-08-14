@@ -409,7 +409,7 @@ text-indent: -9999em; background: url(http://source.qunar.com/site/images/pay/qu
 .b_popup_tips .top { border-color:#fffedf transparent transparent; border-style:solid dashed  dashed; border-width:6px; left:10px; bottom:-11px; }
 .b_popup_tips .tips_content{ padding:6px 10px; font-size:12px; color:#555; }
 .b_card_item .b_popup_tips .tips_content{ padding:9px 10px; }
-/*带icon的弹层*/
+
 .b_tips_info{ border:1px solid #f8d3a7; padding:3px 12px; background-color:#fffedf; }
 .b_tips_info .tips_txt{ line-height:20px; vertical-align:middle; }
 .b_tips_info em{ display:inline-block; margin-right:5px; width:16px; height:16px; vertical-align:middle; background:url(http://source.qunar.com/site/images/pay/quick_pay/icon_v1.png) no-repeat 0 -88px; }
@@ -464,7 +464,8 @@ text-indent: -9999em; background: url(http://source.qunar.com/site/images/pay/qu
 .b_agreement .e_ops_agree{ padding:20px 10px 30px; text-align:center; }
 .b_agreement .e_ops_agree .checkbox{ vertical-align:middle; }
 .b_agreement .e_row_btn{ text-align:center; }
-/*对公共css的修改*/
+
+/* own */
 .all_blind_bank { display: inline-block; float: left; padding-left: 20px; }
 .b_bank_list .title{font-weight:bold;padding-bottom:10px}
 .b_bank_list ul {padding-bottom:10px}
@@ -474,3 +475,25 @@ text-indent: -9999em; background: url(http://source.qunar.com/site/images/pay/qu
 .b_card_list .e_bank_all { padding-left: 132px; margin-top: 18px; }
 
 #bindcardsCon .chose_all_card a, .all_blind_bank a{ padding: 5px; border: 1px solid #CAE1F6; background: #EBF5FF; font-weight: bold; }
+
+
+
+body{text-align:left;}
+.tab_nav, .popup_tips_wrap{float:left;}
+.b_tab_ui .b_popup_tips{left:10px;top:0;}
+.to_bank{border-top:1px solid #F8F8F8;border-bottom:1px solid #F8F8F8;padding:10px;}
+.to_bank a{font-weight: bold;}
+
+
+.debit_card .left_ctn{width:150px;}
+.debit_card .left_ctn .title{text-align:center;font-size:14px;}
+.debit_card td{padding-top:20px;}
+
+.debit_card .show_and_hide a{float:right;width:85px;height:20px;cursor:pointer;margin-right: 50px;}
+.debit_card .show_and_hide .up{background:url(/img/up.png) no-repeat right}
+.debit_card .show_and_hide .down{background:url(/img/down.png) no-repeat right}
+.b_bank_list .hide{display:none;}
+
+.e_ops_button1{border-top:1px solid #F2F2F2;}
+.b_tab_ui .e_ops_button1{padding: 20px 20px 40px 150px;}
+.e_ops_button1 span{margin-left:10px;color:#999}
