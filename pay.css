@@ -318,6 +318,7 @@ text-indent: -9999em; background: url(http://source.qunar.com/site/images/pay/qu
 /*信用卡背面*/
 .e_card_picwrap{ position:relative; z-index:1; clear:both; }
 .e_card_picwrap .card_pic{ position:absolute; left:550px; top:-345px;}
+.e_card_picwrap.simple .card_pic{top:auto;bottom:100px;}
 .e_card_picwrap .card_pic .img{ width:161px; height:142px; background:url(http://source.qunar.com/site/images/pay/quick_pay/cardback_two.gif) no-repeat; background-position: 0 0; overflow:hidden; }
 /*\信用卡背面*/
 
@@ -503,7 +504,7 @@ body{text-align:left;}
 .credit-bank-wrap .fL{float: left;border:1px solid #ccc;padding:0 5px;height: 40px;line-height: 40px;overflow: hidden;}
 .credit-bank-wrap .fR{float: left;line-height: 40px;padding:0 7px;border:1px solid #ccc;border-left:0;}
 .credit-bank-wrap .fR span{font-weight: bold;}
-.credit-info-wrap{display: none;position: relative;display: block;clear:both;}
+.credit-info-wrap{position: relative;display: none;clear:both;}
 .credit-info{left: 550px;position: absolute;padding:5px;top: -345px;border:3px solid #ccc;}
 .credit-info>p{font-weight: bold;padding-bottom: 5px;}
 .credit-info table{width: 250px;color:#000;}

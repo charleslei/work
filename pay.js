@@ -141,19 +141,27 @@ if (typeof QNR == "undefined") {
       $('#credit_cardbacknum').live('focus', function(e) {
         creditInfoWrap.hide();
         cardPicWrap.show();
+        if(allcardsCon.is(":hidden"))
+          cardPicWrap.addClass("simple")
+        else
+          cardPicWrap.removeClass("simple")
         $('.card_pic .img').css('background-position', '0 -142px');
       });
 
       payFrom.delegate('.yselector_box', 'click', function(e) {
         creditInfoWrap.hide();
         cardPicWrap.show();
+        if(allcardsCon.is(":hidden"))
+          cardPicWrap.addClass("simple")
+        else
+          cardPicWrap.removeClass("simple")
         $('.card_pic .img').css('background-position', '0 0');
       });
       //快捷支付 显示全部绑定银行
       showAllBindBank.bind('click', function(e) {
         e.preventDefault();
         bankLi.show(200).removeClass(highlightClass);
-        bankLi.find('.close').hide();
+        // bankLi.find('.close').hide();
         showAllBindBank.hide();
       });
 
@@ -478,7 +486,7 @@ if (typeof QNR == "undefined") {
           me._initClearForm(bindcardsCon);
           bindcardsCon.show();
           allcardsCon.hide();
-          cardPicWrap.hide();
+          cardPicWrap.addClass("simple").hide();
           bindbankname.val(_code);
 
           bankLi.hide();
@@ -715,7 +723,7 @@ if (typeof QNR == "undefined") {
 
     checkDateEnable: function() {
       //判断有效期是否有效；无效则警告；有效则隐藏时间；
-      var date = this.currentDate || '1307',
+      var date = this.currentDate && /^\d*$/.test(this.currentDate) || '1307',
         me = this;
       dd = date.match(/\d{2}/g),
       y = dd[0], m = dd[1],
