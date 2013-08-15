@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * jQuery JavaScript Library v1.5.2
  * http://jquery.com/
  *
@@ -1571,6 +1571,30 @@ var quickPayTemplate = {
 										'</div>',
 									'</div>',
 								'</div>'],
+	creditCardDialog : ['<div class="b_fpanel bank_width b_chose_bank">',
+									'<div class="container">',
+										'<div class="inner">',
+											'<div class="e_title"><a id="banllist_close" href="javascript:void(0);" class="close">关闭</a><span class="title_txt">信用卡网上银行</span></div>',
+											'<div class="content_wrap">',
+												'<form name="quickpayform" class="quickpayform" id="quickpayform" action="${usuallyCardpayUrl}" method="post" target="_blank">',
+												  '<table>',
+													'<tbody><tr>',
+													  '<td class="left_ctn"><div class="title">信用卡网银支付</div></td>',
+													  '<td><span>跳转至银行页面完成支付</span></td>',
+													'</tr>',
+													'<tr>',
+													  '<td></td>',
+													  '<td>',
+														'<ul id="allcards" class="inline">{content}</ul>',
+													  '</td>',
+													'</tr>',
+												  '</tbody></table>',
+												  '<div class="e_ops_button e_ops_button1"><button class="btn_submit" id="btnSubmit_next" type="button">下一步</button><span>跳转至银行页面完成付款</span></div>',
+												'</form>',
+											'</div>',
+										'</div>',
+									'</div>',
+								'</div>'],
 	boundCardBankListDialog1 : ['<div class="b_fpanel bank_width b_chose_bank">',
 									'<div class="container">',
 										'<div class="inner">',
@@ -2371,17 +2395,8 @@ if(typeof QNR=="undefined"){
                              me.checkDateEnable();
                          });
 
-                         /*
-                         //其他支付展示隐藏更多银行
-                         morebank.bind('click',function(e){
-                             var el = $(this);
-                             me.moreBank(el);
-                         });
-                         hidebank.bind('click',function(e){
-                             var el = $(this);
-                             me.hideBank(el);				
-                         });
-                         */
+                         $('#show_creditcard_online').click(function(){
+						 });
                      },
 
         recheckMobileVcode: function(){
