@@ -315,12 +315,12 @@ text-indent: -9999em; background: url(http://source.qunar.com/site/images/pay/qu
 .icon_correct{ background-position:0px 5px;height:23px; }
 
 
-/*淇＄敤鍗¤儗闈?/
+
 .e_card_picwrap{ position:relative; z-index:1; clear:both; }
 .e_card_picwrap .card_pic{ position:absolute; left:550px; top:-345px;}
 .e_card_picwrap.simple .card_pic{top:auto;bottom:100px;}
 .e_card_picwrap .card_pic .img{ width:161px; height:142px; background:url(http://source.qunar.com/site/images/pay/quick_pay/cardback_two.gif) no-repeat; background-position: 0 0; overflow:hidden; }
-/*\淇＄敤鍗¤儗闈?/
+
 
 .b_hd_mod{ margin-bottom:25px; background-color:#f7fdfb; }
 .b_hd_mod .e_notice_content{ position:relative; }
@@ -521,3 +521,4 @@ body{text-align:left;}
 .credit-info table td{border:1px solid #eee;width: 50%;line-height: 2.5;text-indent: 10px;}
 .credit-info table .title td{background: #eee;line-height: 1.5;}
 
+.payResult, .payResult .inner{width:434px}
