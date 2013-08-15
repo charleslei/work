@@ -497,3 +497,11 @@ body{text-align:left;}
 .e_ops_button1{border-top:1px solid #F2F2F2;}
 .b_tab_ui .e_ops_button1{padding: 20px 20px 40px 150px;}
 .e_ops_button1 span{margin-left:10px;color:#999}
+
+.notice_txt{border-bottom: 3px solid #5ABEC6;}
+.b_header{border-bottom:none}
+.b_payfor_content{padding:0}
+.b_main_pay{padding:10px}
+
+.bank_width{width:966px}
+.b_chose_bank .inner1{width:960px;padding-bottom:0}

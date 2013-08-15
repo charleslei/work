@@ -40,7 +40,9 @@ if(typeof QNR=="undefined"){
         bindcardsCon = $('#bindcardsCon'),
         allcardsCon = $("#allcardsCon"),
         cardPicWrap = $('.e_card_picwrap'),
-        imageURL = '/images/site/images/pay/bankicon_1/',
+		//TODO:
+        //imageURL = '/images/site/images/pay/bankicon_1/',
+		imageURL = 'http://source.qunar.com/site/images/pay/bankicon_1/',
         bindUL = bindcardsCon.find('ul'),
         noImgBank = ['ZJCZCBANK', 'YCCCBANK', 'WUXIRCBANK', 'SDEBANK', 'SQBANK', 'SXYDRCBANK', 'LJBANK', 'LZBANK', 'JINHUABANK', 'JSPRCU', 'HNPRU', 'FJPRCU', 'ORDOSBANK', 'DYBANK', 'DALIANBANK', 'JYRCBANK', 'XJKCCB', 'XMCCB', 'FJHXBANK', 'LZCCB', 'DRCBANK', 'HBXH', 'SUZHOUBANK', 'AYB', 'SMXBANK', 'HBSBANK', 'ZHOUKBANK', 'YBCCB', 'YCCCB', 'HAINANBANK', 'GUILINBANK', 'KSRCB', 'TCRCB', 'JXSNXS', 'NMGNXS', 'WUHAICB', 'JCCBANK', 'JZBANK', 'SXNXYB', 'YQCCB', 'FTYZB', 'SZNCCB', 'ASCCB', 'FSBANK', 'QJCCB', 'GXNLS', 'NANHAIBANK', 'JLNLS', 'QHNB', 'CZCCB', 'HDCB', 'SBANK', 'TSBANK', 'ZJKCCB', 'DYCCB', 'SNCCB', 'ZGBANK', 'LSSCB', 'LSZSH', 'YAANBANK', 'NDHB'],
         
@@ -311,17 +313,14 @@ if(typeof QNR=="undefined"){
                             }else if(window.getSelection) {
                                window.getSelection().removeAllRanges(); //ff
                             }
-							
-							this.banklistdlg.dom.find('li').each(function(){
-                             var input=$(this).find('input');
-                             $(this).find('label').bind('click',function(){
-                               input.attr('checked',true);
-                             })
-
-                             $(this).bind('dblclick',function(){
-                               input.attr('checked',true);
-                               confirmBtn.trigger("click");
-                             });
+						  
+							this.banklistdlg.dom.find('li label').click(function(){
+                               var $this = $(this);
+							   $this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
+                            });
+						   
+						   $("#banllist_close, #cancelbank").bind("click",function(){
+                             me.banklistdlg.hide();
                            });
 
   },
