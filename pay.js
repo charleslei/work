@@ -1,921 +1,983 @@
-﻿jQuery.fn.isExistItem = function(value) {  
-    var isExist = false,  
-        sel = $(this).get(0);
-    var count = sel && sel.options && sel.options.length;
-    for(var i=0;i<count;i++){  
-        if(sel.options[i].value == value) {  
-            isExist = true;  
-            break;  
-        }  
-    }  
-    return isExist;  
-}  
-if(typeof QNR=="undefined"){
-  var QNR={};
+﻿jQuery.fn.isExistItem = function(value) {
+  var isExist = false,
+    sel = $(this).get(0);
+  var count = sel && sel.options && sel.options.length;
+  for (var i = 0; i < count; i++) {
+    if (sel.options[i].value == value) {
+      isExist = true;
+      break;
+    }
+  }
+  return isExist;
 }
-(function($){
+if (typeof QNR == "undefined") {
+  var QNR = {};
+}
+(function($) {
 
-    var baseurl       = "/payServer/",
-        btnSubmit     = $("#btnSubmit"),
-        tips          = QNR.locale.tips,
-        showAllBindBank	= $('#showAllBindBank'),
-        expires_year  = $(".expires_year"),
-        expires_month = $(".expires_month"), 
-        bankname     = $('.bankname'), 
-        allbankname = $('#allbankname'),
-        bindbankname = $('#bindbankname'),
-        payFrom       = $("#quickpayform"), 
-        numRegExp     = /^\s*[0-9][\d]*\s*$/i,
-        bankLi			= $('.js-choose-item'),
-        radios			= bankLi.find('input[type="radio"]'),
-        //显示隐藏和选择银行,
-        highlightClass	= "highlight",
-        // 其他支付 展示更多银行	
-        morebank	   = $('.more_bank'),
-        hidebank	   = $('.hide_bank'),
-        mobileStage		= $('#mobile-number #mobile'),
-        vcode		=	$('#vCode'),
-        jquery_dg= old_dg = old_defCarddg = jquery_defCarddg = null,
-        bindCards = {},
-        bindcardsCon = $('#bindcardsCon'),
-        allcardsCon = $("#allcardsCon"),
-        cardPicWrap = $('.e_card_picwrap'),
-        imageURL = '/images/site/images/pay/bankicon_1/',
-        bindUL = bindcardsCon.find('ul'),
-        noImgBank = ['ZJCZCBANK', 'YCCCBANK', 'WUXIRCBANK', 'SDEBANK', 'SQBANK', 'SXYDRCBANK', 'LJBANK', 'LZBANK', 'JINHUABANK', 'JSPRCU', 'HNPRU', 'FJPRCU', 'ORDOSBANK', 'DYBANK', 'DALIANBANK', 'JYRCBANK', 'XJKCCB', 'XMCCB', 'FJHXBANK', 'LZCCB', 'DRCBANK', 'HBXH', 'SUZHOUBANK', 'AYB', 'SMXBANK', 'HBSBANK', 'ZHOUKBANK', 'YBCCB', 'YCCCB', 'HAINANBANK', 'GUILINBANK', 'KSRCB', 'TCRCB', 'JXSNXS', 'NMGNXS', 'WUHAICB', 'JCCBANK', 'JZBANK', 'SXNXYB', 'YQCCB', 'FTYZB', 'SZNCCB', 'ASCCB', 'FSBANK', 'QJCCB', 'GXNLS', 'NANHAIBANK', 'JLNLS', 'QHNB', 'CZCCB', 'HDCB', 'SBANK', 'TSBANK', 'ZJKCCB', 'DYCCB', 'SNCCB', 'ZGBANK', 'LSSCB', 'LSZSH', 'YAANBANK', 'NDHB'],
-        
+  var baseurl = "/payServer/",
+    btnSubmit = $("#btnSubmit"),
+    tips = QNR.locale.tips,
+    showAllBindBank = $('#showAllBindBank'),
+    expires_year = $(".expires_year"),
+    expires_month = $(".expires_month"),
+    bankname = $('.bankname'),
+    allbankname = $('#allbankname'),
+    bindbankname = $('#bindbankname'),
+    payFrom = $("#quickpayform"),
+    numRegExp = /^\s*[0-9][\d]*\s*$/i,
+    bankLi = $('.js-choose-item'),
+    radios = bankLi.find('input[type="radio"]'),
+    //显示隐藏和选择银行,
+    highlightClass = "highlight",
+    // 其他支付 展示更多银行  
+    morebank = $('.more_bank'),
+    hidebank = $('.hide_bank'),
+    mobileStage = $('#mobile-number #mobile'),
+    vcode = $('#vCode'),
+    jquery_dg = old_dg = old_defCarddg = jquery_defCarddg = null,
+    bindCards = {},
+    bindcardsCon = $('#bindcardsCon'),
+    allcardsCon = $("#allcardsCon"),
+    cardPicWrap = $('.e_card_picwrap'),
+    creditInfoWrap = $(".credit-info-wrap"),
+    imageURL = '/images/site/images/pay/bankicon_1/',
+    bindUL = bindcardsCon.find('ul'),
+    noImgBank = ['ZJCZCBANK', 'YCCCBANK', 'WUXIRCBANK', 'SDEBANK', 'SQBANK', 'SXYDRCBANK', 'LJBANK', 'LZBANK', 'JINHUABANK', 'JSPRCU', 'HNPRU', 'FJPRCU', 'ORDOSBANK', 'DYBANK', 'DALIANBANK', 'JYRCBANK', 'XJKCCB', 'XMCCB', 'FJHXBANK', 'LZCCB', 'DRCBANK', 'HBXH', 'SUZHOUBANK', 'AYB', 'SMXBANK', 'HBSBANK', 'ZHOUKBANK', 'YBCCB', 'YCCCB', 'HAINANBANK', 'GUILINBANK', 'KSRCB', 'TCRCB', 'JXSNXS', 'NMGNXS', 'WUHAICB', 'JCCBANK', 'JZBANK', 'SXNXYB', 'YQCCB', 'FTYZB', 'SZNCCB', 'ASCCB', 'FSBANK', 'QJCCB', 'GXNLS', 'NANHAIBANK', 'JLNLS', 'QHNB', 'CZCCB', 'HDCB', 'SBANK', 'TSBANK', 'ZJKCCB', 'DYCCB', 'SNCCB', 'ZGBANK', 'LSSCB', 'LSZSH', 'YAANBANK', 'NDHB'],
 
-        //倒计时
-        tmin = $("#mins"),
-        tsec = $('#sec'),
-        //选择卡类型
-        cardType = $("input:radio[name='cardType']");
 
-  function unionPay(){
+    //倒计时
+    tmin = $("#mins"),
+    tsec = $('#sec'),
+    //选择卡类型
+    cardType = $("input:radio[name='cardType']");
+
+  function unionPay() {
     this._init();
   }
   unionPay.prototype = {
-      _init : function(){
+    _init: function() {
 
-                  //初始化银行信息
-                  this._initBankIcon();
-                  this._initBankCode();
-                  this.initDebitCard();
-                  //初始化页面事件			
-                  this._initEvent();
+      //初始化银行信息
+      this._initBankIcon();
+      this._initBankCode();
+      this.initDebitCard();
+      //初始化页面事件     
+      this._initEvent();
 
-                  //初始化短信验证码
-                  this._initMobile();	
-                  //初始化表单验证器
-                  this._initValidate();
-                  //初始化倒计时	
-                  this._initTimeCount();
-                  //初始化信用卡过期日期 yselector
-                  this._initExpiresDate();
-                  //阻止浏览器记住表单 && 清除信用卡年份yselector初始化时change事件引发的错误提示
-                  this._initClearForm();
+      //初始化短信验证码
+      this._initMobile();
+      //初始化表单验证器
+      this._initValidate();
+      //初始化倒计时  
+      this._initTimeCount();
+      //初始化信用卡过期日期 yselector
+      this._initExpiresDate();
+      //阻止浏览器记住表单 && 清除信用卡年份yselector初始化时change事件引发的错误提示
+      this._initClearForm();
+    },
+
+    _initBankIcon: function() {
+      var me = this;
+      $('.js-bank-icon').each(function() {
+        var $this = $(this),
+          cardCode = $.trim($this.parents('.js-choose-card').find('input.radio_box').attr('bank'));
+        var bankicon = me.parseImgURL(cardCode);
+
+        $this.css('background-image', 'url(' + bankicon + ')');
+      });
+      me._checkBindCardShown();
+    },
+    initDebitCard: function() {
+      $('#debit_card li label,#platform li label').click(function() {
+        var $this = $(this);
+        $this.siblings().attr('checked', true).parent().addClass('active').siblings().removeClass('active');
+      })
+      var hide_ele = $('#allcards .hide');
+      $('#show_and_hide .up, #show_and_hide .down').click(function() {
+        var $this = $(this);
+        if ($this.is('.down')) {
+          hide_ele.show();
+        } else {
+          hide_ele.hide();
+        }
+        $this.hide().siblings().show();
+        return false;
+      })
+    },
+
+    _initEvent: function() {
+      var me = this;
+
+      //确认付款
+      btnSubmit.bind("click", function(e) {
+        me.submitform(e);
+      });
+      //银行卡号
+      $("#credit_cardnum, #debit_cardnum").bind("keyup change focus", function() {
+        var _self = $(this),
+          text = _self.val(),
+          value;
+        if (text) {
+          value = me.formatCardNumber(text);
+          _self.val( value );
+          if( value.replace(/\s/g,"").length === 16 ){
+            me.showCreditCardInfo( value );
+          }else{
+            me.hideCreditCardInfo();
+          }
+        }
+      });
+
+      //手机号
+      $("#allcardsCon #mobile,#bindcardsCon #mobile").live("keyup change", function() {
+        var _self = $(this),
+          text = _self.val();
+        if (text) {
+          _self.val(me.formatMobileNumber(text));
+        }
+      });
+
+      $('#credit_cardbacknum').live('focus', function(e) {
+        creditInfoWrap.hide();
+        cardPicWrap.show();
+        $('.card_pic .img').css('background-position', '0 -142px');
+      });
+
+      payFrom.delegate('.yselector_box', 'click', function(e) {
+        creditInfoWrap.hide();
+        cardPicWrap.show();
+        $('.card_pic .img').css('background-position', '0 0');
+      });
+      //快捷支付 显示全部绑定银行
+      showAllBindBank.bind('click', function(e) {
+        e.preventDefault();
+        bankLi.show(200).removeClass(highlightClass);
+        bankLi.find('.close').hide();
+        showAllBindBank.hide();
+      });
+
+      bindcardsCon.delegate('li.js-choose-item', 'mouseenter', function(e) {
+        $(this).addClass(highlightClass);
+        $(this).find('.close').show();
+      }).delegate('li.js-choose-item', 'mouseleave', function(e) {
+        if (showAllBindBank.is(':visible')) return;
+        $(this).removeClass(highlightClass);
+        $(this).find('.close').hide();
+      }).delegate('.js-choose-card', 'click', function(e) {
+        var el = $(this).closest('li'),
+          checkedEle = el.find('input[type=radio]'),
+          mb = checkedEle.attr('mobile'),
+          bk = checkedEle.attr('bank'),
+          date = checkedEle.attr('valiDate');
+        var sibling = el.siblings('.js-choose-item');
+        sibling.hide(200);
+
+        checkedEle.attr('checked', true);
+        el.addClass(highlightClass);
+        showAllBindBank.show();
+
+        mobileStage.val(mb);
+        me.currentMobile = mb;
+        bindbankname.val(bk);
+        me.currentBank = bk;
+        me.recheckMobileVcode();
+
+        me.currentDate = date;
+        me.checkDateEnable();
+      });
+
+      $('#show_creditcard_online').click(function() {
+        me.showCreditCardDialog();
+        return false;
+      });
+    },
+
+    recheckMobileVcode: function() {
+      if (!vcode.length) {
+        return;
+      }
+
+      var newmobile = radios.filter(':checked').attr('mobile');
+
+      if (this.currentMobile != newmobile) {
+        vcode.val('');
+        $('[placeholder="get-permit-message"]').remove();
+        this.showInvalid(vcode, '您选择的银行卡改变, 请重新发送验证码');
+        this.currentMobile = newmobile;
+      }
+    },
+
+    //初始化倒计时
+    _initTimeCount: function() {
+      var countNum = 1800000;
+      var formattime = function(t) {
+        t = t || '00000000000000';
+        var res = t.match(/\d{2}/g),
+          yy = res[0] + res[1],
+          mou = res[2],
+          dd = res[3],
+          hh = res[4],
+          mm = res[5],
+          ss = res[6];
+        return (new Date(yy, mou, dd, hh, mm, ss)).getTime();
+      };
+      var newtime = $('#newtime').val();
+      var oldtime = $('#oldtime').val();
+      var dur = countNum - (formattime(newtime) - formattime(oldtime));
+
+
+      var timeout = function() {
+        window.location.href = baseurl + 'error.do?type=timeout';
+      };
+
+      var timeCount = new QNR.timeCount(dur, {
+        min: tmin,
+        sec: tsec
+      }, timeout);
+    },
+
+    submitform: function(e) {
+      var me = this;
+      this.formChecker.validateAll(function(ret) {
+        var valiHidden = me.valiHiddens();
+
+        if (ret && valiHidden) {
+          me.syncsubmit();
+        }
+      });
+      e.preventDefault();
+    },
+
+    syncsubmit: function() {
+      var syncForm = document.createElement("form");
+      document.body.appendChild(syncForm);
+      syncForm.method = 'post';
+      syncForm.action = payFrom.attr('action');
+      syncForm.target = '_self';
+
+      var o = this.getParam();
+      for (var _attr in o) {
+        if (o.hasOwnProperty(_attr)) {
+          //清除表单value的空格
+          var _val = $.trim(o[_attr]);
+          var _inp = document.createElement("input");
+          _inp.setAttribute("name", _attr);
+          _inp.setAttribute("value", o[_attr]);
+          _inp.setAttribute("type", "hidden");
+          syncForm.appendChild(_inp);
+        }
+      }
+      syncForm.submit();
+    },
+
+    getParam: function() {
+      var me = this;
+      var parm = me.getForm(payFrom);
+      return parm;
+    },
+
+    //获取form表单
+    getForm: function(form) {
+      var me = this;
+      if (me._checkBindCardShown()) {
+        allcardsCon.remove();
+        cardPicWrap.remove();
+      } else {
+        bindcardsCon.remove();
+      }
+      var array = form.serializeArray();
+      var ret = {}, mon, year;
+      $.each(array, function(i, input) {
+        ret[input.name] = input.value.replace(/\s/g, '');
+      });
+      return ret;
+    },
+
+    formatCardNumber: function(num) {
+      var text = num.replace(/\s/g, '').match(/(\w{4})|(\w{1,3})/g);
+      return !!text ? text.join(' ') : '';
+    },
+
+    formatMobileNumber: function(num) {
+      var th = num.replace(/\s/g, '').match(/\w{1,3}/);
+      var fth = num.substring(3).match(/\w{1,4}/g);
+      var ar = !! fth ? th.concat(fth) : th;
+      return !!ar ? ar.join(' ') : '';
+    },
+
+    showCreditCardDialog: function() {
+      var me = this;
+      this.creditCardDlg = null;
+      var _html = quickPayTemplate.creditCardDialog.join(''),
+        bankListCount = 0;
+
+      bankItem = [];
+      bankData = me.creditCardsBankList;
+      $.each(bankData, function(k, v) {
+        bankItem.push('<li class="e_open_ibank">');
+        bankItem.push('<input type="radio" name="bank" id="' + k + '" value="' + k + '" class="radio_box">');
+        bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="' + v.bankCode + '" src="' + v.picUrl + '" /></span><span class="bank_name_txt"></span></label>');
+        bankItem.push('</li>');
+        bankListCount++;
+      });
+      _html = _html.replace(/\{content\}/g, bankItem.join(''));
+
+      this.banklistdlg = new QNR.htmlDialog(_html);
+      this.banklistdlg.show();
+
+      if (document.selection && document.selection.empty) {
+        document.selection.empty(); //IE
+      } else if (window.getSelection) {
+        window.getSelection().removeAllRanges(); //ff
+      }
+
+      this.banklistdlg.dom.find('li').each(function() {
+        var input = $(this).find('input');
+        $(this).find('label').bind('click', function() {
+          input.attr('checked', true);
+        })
+
+        $(this).bind('dblclick', function() {
+          input.attr('checked', true);
+          confirmBtn.trigger("click");
+        });
+      });
+
+    },
+    showCreditCardInfo: function( cardId ){
+      var lastId = $.trim( cardId ).split(" ")[3];
+      $.get("creditList.json",function(res){
+        // TO DO:ajax data | 判断与之前是否
+        $(".credit-bank-wrap").html('<div class="fL"><img src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png" title="CMB"></div><div class="fR">信用卡 ** <span>'+lastId+'</span></div>');
+        $(".credit-bank").slideDown();
+        cardPicWrap.hide();
+        $(".credit-info").html('<p>网上交易限额</p> <table> <tr class="title"> <td>单笔限额(元)</td> <td>单日限额(元)</td> </tr> <tr> <td>小于2万元</td> <td>小于2万元</td> </tr> <tr class="title"> <td colspan="2">备注</td> </tr> <tr> <td colspan="2">客服热线<span>95588</span></td> </tr> </table>');
+        creditInfoWrap.show();
+      })  
+    },
+    hideCreditCardInfo: function(){
+      $(".credit-bank-wrap").html("");
+      $(".credit-bank").slideUp(0);
+      $(".credit-info").html("");
+      cardPicWrap.show();
+      creditInfoWrap.hide();
+    },
+    showBankListDialog: function() {
+      var me = this;
+      $('.b_chose_bank').remove();
+      this.banklistdlg = null;
+      var _html = quickPayTemplate.boundCardBankListDialog1.join(''),
+        userbankListCount = 0,
+        bankListCount = 0,
+        otherbankListCount = 0;
+
+      bankItem = [];
+      bankData = me.userbankList;
+      $.each(bankData, function(k, v) {
+        bankItem.push('<li class="e_open_ibank e_open_ibank_long" data-bId="' + v.id + '">');
+        bankItem.push('<input type="radio" name="bank" id="' + v.id + '" value="' + v.bankCode + '" class="radio_box">');
+        bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="' + v.bankCode + '" src="' + v.picUrl + '" /></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">' + v.cardNo.substr(v.cardNo.length - 4, 4) + '</em></span></label>');
+        bankItem.push('</li>');
+        userbankListCount++;
+      });
+      _html = _html.replace(/\{bindcontent\}/g, bankItem.join(''));
+
+      bankItem = [];
+      bankData = me.bankList;
+      $.each(bankData, function(k, v) {
+        bankItem.push('<li class="e_open_ibank">');
+        bankItem.push('<input type="radio" name="bank" id="' + k + '" value="' + k + '" class="radio_box">');
+        bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="' + v.bankCode + '" src="' + v.picUrl + '" /></span><span class="bank_name_txt"></span></label>');
+        bankItem.push('</li>');
+        bankListCount++;
+      });
+      _html = _html.replace(/\{content\}/g, bankItem.join(''));
+
+      bankItem = [];
+      bankData = me.otherbankList;
+      $.each(bankData, function(k, v) {
+        bankItem.push('<li class="e_open_ibank">');
+        bankItem.push('<input type="radio" name="bank" id="' + k + '" value="' + k + '" class="radio_box">');
+        bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="' + v.bankCode + '" src="' + v.picUrl + '" /></span><span class="bank_name_txt"></span></label>');
+        bankItem.push('</li>');
+        otherbankListCount++;
+      });
+      _html = _html.replace(/\{othercontent\}/g, bankItem.join(''));
+
+
+      this.banklistdlg = new QNR.htmlDialog(_html);
+      this.banklistdlg.show();
+
+      if (document.selection && document.selection.empty) {
+        document.selection.empty(); //IE
+      } else if (window.getSelection) {
+        window.getSelection().removeAllRanges(); //ff
+      }
+
+
+      if (!userbankListCount) {
+        $('#bindbanklist').hide();
+      }
+      if (!bankListCount) {
+        $('#allbanklist').hide();
+      }
+      if (!otherbankListCount) {
+        $('#otherbanklist').hide();
+      }
+
+      var confirmBtn = $("#confimbank");
+
+      this.banklistdlg.dom.find('li').each(function() {
+        var input = $(this).find('input');
+        $(this).find('label').bind('click', function() {
+          input.attr('checked', true);
+        })
+
+        $(this).bind('dblclick', function() {
+          input.attr('checked', true);
+          confirmBtn.trigger("click");
+        });
+      });
+
+      $("#banllist_close, #cancelbank").bind("click", function() {
+        me.banklistdlg.hide();
+      });
+
+      confirmBtn.bind("click", function() {
+        me.banklistdlg.hide();
+        var el = $("input:radio[name='bank']:checked");
+        if (el.length == 0) {
+          return;
+        }
+        var _code = el.val(),
+          _id = el.attr('id'),
+          _source = el.closest('li').find('img').attr('src');
+        //判断：如果选择新银行，那么跳到标准模式；否则进入简单模式
+        if (el.parents('ul').is('#allcards') || el.parents('ul').is('#othercards')) { //进入标准模式
+          me._initClearForm(allcardsCon);
+          allbankname.val(_code);
+          me.clearTips(allbankname);
+          allcardsCon.find("#dvchoose").hide();
+          allcardsCon.find("#dvrechoose").show();
+          allcardsCon.find("#bankimg").attr("src", _source);
+          bindcardsCon.hide();
+          allcardsCon.show();
+          cardPicWrap.show();
+          //用户已经登录，若选择其他银行卡，则隐藏绑卡提示：
+          var bind = allcardsCon.find('input[name="isBind"]');
+          if (QNR.PayInfo.userid != '' && el.parents('ul').is('#othercards')) {
+            bind.attr('checked', false);
+            bind.parents('tr').hide();
+          } else if (QNR.PayInfo.userid != '') {
+            bind.attr('checked', true);
+            bind.parents('tr').show();
+          }
+
+        } else if (el.parents('ul').is('#bindcards')) { //进入简单模式
+          me._initClearForm(bindcardsCon);
+          bindcardsCon.show();
+          allcardsCon.hide();
+          cardPicWrap.hide();
+          bindbankname.val(_code);
+
+          bankLi.hide();
+          bankLi.removeClass(highlightClass);
+          var inp = bankLi.find('input[value="' + _id + ',1"]');
+          if (inp.length) {
+            inp.attr('checked', true);
+            inp.parents('li').addClass(highlightClass).show();
+            var date = inp.attr('valiDate'),
+              mb = inp.attr('mobile');
+          } else {
+            var data = me.userbankList[_id];
+            me._refreshBindCard(data);
+            var date = data.validate,
+              mb = data.telphone;
+          }
+          showAllBindBank.show();
+
+          mobileStage.val(mb);
+          me.currentMobile = mb;
+
+          me.currentDate = date;
+          me.checkDateEnable();
+        }
+
+        me._checkBindCardShown();
+      });
+    },
+
+    _refreshBindCard: function(obj) {
+      var id = obj.id,
+        me = this;
+      bankVal = id + ',' + obj.cardType,
+      mob = obj.telphone,
+      bk = obj.bankCode,
+      date = obj.validate,
+      cardNumA = obj.cardNo.split('*'),
+      cardNum = cardNumA[cardNumA.length - 1],
+      img = me.parseImgURL(bk);
+
+      li = '<li class="js-choose-item highlight" style="display: list-item;"><div class="e_card_type clrfix"><div class="common_card">常用卡</div><div class="info_card js-choose-card"><input checked type="radio" name="bankAndType" value="' + bankVal + '" mobile="' + mob + '" bank="' + bk + '" validate="' + date + '" class="radio_box"><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" style="background-image: url(' + img + ');background-position: 0px 0px;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">' + cardNum + '</em></span></label></div><a href="javascript:;" js_bid="' + id + '" js_btype="1" js_blastfnum="' + cardNum + '" class="close js_ops_link">删除</a></div></li>';
+      bankLi.eq(bankLi.length - 1).remove();
+      bindUL.append(li);
+      bankLi = $('.js-choose-item');
+      radios = bankLi.find('input[type="radio"]');
+
+    },
+
+    //短信验证码
+    _initMobile: function() {
+      var form = payFrom,
+        _error = form.find("[placeholder='get-permit-error']"),
+        _message = form.find('[placeholder="get-permit-message"]'),
+        _button = form.find('[placeholder="get-permit"]');
+      var _showError = function(msg) {
+        _error.removeClass("popup_tips_wrap_clr");
+        var _msg = quickPayTemplate.icon_wrong.join('');
+        _error.html(_msg.replace(/\{content\}/g, msg));
+
+        if (_showError.handler) {
+          clearTimeout(_showError.handler);
+        }
+
+        _showError.handler = setTimeout(function() {
+          _error.hide();
+          _showError.handler = false;
+        }, 3000);
+      };
+
+      QNR.phoneValid({
+        url: baseurl + "SendVcodeNoUid.do",
+        button: _button,
+        message: _message,
+        callback: function(data) {
+          var m = "status";
+          if (data.ret) {
+            if (parseInt(data.data[m]) == 1) {
+              _error.hide();
+              return true;
+            } else if (parseInt(data.data[m]) == 2) {
+              _showError(tips.vcode.limit);
+              return false;
+            } else if (parseInt(data.data[m]) == 3) {
+              _showError(tips.vcode.frequent);
+              return false;
+            }
+          } else {
+            _error.removeClass("popup_tips_wrap_clr");
+            var _msg = quickPayTemplate.icon_wrong.join('');
+            _error.html(_msg.replace(/\{content\}/g, tips.vcode.sendFail));
+            return false;
+          }
+
+          return false;
+        },
+        locker: function(obj) {
+          var _mobileObj = $(obj).parents('table').find('#mobile'),
+            _mobile = (_mobileObj.val()).replace(/\s/g, '');
+
+          if (!_mobile) {
+            $('#mobile').trigger('blur');
+          }
+
+          return QNR.patterns.mobile.test(_mobile);
+        },
+
+        paramRender: function(obj) {
+          var _self = this;
+          var $moble = $(obj).parents('table').find('#mobile');
+          var _moble = ($moble.val()).replace(/\s/g, '');
+          $moble.trigger('blur');
+          return {
+            mobile: _moble,
+            messageType: 1
+          };
+        }
+      });
+    },
+    _initBankCode: function() {
+      //如果是用户已经保存的卡，那么把选择的卡code放到的银行卡code里；
+      if (this._checkBindCardShown()) {
+        this.currentMobile = radios.filter(':checked').attr('mobile') || '';
+        this.currentBank = radios.filter(':checked').attr('bank') || '';
+        this.currentDate = radios.filter(':checked').attr('valiDate') || '';
+        mobileStage.val(this.currentMobile);
+        bindbankname.val(this.currentBank);
+        cardPicWrap.hide();
+      } else {
+        allcardsCon.show();
+        cardPicWrap.show();
+      }
+    },
+
+    _initClearForm: function(obj) {
+      if (obj) {
+        obj.find('.js_tipcontainer').hide();
+      } else {
+        $(".js_tipcontainer").hide();
+      }
+    },
+
+    //验证银行卡，采用了 LUHN 算法
+    isValidMasterCard: function(cardNo) {
+      return QNR.patterns.creditcard.test(cardNo);
+    },
+    //被隐藏的input校验
+    valiHiddens: function() {
+      var me = this,
+        res = true,
+        m, y, bkEle,
+        y0 = dateNow.getFullYear().toString().match(/\d{2}/g)[1],
+        m0 = dateNow.getMonth() + 1;
+      if (me._checkBindCardShown()) {
+        m = bindcardsCon.find('.expires_month');
+        y = bindcardsCon.find('.expires_year');
+        bkEle = bindbankname;
+      } else {
+        m = allcardsCon.find('.expires_month');
+        y = allcardsCon.find('.expires_year');
+        bkEle = allbankname;
+      }
+      if (!(m.get(0).selectedIndex) || !(y.get(0).selectedIndex) || (+$(y).val() <= +y0 && +$(m).val() < +m0)) {
+        me.showTips(y, '请选择有效期');
+        res = res && false;
+      }
+
+      if ($.trim(bkEle.val()) == "") {
+        me.showTips(bkEle, '请选择银行名称');
+        res = res && false;
+      }
+
+      return res;
+    },
+
+    _checkBindCardShown: function() {
+      var res = bindcardsCon && bindcardsCon.is(":visible");
+      if (res) {
+        btnSubmit.parent().css('padding-left', '160px')
+      } else {
+        btnSubmit.parent().css('padding-left', '130px')
+      }
+
+      return res;
+    },
+
+    _initExpiresDate: function() {
+      var me = this;
+      var year = new Date().getFullYear().toString().substr(2);
+      var expire_M_Y = function(ori) {
+        var prt = $(ori.options.rawSelect).parents('.ops_date'),
+          m = prt.find('.expires_month'),
+          y = prt.find('.expires_year'),
+          dateNow = new Date(),
+          y0 = dateNow.getFullYear().toString().match(/\d{2}/g)[1],
+          m0 = dateNow.getMonth() + 1;
+
+        if ( !! m.get(0).selectedIndex && !! y.get(0).selectedIndex) {
+          if (+$(y).val() <= +y0 && +$(m).val() < +m0) {
+            me.showTips(y, '请选择有效期');
+          } else {
+            me.clearTips(y);
+          }
+        } else {
+          me.showTips(y, '请选择有效期');
+        }
+      }
+      if (!expires_year.length) return;
+      expires_year.each(function(idx, val) {
+        var y_options = expires_year[idx].options,
+          i = 0,
+          _val;
+        y_options.add(new Option("请选择年份", ""));
+        do {
+          _val = +year + i;
+          y_options.add(new Option(_val, _val));
+          i++;
+        } while (i < 20);
+      });
+
+      //填充有效期；只对绑定的银行卡有效
+      me.checkDateEnable();
+
+      expires_year.yselector({
+        onchange: function(obj) {
+          expire_M_Y(this);
+        }
+      });
+      expires_month.yselector({
+        onchange: function(obj) {
+          expire_M_Y(this);
+        }
+      });
+    },
+
+    checkDateEnable: function() {
+      //判断有效期是否有效；无效则警告；有效则隐藏时间；
+      var date = this.currentDate || '1307',
+        me = this;
+      dd = date.match(/\d{2}/g),
+      y = dd[0], m = dd[1],
+      dateNow = new Date(),
+      y0 = dateNow.getFullYear().toString().match(/\d{2}/g)[1],
+      m0 = dateNow.getMonth() + 1,
+      yEle = bindcardsCon.find('.expires_year'),
+      mEle = bindcardsCon.find('.expires_month');
+
+      mEle.val(mEle.isExistItem(m) ? m : '请选择月份');
+      yEle.val(yEle.isExistItem(y) ? y : '请选择年份');
+      mEle.trigger('change');
+      yEle.trigger('change');
+
+      if (+m < +m0 && +y <= y0) {
+        yEle.parents('tr').show();
+        me.showTips(yEle, '请确认有效期');
+      } else if (+m == +m0 && +y <= y0) {
+        yEle.parents('tr').show();
+      } else {
+        me.clearTips(yEle);
+        yEle.parents('tr').hide();
+      }
+
+    },
+
+    clearTips: function(el) {
+      var _div = el.closest('td').find(".js_tipcontainer");
+      _div.find('.txt_tips').text('');
+      _div.find('.iright').show();
+      _div.find('.iwrong').hide();
+    },
+
+    showTips: function(el, msg) {
+      var _div = el.closest('td').find(".js_tipcontainer");
+      _div.show();
+      _div.find('.iwrong').show();
+      _div.find('.iright').hide();
+      _div.find('.txt_tips').text(msg);
+    },
+
+    _initValidate: function() {
+      var me = this;
+      $.jvalidator.addPattern({
+        name: 'not_empty',
+        message: '不能为空',
+        validate: function(value, validationCallback) {
+          validationCallback($.trim(value) != '');
+        }
+      });
+      $.jvalidator.addPattern({
+        name: 'mobile',
+        message: '请输入正确的手机号',
+        validate: function(value, validationCallback) {
+          value = $.trim(value).replace(/\s/g, '');
+          validationCallback(QNR.patterns.mobile.test(value));
+        }
+      });
+      $.jvalidator.addPattern({
+        name: 'creditcardcvv',
+        message: '格式有误',
+        validate: function(value, validationCallback) {
+          //验证信用卡背后三位数字
+          var mobileRegExp = /^\d{3}$/i;
+          validationCallback(mobileRegExp.test($.trim(value)));
+        }
+      });
+      $.jvalidator.addPattern({
+        name: 'debitcardno',
+        message: '请输入正确的银行卡号',
+        validate: function(value, validationCallback) {
+          var cardRegExp = /^[\d]{16,19}$/;
+          value = $.trim(value).replace(/\s/g, '');
+          validationCallback(cardRegExp.test(value));
+        }
+      });
+
+      $.jvalidator.addPattern({
+        name: 'creditcardno',
+        message: '请输入正确的信用卡号',
+        validate: function(value, validationCallback) {
+          var isMasterCard = numRegExp.test($.trim(value).replace(/\s/g, ''));
+          //todo 记得删除对beta的判断
+          isMasterCard = isMasterCard && me.isValidMasterCard($.trim(value).replace(/\s/g, ''));
+
+          var cardid = $('#credit_cardnum');
+          var params = {
+            cardType: $('[name="cardType"]:checked').val()
+          };
+          params[allbankname.attr('name')] = allbankname.val();
+          params[cardid.attr('name')] = cardid.val().replace(/\s/g, '');
+
+          if (isMasterCard && bankname.val()) {
+            $.ajax({
+              url: baseurl + 'CheckCardBin.do',
+              data: params,
+              type: 'post',
+              dataType: 'json',
+              success: function(data) {
+                var result = data.ret && data.data && (parseInt(data.data.status, 10) == 1);
+
+                if (result) {
+                  validationCallback(result);
+                } else {
+                  validationCallback(result, '类型, 银行和卡号不匹配');
+                }
               },
 
-      _initBankIcon: function(){
-                         var me = this;
-                         $('.js-bank-icon').each(function(){
-                             var $this = $(this), cardCode = $.trim($this.parents('.js-choose-card').find('input.radio_box').attr('bank'));
-                             var bankicon= me.parseImgURL(cardCode);
+              error: function(data) {
+                validationCallback(false);
+              }
+            });
+          } else {
+            validationCallback(isMasterCard);
+          }
+        }
+      });
 
-                             $this.css('background-image','url('+bankicon+')');
-                         });
-                         me._checkBindCardShown();
-                     },
-        initDebitCard: function(){
-						  $('#debit_card li label,#platform li label').click(function(){
-							var $this = $(this);
-							$this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
-						  })
-						  var hide_ele = $('#allcards .hide');
-						  $('#show_and_hide .up, #show_and_hide .down').click(function(){
-							var $this = $(this);
-							if($this.is('.down')){
-							  hide_ele.show();
-							}else{
-							  hide_ele.hide();
-							}
-							$this.hide().siblings().show();
-							return false;
-						  })
-						},
+      $.jvalidator.addPattern({
+        name: 'vcode',
+        message: '请输入正确的验证码',
+        validate: function(value, validationCallback) {
+          var isMatch = /^[\d]{6}$/.test($.trim(value));
+          $('[placeholder="get-permit-message"]').remove();
+          var _mobile = $(this).parents('table').find('input[name="mobile"]').val().replace(/\s/g, '');
 
-        _initEvent : function(){
-                         var me = this;
-
-                         //确认付款
-                         btnSubmit.bind("click",function(e){
-                             me.submitform(e);
-                         });
-                         //银行卡号
-                         $("#credit_cardnum, #debit_cardnum").bind("keyup change", function () {
-                             var _self = $(this), text = _self.val();
-                             if (text) {
-                                 _self.val(me.formatCardNumber(text));
-                             }
-                         });
-
-                         //手机号
-                         $("#allcardsCon #mobile,#bindcardsCon #mobile").bind("keyup change", function () {
-                             var _self = $(this), text = _self.val();
-                             if (text) {
-                                 _self.val(me.formatMobileNumber(text));
-                             }
-                         });
-
-                         $('#credit_cardbacknum').bind('focus', function(e){
-                             $('.card_pic .img').css('background-position','0 -142px');
-                         });
-
-                         payFrom.delegate('.yselector_box', 'click', function(e){
-                             $('.card_pic .img').css('background-position','0 0');
-                         });
-                         //快捷支付 显示全部绑定银行
-                         showAllBindBank.bind('click',function(e){
-                             e.preventDefault();
-                             bankLi.show(200).removeClass(highlightClass);
-                             bankLi.find('.close').hide();
-                             showAllBindBank.hide();
-                         });
-
-                         bindcardsCon.delegate('li.js-choose-item', 'mouseenter',function(e){
-                             $(this).addClass(highlightClass);
-                             $(this).find('.close').show();
-                         }).delegate('li.js-choose-item', 'mouseleave',function(e){
-                             if(showAllBindBank.is(':visible')) return;
-                             $(this).removeClass(highlightClass);
-                             $(this).find('.close').hide();
-                         }).delegate('.js-choose-card', 'click',function(e){
-                             var el = $(this).closest('li'), checkedEle = el.find('input[type=radio]'),
-                                 mb = checkedEle.attr('mobile'),
-                                 bk = checkedEle.attr('bank'),
-                                 date = checkedEle.attr('valiDate');
-                             var sibling = el.siblings('.js-choose-item');
-                             sibling.hide(200);
-
-                             checkedEle.attr('checked',true);
-                             el.addClass(highlightClass);
-                             showAllBindBank.show();
-
-                             mobileStage.val(mb);
-                             me.currentMobile = mb;
-                             bindbankname.val(bk);
-                             me.currentBank = bk;
-                             me.recheckMobileVcode();
-
-                             me.currentDate = date;
-                             me.checkDateEnable();
-                         });
-
-                         $('#show_creditcard_online').click(function(){
-							me.showCreditCardDialog();
-							return false;
-						 });
-                     },
-
-        recheckMobileVcode: function(){
-                                if(!vcode.length){
-                                    return;
-                                }
-
-                                var newmobile=radios.filter(':checked').attr('mobile');
-
-                                if(this.currentMobile!=newmobile){
-                                    vcode.val('');
-                                    $('[placeholder="get-permit-message"]').remove();
-                                    this.showInvalid(vcode,'您选择的银行卡改变, 请重新发送验证码');
-                                    this.currentMobile=newmobile;
-                                }
-                            },
-
-  //初始化倒计时
-  _initTimeCount : function(){
-                     var countNum = 1800000;
-                     var formattime = function(t){
-                       t = t || '00000000000000';
-                       var res = t.match(/\d{2}/g),
-                         yy = res[0] + res[1],
-                         mou = res[2],
-                         dd = res[3],
-                         hh = res[4],
-                         mm = res[5],
-                         ss = res[6];
-                       return (new Date(yy,mou,dd,hh,mm,ss)).getTime();
-                     };
-                     var newtime=$('#newtime').val();
-                     var oldtime=$('#oldtime').val();
-                     var dur = countNum-( formattime(newtime)-formattime(oldtime) );
-
-
-                     var timeout=function(){
-                       window.location.href= baseurl + 'error.do?type=timeout';
-                     };
-
-                     var timeCount = new QNR.timeCount(dur,{min:tmin,sec:tsec},timeout);
-                   },
-				   
- submitform : function(e){
-                 var me = this;
-                 this.formChecker.validateAll(function(ret) {
-                   var valiHidden = me.valiHiddens();
-
-                   if(ret && valiHidden){
-                     me.syncsubmit();
-                   }
-                 });
-                 e.preventDefault();
-               },
-
-  syncsubmit : function(){
-                 var syncForm = document.createElement("form");
-                 document.body.appendChild(syncForm);
-                 syncForm.method = 'post';
-                 syncForm.action = payFrom.attr('action');
-                 syncForm.target = '_self';
-
-                 var o = this.getParam();
-                 for( var _attr in o ){
-                   if( o.hasOwnProperty(_attr) ){
-                     //清除表单value的空格
-                     var _val = $.trim(o[_attr]);
-                     var _inp = document.createElement("input");
-                     _inp.setAttribute("name", _attr );
-                     _inp.setAttribute("value",o[_attr]);
-                     _inp.setAttribute("type","hidden");
-                     syncForm.appendChild( _inp );
-                   }
-                 }
-                 syncForm.submit();
-               },
-
-  getParam : function(){
-               var me = this;
-               var parm = me.getForm(payFrom);
-               return parm;
-             },
-
-  //获取form表单
-  getForm : function(form){
-                var me = this;
-                if(me._checkBindCardShown()){
-                    allcardsCon.remove();
-                    cardPicWrap.remove();
-                }else{
-                    bindcardsCon.remove();
+          if (isMatch && QNR.patterns.mobile.test(_mobile)) {
+            $.ajax({
+              url: baseurl + 'CheckVcodeNoUid.do',
+              data: {
+                mobile: _mobile,
+                vcode: value,
+                messageType: 1
+              },
+              type: 'post',
+              dataType: 'json',
+              success: function(data) {
+                if (data && data.ret) {
+                  validationCallback(true);
+                } else {
+                  validationCallback(false);
                 }
-              var array = form.serializeArray();
-              var ret ={}, mon, year;
-              $.each(array,function(i,input){
-                ret[input.name] = input.value.replace(/\s/g, '');
-              });
-              return ret;
-            },
+              }
+            });
+          } else {
+            validationCallback(isMatch);
+          }
+        }
+      });
 
-  formatCardNumber : function(num){
-                       var text = num.replace(/\s/g, '').match(/(\w{4})|(\w{1,3})/g);
-                       return !!text ? text.join(' ') : '';
-                     },
-					 
-  formatMobileNumber : function(num){
-                         var th = num.replace(/\s/g, '').match(/\w{1,3}/);
-                         var fth = num.substring(3).match(/\w{1,4}/g);
-                         var ar = !!fth ? th.concat(fth) : th;
-                         return !!ar ? ar.join(' ') : '';
-                       },
-					   	 
-  showCreditCardDialog: function(){
-							var me = this;
-							this.creditCardDlg = null;
-							var _html = quickPayTemplate.creditCardDialog.join(''), bankListCount = 0;
-							
-							bankItem = [];
-                            bankData = me.creditCardsBankList;
-                            $.each(bankData, function(k, v){
-                              bankItem.push('<li class="e_open_ibank">');
-                              bankItem.push('<input type="radio" name="bank" id="'+ k +'" value="'+ k +'" class="radio_box">');
-                              bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="'+ v.bankCode +'" src="'+ v.picUrl +'" /></span><span class="bank_name_txt"></span></label>');
-                              bankItem.push('</li>');
-                              bankListCount++;
-                            });
-                            _html = _html.replace(/\{content\}/g,bankItem.join(''));
-							
-							this.banklistdlg = new QNR.htmlDialog(_html);
-                            this.banklistdlg.show();
-							
-							if (document.selection && document.selection.empty) {
-                               document.selection.empty();  //IE
-                            }else if(window.getSelection) {
-                               window.getSelection().removeAllRanges(); //ff
-                            }
-							
-							this.banklistdlg.dom.find('li').each(function(){
-                             var input=$(this).find('input');
-                             $(this).find('label').bind('click',function(){
-                               input.attr('checked',true);
-                             })
+      this.showInvalid = function(el, message) {
+        var e = $(el).closest('td').find(".js_tipcontainer");
+        e.removeClass("popup_tips_wrap_clr");
+        var _msg = quickPayTemplate.icon_wrong.join('');
+        e.html(_msg.replace(/\{content\}/g, message)).show();
+      };
 
-                             $(this).bind('dblclick',function(){
-                               input.attr('checked',true);
-                               confirmBtn.trigger("click");
-                             });
-                           });
+      this.showValid = function(el) {
+        var e = $(el).parent().siblings(".js_tipcontainer");
+        e.removeClass("popup_tips_wrap_clr");
+        e.html(quickPayTemplate.icon_right.join('')).show();
+      };
 
-  },
-  
-  showBankListDialog : function(){
-                         var me = this;
-                         $('.b_chose_bank').remove();
-                         this.banklistdlg = null;
-                           var _html = quickPayTemplate.boundCardBankListDialog1.join(''),
-                               userbankListCount = 0,bankListCount = 0, otherbankListCount = 0;
+      this.formChecker = payFrom.find("[data-jvalidator-pattern]").jvalidator({
+        validation_events: ['blur'],
+        on: {
+          invalid: function(evt, el, patterns) {
+            var e = $(el).parent().siblings(".js_tipcontainer");
+            e.removeClass("popup_tips_wrap_clr");
+            var _msg = quickPayTemplate.icon_wrong.join('');
+            e.html(_msg.replace(/\{content\}/g, patterns[0].message)).show();
+          },
+          valid: function(evt, el, patterns) {
+            var e = $(el).parent().siblings(".js_tipcontainer");
+            e.removeClass("popup_tips_wrap_clr");
+            e.html(quickPayTemplate.icon_right.join('')).show();
+          }
+        }
+      });
+    },
 
-                           bankItem = [];
-                           bankData = me.userbankList;
-                           $.each(bankData, function(k, v){
-                             bankItem.push('<li class="e_open_ibank e_open_ibank_long" data-bId="' + v.id + '">');
-                             bankItem.push('<input type="radio" name="bank" id="'+ v.id +'" value="'+ v.bankCode +'" class="radio_box">');
-                             bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="'+ v.bankCode +'" src="'+ v.picUrl +'" /></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">' + v.cardNo.substr(v.cardNo.length - 4, 4)+ '</em></span></label>');
-                             bankItem.push('</li>');
-                             userbankListCount++;
-                           });
-                           _html = _html.replace(/\{bindcontent\}/g,bankItem.join(''));
+    getCreditCarddList: function(callback) {
+      var me = this;
+      var uid = QNR.PayInfo ? QNR.PayInfo.userid : '';
+      //TODO:
+      var url = "/creditList.json";
+      $.ajax({
+        url: url,
+        type: "POST",
+        dataType: 'json',
+        success: function(res) {
+          if (res && res.ret && res.data) {
+            var creditCards = res.data.baseCard || [],
+              creditCardsLen = creditCards.length,
 
-                           bankItem = [];
-                           bankData = me.bankList;
-                           $.each(bankData, function(k, v){
-                             bankItem.push('<li class="e_open_ibank">');
-                             bankItem.push('<input type="radio" name="bank" id="'+ k +'" value="'+ k +'" class="radio_box">');
-                             bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="'+ v.bankCode +'" src="'+ v.picUrl +'" /></span><span class="bank_name_txt"></span></label>');
-                             bankItem.push('</li>');
-                             bankListCount++;
-                           });
-                           _html = _html.replace(/\{content\}/g,bankItem.join(''));
+              creditCardsData = {},
+              bank, img;
 
-                           bankItem = [];
-                           bankData = me.otherbankList;
-                           $.each(bankData, function(k, v){
-                             bankItem.push('<li class="e_open_ibank">');
-                             bankItem.push('<input type="radio" name="bank" id="'+ k +'" value="'+ k +'" class="radio_box">');
-                             bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="'+ v.bankCode +'" src="'+ v.picUrl +'" /></span><span class="bank_name_txt"></span></label>');
-                             bankItem.push('</li>');
-                             otherbankListCount++;
-                           });
-                           _html = _html.replace(/\{othercontent\}/g,bankItem.join(''));
+            for (var i = 0; i < creditCardsLen; i++) {
+              bank = creditCards[i];
+              img = me.parseImgURL(bank.bankCode);
+              bank.picUrl = img;
+              creditCardsData[creditCards[i].bankCode] = bank;
+            }
 
+            unionPay.creditCardsBankList = creditCardsData;
+            callback && callback();
+          }
+        }
+      })
+    },
 
-                           this.banklistdlg = new QNR.htmlDialog(_html);
-                           this.banklistdlg.show();
-
-                           if (document.selection && document.selection.empty) {
-                               document.selection.empty();  //IE
-                           }else if(window.getSelection) {
-                               window.getSelection().removeAllRanges(); //ff
-                           }
-
-
-                           if(!userbankListCount){
-                               $('#bindbanklist').hide();
-                           }
-                           if(!bankListCount){
-                               $('#allbanklist').hide();
-                           }
-                           if(!otherbankListCount){
-                               $('#otherbanklist').hide();
-                           }
-
-                           var confirmBtn=$("#confimbank");
-
-                           this.banklistdlg.dom.find('li').each(function(){
-                             var input=$(this).find('input');
-                             $(this).find('label').bind('click',function(){
-                               input.attr('checked',true);
-                             })
-
-                             $(this).bind('dblclick',function(){
-                               input.attr('checked',true);
-                               confirmBtn.trigger("click");
-                             });
-                           });
-
-                           $("#banllist_close, #cancelbank").bind("click",function(){
-                             me.banklistdlg.hide();
-                           });
-
-                           confirmBtn.bind("click", function(){
-                             me.banklistdlg.hide();
-                             var el = $("input:radio[name='bank']:checked");
-                             if(el.length == 0){
-                               return;
-                             }
-                             var _code = el.val(),_id = el.attr('id'),
-                                 _source = el.closest('li').find('img').attr('src');
-                             //判断：如果选择新银行，那么跳到标准模式；否则进入简单模式
-                             if(el.parents('ul').is('#allcards') || el.parents('ul').is('#othercards')){//进入标准模式
-                                 me._initClearForm(allcardsCon);
-                                 allbankname.val(_code);
-                                 me.clearTips(allbankname);
-                                 allcardsCon.find("#dvchoose").hide();
-                                 allcardsCon.find("#dvrechoose").show();
-                                 allcardsCon.find("#bankimg").attr("src", _source);
-                                 bindcardsCon.hide();
-                                 allcardsCon.show();
-                                 cardPicWrap.show();
-                                 //用户已经登录，若选择其他银行卡，则隐藏绑卡提示：
-                                 var bind = allcardsCon.find('input[name="isBind"]');
-                                 if( QNR.PayInfo.userid != '' && el.parents('ul').is('#othercards')){
-                                     bind.attr('checked', false);
-                                     bind.parents('tr').hide();
-                                 }else if(QNR.PayInfo.userid != ''){
-                                     bind.attr('checked', true);
-                                     bind.parents('tr').show();
-                                 }
-
-                             }else if(el.parents('ul').is('#bindcards')){//进入简单模式
-                                 me._initClearForm(bindcardsCon);
-                                 bindcardsCon.show();
-                                 allcardsCon.hide();
-                                 cardPicWrap.hide();
-                                 bindbankname.val(_code);
-
-                                 bankLi.hide();
-                                 bankLi.removeClass(highlightClass);
-                                 var inp = bankLi.find('input[value="' + _id + ',1"]');
-                                 if(inp.length){
-                                     inp.attr('checked', true);
-                                     inp.parents('li').addClass(highlightClass).show();
-                                     var date = inp.attr('valiDate'),
-                                         mb = inp.attr('mobile');
-                                 }else{
-                                     var data = me.userbankList[_id];
-                                     me._refreshBindCard(data);
-                                     var date = data.validate,
-                                         mb = data.telphone;
-                                 }
-                                 showAllBindBank.show();
-
-                                 mobileStage.val(mb);
-                                 me.currentMobile = mb;
-
-                                 me.currentDate = date;
-                                 me.checkDateEnable();
-                             }
-
-                             me._checkBindCardShown();
-                           });
-                       },
-					   
-  _refreshBindCard: function(obj){
-                        var id = obj.id,me = this;
-                            bankVal = id + ',' + obj.cardType,
-                            mob = obj.telphone,
-                            bk = obj.bankCode,
-                            date = obj.validate,
-                            cardNumA = obj.cardNo.split('*'),
-                            cardNum = cardNumA[cardNumA.length -1],
-                            img = me.parseImgURL(bk);
-
-                            li = '<li class="js-choose-item highlight" style="display: list-item;"><div class="e_card_type clrfix"><div class="common_card">常用卡</div><div class="info_card js-choose-card"><input checked type="radio" name="bankAndType" value="' + bankVal + '" mobile="' + mob + '" bank="' + bk + '" validate="' + date + '" class="radio_box"><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" style="background-image: url(' + img + ');background-position: 0px 0px;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">' + cardNum + '</em></span></label></div><a href="javascript:;" js_bid="' + id + '" js_btype="1" js_blastfnum="' + cardNum + '" class="close js_ops_link">删除</a></div></li>';
-                        bankLi.eq(bankLi.length - 1).remove();
-                        bindUL.append(li);
-                        bankLi = $('.js-choose-item');
-                        radios = bankLi.find('input[type="radio"]');
-
-                    },
-
-  //短信验证码
-  _initMobile : function(){
-                    var form = payFrom,
-                    _error = form.find("[placeholder='get-permit-error']"),
-                    _message = form.find('[placeholder="get-permit-message"]'),
-                    _button = form.find('[placeholder="get-permit"]');
-                    var _showError=function(msg){
-                        _error.removeClass("popup_tips_wrap_clr");
-                        var _msg = quickPayTemplate.icon_wrong.join('');
-                        _error.html( _msg.replace(/\{content\}/g,  msg) );					
-
-                        if(_showError.handler){
-                            clearTimeout(_showError.handler);
-                        }
-
-                        _showError.handler=setTimeout(function(){
-                            _error.hide();
-                            _showError.handler=false;
-                        },3000);
-                    };
-
-                    QNR.phoneValid({
-                        url: baseurl+"SendVcodeNoUid.do",
-                        button: _button,
-                        message: _message,
-                        callback: function(data){
-                            var m="status";
-                            if(data.ret){
-                                if(parseInt(data.data[m])==1){
-                                    _error.hide();
-                                    return true;
-                                }else if(parseInt(data.data[m])==2){
-                                    _showError(tips.vcode.limit);
-                                    return false;
-                                }else if(parseInt(data.data[m])==3){
-                                    _showError(tips.vcode.frequent);
-                                    return false;
-                                }
-                            }else{
-                                _error.removeClass("popup_tips_wrap_clr");
-                                var _msg = quickPayTemplate.icon_wrong.join('');
-                                _error.html( _msg.replace(/\{content\}/g,  tips.vcode.sendFail) );					  
-                                return false;
-                            }
-
-                            return false;
-                        },
-                        locker: function(obj){
-                                    var _mobileObj = $(obj).parents('table').find('#mobile'),
-                                    _mobile = (_mobileObj.val()).replace(/\s/g, '');
-
-                                    if(!_mobile){
-                                        $('#mobile').trigger('blur');
-                                    }
-
-                                    return QNR.patterns.mobile.test(_mobile);
-                                },
-
-                        paramRender: function(obj){
-                                         var _self = this;
-                                         var $moble = $(obj).parents('table').find('#mobile');
-                                         var _moble = ($moble.val()).replace(/\s/g, '');
-                                         $moble.trigger('blur');
-                                         return {mobile:_moble, messageType: 1};
-                                     }
-                    });
-                },
-      _initBankCode: function(){
-                         //如果是用户已经保存的卡，那么把选择的卡code放到的银行卡code里；
-                         if(this._checkBindCardShown()){
-                             this.currentMobile = radios.filter(':checked').attr('mobile')||'';
-                             this.currentBank = radios.filter(':checked').attr('bank')||'';
-                             this.currentDate = radios.filter(':checked').attr('valiDate')||'';
-                             mobileStage.val(this.currentMobile);
-                             bindbankname.val(this.currentBank);
-                             cardPicWrap.hide();
-                         }else{
-                             allcardsCon.show();
-                             cardPicWrap.show();
-                         }
-                     },
-
-      _initClearForm: function(obj){
-                          if(obj){
-                              obj.find('.js_tipcontainer').hide();
-                          }else{
-                              $(".js_tipcontainer").hide();
-                          }
-                      },
-
-      //验证银行卡，采用了 LUHN 算法
-      isValidMasterCard : function(cardNo) {
-                              return QNR.patterns.creditcard.test(cardNo);
-                          },	
-      //被隐藏的input校验
-      valiHiddens : function(){
-                        var me = this, res = true, m, y, bkEle,
-                        y0 = dateNow.getFullYear().toString().match(/\d{2}/g)[1],
-                        m0 = dateNow.getMonth() + 1;
-                        if(me._checkBindCardShown()){
-                            m = bindcardsCon.find('.expires_month');
-                            y = bindcardsCon.find('.expires_year');
-                            bkEle = bindbankname;
-                        }else{
-                            m = allcardsCon.find('.expires_month');
-                            y = allcardsCon.find('.expires_year');
-                            bkEle = allbankname;
-                        }
-                        if(!(m.get(0).selectedIndex) || !(y.get(0).selectedIndex) || (+$(y).val() <= +y0 && +$(m).val() < +m0 )){
-                            me.showTips(y,'请选择有效期');
-                            res = res && false;
-                        }	
-
-                        if($.trim(bkEle.val()) == ""){
-                            me.showTips(bkEle,'请选择银行名称');
-                            res = res && false;
-                        }	
-
-                        return res;
-                    },
-					
-      _checkBindCardShown : function(){
-                                var res =  bindcardsCon && bindcardsCon.is(":visible");
-                                if (res){
-                                    btnSubmit.parent().css('padding-left', '160px')
-                                }else{
-                                    btnSubmit.parent().css('padding-left', '130px')
-                                }
-
-                                return res;
-                            },
-							
-      _initExpiresDate : function(){
-                             var me = this;
-                             var year = new Date().getFullYear().toString().substr(2);
-                             var expire_M_Y = function(ori){
-                                 var prt = $(ori.options.rawSelect).parents('.ops_date'),
-                                     m = prt.find('.expires_month'),
-                                     y = prt.find('.expires_year'),
-                                     dateNow = new Date(),
-                                     y0 = dateNow.getFullYear().toString().match(/\d{2}/g)[1],
-                                     m0 = dateNow.getMonth() + 1;
-
-                                 if(!!m.get(0).selectedIndex && !!y.get(0).selectedIndex){
-                                     if(+$(y).val() <= +y0 && +$(m).val() < +m0 ){
-                                         me.showTips(y,'请选择有效期');
-                                     }else{
-                                         me.clearTips(y);
-                                     }
-                                 }else{
-                                     me.showTips(y,'请选择有效期');
-                                 }
-                             }
-                             if(!expires_year.length) return;
-                             expires_year.each(function(idx, val){
-                                 var y_options = expires_year[idx].options, i = 0, _val;
-                                 y_options.add(new Option("请选择年份", ""));
-                                 do{
-                                     _val = +year + i;
-                                     y_options.add(new Option(_val,_val));
-                                     i++;
-                                 }while( i < 20 );
-                             });
-
-                             //填充有效期；只对绑定的银行卡有效
-                             me.checkDateEnable();
-
-                             expires_year.yselector({
-                                 onchange: function(obj){
-                                               expire_M_Y(this);
-                                           }
-                             });
-                             expires_month.yselector({
-                                 onchange: function(obj){
-                                               expire_M_Y(this);
-                                           }
-                             });
-                         },
-
-      checkDateEnable: function(){
-                           //判断有效期是否有效；无效则警告；有效则隐藏时间；
-                           var date = this.currentDate || '1307', me = this;
-                           dd = date.match(/\d{2}/g),
-                              y = dd[0], m = dd[1],
-                              dateNow = new Date(),
-                              y0 = dateNow.getFullYear().toString().match(/\d{2}/g)[1],
-                              m0 = dateNow.getMonth() + 1,
-                              yEle = bindcardsCon.find('.expires_year'),
-                              mEle = bindcardsCon.find('.expires_month');
-
-                           mEle.val(mEle.isExistItem(m) ? m : '请选择月份');
-                           yEle.val(yEle.isExistItem(y) ? y : '请选择年份');
-                           mEle.trigger('change');
-                           yEle.trigger('change');
-
-                           if( +m < +m0 && +y <= y0){
-                               yEle.parents('tr').show();
-                               me.showTips(yEle, '请确认有效期');
-                           }else if( +m == +m0 && +y <= y0){
-                               yEle.parents('tr').show();
-                           }else{
-                               me.clearTips(yEle);
-                               yEle.parents('tr').hide();
-                           }
-
-                       },
-					   
-      clearTips : function(el){
-                      var _div = el.closest('td').find(".js_tipcontainer");
-                      _div.find('.txt_tips').text('');
-                      _div.find('.iright').show();
-                      _div.find('.iwrong').hide();
-                  },
-
-      showTips : function(el, msg){
-                     var _div = el.closest('td').find(".js_tipcontainer");
-                     _div.show();
-                     _div.find('.iwrong').show();
-                     _div.find('.iright').hide();
-                     _div.find('.txt_tips').text( msg );
-                 },
-
-      _initValidate : function(){
-                          var me = this;
-                          $.jvalidator.addPattern({
-                              name: 'not_empty',
-                              message: '不能为空',
-                              validate: function(value, validationCallback) {
-                                  validationCallback($.trim(value) != '');
-                              }
-                          });
-                          $.jvalidator.addPattern({
-                              name: 'mobile',
-                              message: '请输入正确的手机号',
-                              validate: function(value, validationCallback) {
-                                  value = $.trim(value).replace(/\s/g, '');
-                                  validationCallback( QNR.patterns.mobile.test(value) );
-                              }
-                          });
-                          $.jvalidator.addPattern({
-                              name: 'creditcardcvv',
-                              message: '格式有误',
-                              validate: function(value, validationCallback) {
-                                  //验证信用卡背后三位数字
-                                  var mobileRegExp = /^\d{3}$/i;
-                                  validationCallback( mobileRegExp.test($.trim(value)) );
-                              }
-                          });
-                          $.jvalidator.addPattern({
-                              name: 'debitcardno',
-                              message: '请输入正确的银行卡号',
-                              validate: function(value, validationCallback) {
-                                  var cardRegExp = /^[\d]{16,19}$/;
-                                  value = $.trim(value).replace(/\s/g, '');
-                                  validationCallback( cardRegExp.test(value) );
-                              }
-                          });
-
-                          $.jvalidator.addPattern({
-                              name: 'creditcardno',
-                              message: '请输入正确的信用卡号',
-                              validate: function(value, validationCallback) {
-                                  var isMasterCard = numRegExp.test($.trim(value).replace(/\s/g, ''));
-                                  //todo 记得删除对beta的判断
-                                  isMasterCard = isMasterCard&& me.isValidMasterCard($.trim(value).replace(/\s/g, ''));
-
-                                  var cardid=$('#credit_cardnum');
-                                  var params={cardType: $('[name="cardType"]:checked').val()};
-                                  params[allbankname.attr('name')] = allbankname.val();
-                                  params[cardid.attr('name')]=cardid.val().replace(/\s/g, '');
-
-                                  if(isMasterCard&&bankname.val()){
-                                      $.ajax({
-                                          url: baseurl + 'CheckCardBin.do',
-                                          data: params,
-                                          type: 'post',
-                                          dataType: 'json',
-                                          success: function(data){
-                                              var result=data.ret&&data.data&&(parseInt(data.data.status,10)==1);
-
-                                              if(result){
-                                                  validationCallback(result);
-                                              }else{
-                                                  validationCallback(result,'类型, 银行和卡号不匹配');
-                                              }
-                                          },
-
-                                          error: function(data){
-                                                     validationCallback(false);
-                                                 }
-                                      });
-                                  }else{
-                                      validationCallback( isMasterCard );
-                                  }
-                              }
-                          });
-
-                          $.jvalidator.addPattern({
-                              name: 'vcode',
-                              message: '请输入正确的验证码',
-                              validate: function(value, validationCallback) {
-                                  var isMatch=/^[\d]{6}$/.test($.trim(value));
-                                  $('[placeholder="get-permit-message"]').remove();
-                                  var _mobile=$(this).parents('table').find('input[name="mobile"]').val().replace(/\s/g, '');
-
-                                  if(isMatch&&QNR.patterns.mobile.test(_mobile)){
-                                      $.ajax({
-                                          url: baseurl+'CheckVcodeNoUid.do',
-                                          data: {
-                                              mobile: _mobile,
-                                          vcode: value,
-                                          messageType: 1
-                                          },
-                                          type: 'post',
-                                          dataType: 'json',
-                                          success: function(data){
-                                              if(data&&data.ret){
-                                                  validationCallback(true);
-                                              }else{
-                                                  validationCallback(false);
-                                              }
-                                          }
-                                      });
-                                  }else{
-                                      validationCallback(isMatch);
-                                  }
-                              }
-                          });
-
-                          this.showInvalid=function(el,message){
-                              var e = $(el).closest('td').find(".js_tipcontainer");
-                              e.removeClass("popup_tips_wrap_clr");
-                              var _msg = quickPayTemplate.icon_wrong.join('');
-                              e.html( _msg.replace(/\{content\}/g,  message) ).show();
-                          };
-
-                          this.showValid=function(el){
-                              var e = $(el).parent().siblings(".js_tipcontainer");
-                              e.removeClass("popup_tips_wrap_clr");
-                              e.html(quickPayTemplate.icon_right.join('')).show();
-                          };
-
-                          this.formChecker= payFrom.find("[data-jvalidator-pattern]").jvalidator({
-                              validation_events:['blur'],
-                              on: {
-                                  invalid: function(evt,el,patterns) {
-                                               var e = $(el).parent().siblings(".js_tipcontainer");
-                                               e.removeClass("popup_tips_wrap_clr");
-                                               var _msg = quickPayTemplate.icon_wrong.join('');
-                                               e.html( _msg.replace(/\{content\}/g,  patterns[0].message) ).show();
-                                           },
-                              valid: function(evt,el,patterns) {
-                                         var e = $(el).parent().siblings(".js_tipcontainer");
-                                         e.removeClass("popup_tips_wrap_clr");
-                                         e.html(quickPayTemplate.icon_right.join('')).show();
-                                     }
-                              }
-                          });
-                      },
-
-      getCreditCarddList: function(callback){
-                       var me = this;
-                       var uid = QNR.PayInfo ? QNR.PayInfo.userid : '';
-					   //TODO:
-                       var url = "/creditList.json";
-                       $.ajax({
-                           url: url,
-                           type: "POST",
-                           dataType: 'json',
-                           success: function(res){
-                               if(res && res.ret && res.data){
-                                   var creditCards = res.data.baseCard || [],
-                                       creditCardsLen = creditCards.length,
-
-                                       creditCardsData = {},
-                                       bank, img;
-
-                                   for(var i=0;i<creditCardsLen;i++){
-                                       bank = creditCards[i];
-                                       img = me.parseImgURL(bank.bankCode);
-                                       bank.picUrl = img;
-                                       creditCardsData[creditCards[i].bankCode] = bank;
-                                   }								   
-								   
-                                   unionPay.creditCardsBankList = creditCardsData;
-                                   callback && callback();
-                               }
-                           }
-                       })
-                   },
-				   
-      parseImgURL: function(code){
-                       var url = '';
-                       if($.inArray(code,noImgBank) > -1){
-                            url = imageURL + 'nologo.png';
-                       }else{
-                            url = imageURL + code.toLowerCase() + '.png';
-                       }
-                       return url;
-                   }
-              };
+    parseImgURL: function(code) {
+      var url = '';
+      if ($.inArray(code, noImgBank) > -1) {
+        url = imageURL + 'nologo.png';
+      } else {
+        url = imageURL + code.toLowerCase() + '.png';
+      }
+      return url;
+    }
+  };
   var unionPay = new unionPay();
-  $(function(){
-      unionPay.getCreditCarddList();
+  $(function() {
+    unionPay.getCreditCarddList();
   });
 })(jQuery);
 
 
-$(function(){
-    $('#login').click(function(){
-        new $.LoginPop({callback: function(a){
-            location.reload();
-        },proxy:'payServer/view/proxy.htm',regFlag:false,twoWeek:false})
-        return false;
+$(function() {
+  $('#login').click(function() {
+    new $.LoginPop({
+      callback: function(a) {
+        location.reload();
+      },
+      proxy: 'payServer/view/proxy.htm',
+      regFlag: false,
+      twoWeek: false
     })
+    return false;
+  })
 
-    $('#regist').bind('click', function(){
-        new $.LoginPop({callback:function(a){
-            location.reload();
-        },type:'reg',proxy:'payServer/view/proxy.htm'});
-        return false;
+  $('#regist').bind('click', function() {
+    new $.LoginPop({
+      callback: function(a) {
+        location.reload();
+      },
+      type: 'reg',
+      proxy: 'payServer/view/proxy.htm'
     });
+    return false;
+  });
 })
 
 
 
 // TODO: own 
-$(function(){
-  var tabs = $('.trigger_item'), ctns = $('.e_tab_content'),cls = 'trigger_item_current';
-  tabs.click(function(e){
+$(function() {
+  var tabs = $('.trigger_item'),
+    ctns = $('.e_tab_content'),
+    cls = 'trigger_item_current';
+  tabs.click(function(e) {
     var $this = $(this);
     var idx = tabs.index($this);
     tabs.removeClass(cls).eq(idx).addClass(cls);

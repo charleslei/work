@@ -497,3 +497,16 @@ body{text-align:left;}
 .e_ops_button1{border-top:1px solid #F2F2F2;}
 .b_tab_ui .e_ops_button1{padding: 20px 20px 40px 150px;}
 .e_ops_button1 span{margin-left:10px;color:#999}
+
+/*credit info*/
+.credit-bank{overflow: hidden;display: none;}
+.credit-bank-wrap .fL{float: left;border:1px solid #ccc;padding:0 5px;height: 40px;line-height: 40px;overflow: hidden;}
+.credit-bank-wrap .fR{float: left;line-height: 40px;padding:0 7px;border:1px solid #ccc;border-left:0;}
+.credit-bank-wrap .fR span{font-weight: bold;}
+.credit-info-wrap{display: none;position: relative;display: block;clear:both;}
+.credit-info{left: 550px;position: absolute;padding:5px;top: -345px;border:3px solid #ccc;}
+.credit-info>p{font-weight: bold;padding-bottom: 5px;}
+.credit-info table{width: 250px;color:#000;}
+.credit-info table td{border:1px solid #eee;width: 50%;line-height: 2.5;text-indent: 10px;}
+.credit-info table .title td{background: #eee;line-height: 1.5;}
+
