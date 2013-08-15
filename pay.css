@@ -485,7 +485,7 @@ body{text-align:left;}
 .to_bank a{font-weight: bold;}
 
 
-.debit_card .left_ctn{width:150px;}
+.debit_card .left_ctn{width:170px;}
 .debit_card .left_ctn .title{text-align:center;font-size:14px;}
 .debit_card td{padding-top:20px;}
 
@@ -495,7 +495,7 @@ body{text-align:left;}
 .b_bank_list .hide{display:none;}
 
 .e_ops_button1{border-top:1px solid #F2F2F2;}
-.b_tab_ui .e_ops_button1{padding: 20px 20px 40px 150px;}
+.b_tab_ui .e_ops_button1{padding: 20px 20px 40px 170px;}
 .e_ops_button1 span{margin-left:10px;color:#999}
 
 .notice_txt{border-bottom: 3px solid #5ABEC6;}
