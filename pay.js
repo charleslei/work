@@ -383,6 +383,7 @@ if(typeof QNR=="undefined"){
       $(".b_other_bank .content_wrap").append( obj );
       allcardsCon.show();
       creditInfoWrap.hide();
+      bindcardsCon.find(".ftable").hide();
 
       // close
       $(".b_other_bank .close").one("click",function(){
@@ -393,6 +394,7 @@ if(typeof QNR=="undefined"){
         creditInfoWrap.hide();
         me.payResultDlg.hide();
         me.payResultDlg = null;
+        bindcardsCon.find(".ftable").show();
         $(".b_other_bank").remove();
       });
 
