@@ -193,7 +193,8 @@ if(typeof QNR=="undefined"){
                              var el = $(this).closest('li'), checkedEle = el.find('input[type=radio]'),
                                  mb = checkedEle.attr('mobile'),
                                  bk = checkedEle.attr('bank'),
-                                 date = checkedEle.attr('valiDate');
+                                 date = checkedEle.attr('valiDate'),
+                                 ctl = $(this).attr("data-ctl");
                              var sibling = el.siblings('.js-choose-item');
                              sibling.hide(200);
 
@@ -202,6 +203,9 @@ if(typeof QNR=="undefined"){
                              el.addClass("current");
                              el.siblings().removeClass("current")
                              showAllBindBank.show();
+
+                             // 风险控制
+                             me.inputControl( ctl );
 
                              mobileStage.val(mb);
                              me.currentMobile = mb;
@@ -231,7 +235,29 @@ if(typeof QNR=="undefined"){
 							return false;
 						 });
                      },
-
+        inputControl:function(ctl){
+          // 风险控制
+          if(!ctl){
+            // TODO:ajax get data
+            $.post("creditList.json",function(res){
+              if(res.data)
+               this._inputControlHandler( res.data );
+            });
+          }else{
+            this._inputControlHandler( eval( "("+ctl+ ")" ) );
+          }
+        },
+        _inputControlHandler:function( data ){
+          // 风险控制内部函数
+          var $wrap = $(".ftable:visible");
+          $.each(data,function(key,v){
+            var $target = $wrap.find("input[name="+key+"],select[name="+key+"]").closest("tr");
+            console.log(key,v,$target.length)
+            if($target.length){
+              !!v ? $target.show() : $target.hide();
+            }
+          });
+        },
         recheckMobileVcode: function(){
                                 if(!vcode.length){
                                     return;
