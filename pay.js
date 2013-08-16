@@ -40,7 +40,7 @@ if(typeof QNR=="undefined"){
         bindcardsCon = $('#bindcardsCon'),
         allcardsCon = $("#allcardsCon"),
         cardPicWrap = $('.e_card_picwrap'),
-        creditInfoWrap = $(".credit-info-wrap"),
+		creditInfoWrap = $(".credit-info-wrap"),
         //TODO:
         //imageURL = '/images/site/images/pay/bankicon_1/',
         imageURL = 'http://source.qunar.com/site/images/pay/bankicon_1/',
@@ -63,7 +63,7 @@ if(typeof QNR=="undefined"){
                   //初始化银行信息
                   this._initBankIcon();
                   this._initBankCode();
-                  this.initDebitCard();
+				  this.initDebitCard();
                   //初始化页面事件			
                   this._initEvent();
 
@@ -89,6 +89,7 @@ if(typeof QNR=="undefined"){
                          });
                          me._checkBindCardShown();
                      },
+					 
         initDebitCard: function(){
 						  $('#debit_card li label,#platform li label').click(function(){
 							var $this = $(this);
@@ -147,8 +148,8 @@ if(typeof QNR=="undefined"){
                               cardPicWrap.removeClass("simple")
                             $('.card_pic .img').css('background-position', '0 -142px');
                           });
-
-                         payForm.delegate('.yselector_box', 'click', function(e) {
+						  
+						  payForm.delegate('.yselector_box', 'click', function(e) {
                             creditInfoWrap.hide();
                             cardPicWrap.show();
                             if(allcardsCon.is(":hidden"))
@@ -157,6 +158,7 @@ if(typeof QNR=="undefined"){
                               cardPicWrap.removeClass("simple")
                             $('.card_pic .img').css('background-position', '0 0');
                           });
+						  
                          //快捷支付 显示全部绑定银行
                          showAllBindBank.bind('click',function(e){
                              e.preventDefault();
@@ -204,7 +206,7 @@ if(typeof QNR=="undefined"){
 							me.netbankPay($this.parents('form'));
 							return false;
 						 });
-        },
+                     },
 
         recheckMobileVcode: function(){
                                 if(!vcode.length){
@@ -246,7 +248,6 @@ if(typeof QNR=="undefined"){
 
                      var timeCount = new QNR.timeCount(dur,{min:tmin,sec:tsec},timeout);
                    },
-				   
  submitform : function(e){
                  var me = this;
                  this.formChecker.validateAll(function(ret) {
@@ -308,15 +309,15 @@ if(typeof QNR=="undefined"){
                        var text = num.replace(/\s/g, '').match(/(\w{4})|(\w{1,3})/g);
                        return !!text ? text.join(' ') : '';
                      },
-
+					 
   formatMobileNumber : function(num){
                          var th = num.replace(/\s/g, '').match(/\w{1,3}/);
                          var fth = num.substring(3).match(/\w{1,4}/g);
                          var ar = !!fth ? th.concat(fth) : th;
                          return !!ar ? ar.join(' ') : '';
                        },
-
-  showPayResultDialog: function(){
+					   
+    showPayResultDialog: function(){
     var me = this;
     this.payResultDlg = null;
     var _html = quickPayTemplate.payDoneDialog.join('');
@@ -375,8 +376,8 @@ if(typeof QNR=="undefined"){
     $("#banllist_close, #cancelbank").bind("click",function(){
       me.creditCardDlg.hide();
     });
-
   },
+  
   showCreditCardInfo: function( cardId ){
       var lastId = $.trim( cardId ).split(" ")[3];
       $.get("creditList.json",function(res){
@@ -388,6 +389,7 @@ if(typeof QNR=="undefined"){
         creditInfoWrap.show();
       })  
     },
+	
     hideCreditCardInfo: function(){
       $(".credit-bank-wrap").html("");
       $(".credit-bank").slideUp(0);
@@ -423,8 +425,7 @@ if(typeof QNR=="undefined"){
           }
           me.showPayResultDialog();
         },
-
-      _refreshBindCard: function(obj){
+  _refreshBindCard: function(obj){
                         var id = obj.id,me = this;
                             bankVal = id + ',' + obj.cardType,
                             mob = obj.telphone,
@@ -442,8 +443,8 @@ if(typeof QNR=="undefined"){
 
                     },
 
-      //短信验证码
-      _initMobile : function(){
+  //短信验证码
+  _initMobile : function(){
                     var form = payForm,
                     _error = form.find("[placeholder='get-permit-error']"),
                     _message = form.find('[placeholder="get-permit-message"]'),
@@ -509,7 +510,6 @@ if(typeof QNR=="undefined"){
                                      }
                     });
                 },
-				
       _initBankCode: function(){
                          //如果是用户已经保存的卡，那么把选择的卡code放到的银行卡code里；
                          if(this._checkBindCardShown()){
@@ -563,7 +563,6 @@ if(typeof QNR=="undefined"){
 
                         return res;
                     },
-					
       _checkBindCardShown : function(){
                                 var res =  bindcardsCon && bindcardsCon.is(":visible");
                                 if (res){
@@ -574,7 +573,6 @@ if(typeof QNR=="undefined"){
 
                                 return res;
                             },
-							
       _initExpiresDate : function(){
                              var me = this;
                              var year = new Date().getFullYear().toString().substr(2);
@@ -624,8 +622,7 @@ if(typeof QNR=="undefined"){
 
       checkDateEnable: function(){
                            //判断有效期是否有效；无效则警告；有效则隐藏时间；
-                           var date = this.currentDate && /^\d*$/.test(this.currentDate) || '1307',
-                              me = this;
+                           var date = this.currentDate && /^\d*$/.test(this.currentDate) || '1307', me = this;
                            dd = date.match(/\d{2}/g),
                               y = dd[0], m = dd[1],
                               dateNow = new Date(),
@@ -834,7 +831,7 @@ if(typeof QNR=="undefined"){
                            }
                        })
                    },
-				   
+				   				   
       parseImgURL: function(code){
                        var url = '';
                        if($.inArray(code,noImgBank) > -1){
