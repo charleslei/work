@@ -232,7 +232,11 @@ a:hover { color:#f60; text-decoration:none; }
 .b_tab_ui .e_tab_content dd{ margin-left:130px; }
 .b_tab_ui .e_tab_content .subtitle{ padding:3px 0 15px; }
 /*锟斤拷锟街э拷锟窖★拷锟侥匡拷list*/
-.b_card_list li.js-choose-item{ border:2px solid #fff; padding:2px; background-color:#fff; font-size:0; }
+.b_card_list li.js-choose-item{ position: relative;border:2px solid #fff; padding:2px; background-color:#fff; font-size:0; }
+.b_card_list li.js-choose-item:hover table.info,.b_card_list li.js-choose-item.current table.info{display: block;}
+.b_card_list li.js-choose-item table.info {font-size: 12px; height: 60px; position: absolute; right: 20px; top: 10px; width: 263px; display: none; }
+.b_card_list li.js-choose-item table.info td{border:1px solid #ccc;text-align: center;padding:0;height:35px;vertical-align:middle;}
+.b_card_list li.js-choose-item table.info th{border:1px solid #ccc;text-align: center;padding:0;height:25px;vertical-align:middle;background: #ccc;}
 .b_card_list li.highlight{ border:2px solid #c9f3f5; background-color:#5abec6;  position: relative;}
 .b_card_list .e_card_type{ padding:18px 16px; background-color:#fff; font-size:12px; }
 .b_card_list .e_card_type .common_card{ width:84px; float:left; padding-top:12px; padding-right:10px; font-size:14px; font-family:Microsoft YaHei, SimHei; color:#333; }

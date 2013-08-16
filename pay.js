@@ -186,8 +186,8 @@ if(typeof QNR=="undefined"){
                              $(this).addClass(highlightClass);
                              $(this).find('.close').show();
                          }).delegate('li.js-choose-item', 'mouseleave',function(e){
-                             if(showAllBindBank.is(':visible')) return;
                              $(this).removeClass(highlightClass);
+                             if(showAllBindBank.is(':visible')) return;
                              $(this).find('.close').hide();
                          }).delegate('.js-choose-card', 'click',function(e){
                              var el = $(this).closest('li'), checkedEle = el.find('input[type=radio]'),
@@ -198,7 +198,9 @@ if(typeof QNR=="undefined"){
                              sibling.hide(200);
 
                              checkedEle.attr('checked',true);
-                             el.addClass(highlightClass);
+                             // el.addClass(highlightClass);
+                             el.addClass("current");
+                             el.siblings().removeClass("current")
                              showAllBindBank.show();
 
                              mobileStage.val(mb);
