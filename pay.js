@@ -177,6 +177,12 @@ if(typeof QNR=="undefined"){
                            me.showCreditCardDialog();
                            return false;
                          });
+						 
+						 $('#btnSubmitDebitCard_next, #btnSubmitPlatform_next').click(function(){
+							var $this = $(this);
+							me.netbankPay($this.parents('form'));
+							return false;
+						 });
         },
 
         recheckMobileVcode: function(){
@@ -308,7 +314,6 @@ if(typeof QNR=="undefined"){
     this.payResultDlg.dom.find('li label').click(function(){
       var $this = $(this);
       $this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
-      $this.parents('ul').css('border', 'none')
     });
   },
 
@@ -340,7 +345,6 @@ if(typeof QNR=="undefined"){
     me.creditCardDlg.dom.find('li label').click(function(){
       var $this = $(this);
       $this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
-      $this.parents('ul').css('border', 'none')
     });
 
     me.creditCardDlg.dom.find('#btnCreditSubmit_next').click(function(e){
@@ -361,7 +365,6 @@ if(typeof QNR=="undefined"){
           })
 
           if(!bankCodeTag){
-            prt.find('ul').css('border', '2px solid red');
             return false;
           }
           var array = payForm.serializeArray();
@@ -379,8 +382,8 @@ if(typeof QNR=="undefined"){
           if(dlg){
             dlg.hide();
             dlg.remove();
-            me.showPayResultDialog();
           }
+          me.showPayResultDialog();
         },
 
       _refreshBindCard: function(obj){

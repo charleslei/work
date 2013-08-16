@@ -507,7 +507,7 @@ body{text-align:left;}
 
 .bank_width{width:966px}
 .b_chose_bank .inner1{width:960px;padding-bottom:0}
-
+.b_chose_bank .content_wrap{margin: 10px 10px 0 10px;}
 
 /*credit info*/
 .credit-bank{overflow: hidden;display: none;}
@@ -522,3 +522,8 @@ body{text-align:left;}
 .credit-info table .title td{background: #eee;line-height: 1.5;}
 
 .payResult, .payResult .inner{width:434px}
+.payResult .inner{padding-bottom:0}
+.payResult .ctl{text-align: center;vertical-align: middle;padding: 20px 10px 30px 10px;border-bottom: 1px solid #D9D9D9;}
+.payResult .msg{color:#999;padding: 20px 10px 30px 10px;}
+
+.payResult .ctl a{padding: 5px 30px;display: inline-block;height: 20px;line-height: 20px;background: #F0F0F0;border: 1px solid #D2D2D2;margin: 0 20px;font-size:14px;}

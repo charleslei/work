@@ -294,6 +294,7 @@
                   <div class="tab_content_inner">
                     <div class='b_bank_list debit_card' id='debit_card'>
                       <form name="quickpayform" class='quickpayform' id="quickpayform" action="${usuallyCardpayUrl}" method="post" target="_blank">
+					  <input type="hidden" name="payType" value="">
                       <table>
                         <tr>
                           <td class='left_ctn'><div class='title'>储蓄卡网银支付</div></td>
@@ -304,43 +305,43 @@
                           <td>
                             <ul id="allcards" class="inline">
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="CMB" value="CMB" class="radio_box">
+                              <input type="radio" name="bankCode" id="CMB" value="CMB" class="radio_box">
                               <label class="bank_logo_box"><span class="bank_logo"><img title="CMB" src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png"></span><span class="bank_name_txt"></span></label>
                               </li>
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="CCB" value="CCB" class="radio_box">
+                              <input type="radio" name="bankCode" id="CCB" value="CCB" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"><img title="CCB" src="http://source.qunar.com/site/images/pay/bankicon_1/ccb.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="ICBC" value="ICBC" class="radio_box">
+                              <input type="radio" name="bankCode" id="ICBC" value="ICBC" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"> <img title="ICBC" src="http://source.qunar.com/site/images/pay/bankicon_1/icbc.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="BOC" value="BOC" class="radio_box">
+                              <input type="radio" name="bankCode" id="BOC" value="BOC" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"> <img title="BOC" src="http://source.qunar.com/site/images/pay/bankicon_1/boc.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="ABC" value="ABC" class="radio_box">
+                              <input type="radio" name="bankCode" id="ABC" value="ABC" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"> <img title="ABC" src="http://source.qunar.com/site/images/pay/bankicon_1/abc.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="BANKCOMM" value="BANKCOMM" class="radio_box">
+                              <input type="radio" name="bankCode" id="BANKCOMM" value="BANKCOMM" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"> <img title="BANKCOMM" src="http://source.qunar.com/site/images/pay/bankicon_1/bankcomm.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="BANKCOMM" value="BANKCOMM" class="radio_box">
+                              <input type="radio" name="bankCode" id="BANKCOMM" value="BANKCOMM" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"> <img title="BANKCOMM" src="http://source.qunar.com/site/images/pay/bankicon_1/bankcomm.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="BANKCOMM" value="BANKCOMM" class="radio_box">
+                              <input type="radio" name="bankCode" id="BANKCOMM" value="BANKCOMM" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"> <img title="BANKCOMM" src="http://source.qunar.com/site/images/pay/bankicon_1/bankcomm.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                               <li class="e_open_ibank hide">
-                              <input type="radio" name="bank" id="BANKCOMM" value="BANKCOMM" class="radio_box">
+                              <input type="radio" name="bankCode" id="BANKCOMM" value="BANKCOMM" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"> <img title="BANKCOMM" src="http://source.qunar.com/site/images/pay/bankicon_1/bankcomm.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                               <li class="e_open_ibank hide">
-                              <input type="radio" name="bank" id="BANKCOMM" value="BANKCOMM" class="radio_box">
+                              <input type="radio" name="bankCode" id="BANKCOMM" value="BANKCOMM" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"> <img title="BANKCOMM" src="http://source.qunar.com/site/images/pay/bankicon_1/bankcomm.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                             </ul>
@@ -351,7 +352,7 @@
                           <td style='padding-top:0'><div class='clrfix show_and_hide' id='show_and_hide'><a href='#' class='down'>展开更多银行</a><a href='#' class='up hide'>收起更多银行</a></div></td>
                         </tr>
                       </table>
-                      <div class="e_ops_button e_ops_button1"><button class="btn_submit" id="btnSubmit_next" type="button">下一步</button><span>跳转至银行页面完成付款</span></div>
+                      <div class="e_ops_button e_ops_button1"><button class="btn_submit" id="btnSubmitDebitCard_next" type="button">下一步</button><span>跳转至银行页面完成付款</span></div>
                     </form>
                     </div>
 
@@ -364,6 +365,7 @@
                   <div class="tab_content_inner">
                     <div class='b_bank_list debit_card' id='platform'>
                       <form name="quickpayform" class='quickpayform' id="quickpayform" action="${usuallyCardpayUrl}" method="post" target="_blank">
+					  <input type="hidden" name="payType" value="">
                       <table>
                         <tr>
                           <td class='left_ctn'><div class='title'>支付平台</div></td>
@@ -374,22 +376,22 @@
                           <td>
                             <ul id="allcards" class="inline">
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="CMB" value="CMB" class="radio_box">
+                              <input type="radio" name="bankCode" id="CMB" value="CMB" class="radio_box">
                               <label class="bank_logo_box"><span class="bank_logo"><img title="CMB" src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png"></span><span class="bank_name_txt"></span></label>
                               </li>
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="CCB" value="CCB" class="radio_box">
+                              <input type="radio" name="bankCode" id="CCB" value="CCB" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"><img title="CCB" src="http://source.qunar.com/site/images/pay/bankicon_1/ccb.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                               <li class="e_open_ibank">
-                              <input type="radio" name="bank" id="ICBC" value="ICBC" class="radio_box">
+                              <input type="radio" name="bankCode" id="ICBC" value="ICBC" class="radio_box">
                               <label class="bank_logo_box"> <span class="bank_logo"> <img title="ICBC" src="http://source.qunar.com/site/images/pay/bankicon_1/icbc.png"> </span> <span class="bank_name_txt"> </span> </label>
                               </li>
                             </ul>
                           </td>
                         </tr>
                       </table>
-                      <div class="e_ops_button e_ops_button1"><button class="btn_submit" id="btnSubmit_next" type="button">下一步</button><span>跳转至平台页面完成付款</span></div>
+                      <div class="e_ops_button e_ops_button1"><button class="btn_submit" id="btnSubmitPlatform_next" type="button">下一步</button><span>跳转至平台页面完成付款</span></div>
                     </form>
                     </div>
                   </div>
