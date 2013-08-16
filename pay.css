@@ -232,7 +232,11 @@ a:hover { color:#f60; text-decoration:none; }
 .b_tab_ui .e_tab_content dd{ margin-left:130px; }
 .b_tab_ui .e_tab_content .subtitle{ padding:3px 0 15px; }
 /*锟斤拷锟街э拷锟窖★拷锟侥匡拷list*/
-.b_card_list li.js-choose-item{ border:2px solid #fff; padding:2px; background-color:#fff; font-size:0; }
+.b_card_list li.js-choose-item{ position: relative;border:2px solid #fff; padding:2px; background-color:#fff; font-size:0; }
+.b_card_list li.js-choose-item:hover table.info,.b_card_list li.js-choose-item.current table.info{display: block;}
+.b_card_list li.js-choose-item table.info {font-size: 12px; height: 60px; position: absolute; right: 20px; top: 10px; width: 263px; display: none; }
+.b_card_list li.js-choose-item table.info td{border:1px solid #ccc;text-align: center;padding:0;height:35px;vertical-align:middle;}
+.b_card_list li.js-choose-item table.info th{border:1px solid #ccc;text-align: center;padding:0;height:25px;vertical-align:middle;background: #ccc;}
 .b_card_list li.highlight{ border:2px solid #c9f3f5; background-color:#5abec6;  position: relative;}
 .b_card_list .e_card_type{ padding:18px 16px; background-color:#fff; font-size:12px; }
 .b_card_list .e_card_type .common_card{ width:84px; float:left; padding-top:12px; padding-right:10px; font-size:14px; font-family:Microsoft YaHei, SimHei; color:#333; }
@@ -242,7 +246,7 @@ a:hover { color:#f60; text-decoration:none; }
 .b_card_list .banklogo_box .bank_name{ vertical-align:middle; overflow:hidden; }
 .b_card_list .banklogo_box .bankcard_info{ border-left:1px solid #e5e5e5; display:inline-block; vertical-align:middle; padding:7px 10px 9px; color:#888; }
 .b_card_list .e_card_type .all_blind_bank{ float:left; display:inline-block; padding-left:8px; padding-top:26px; }
-.b_card_list .e_bank_all{ padding-left:100px;margin-top: 18px;}
+.b_card_list .e_bank_all{overflow: hidden;height:40px;line-height: 40px;border-top:1px solid #eee;padding-top: 10px;position: relative;margin-top: 18px;}
 .b_card_list .close{ _width: 50px; position: absolute;  right: 25px; top: 32px; display:inline-block; margin-top: 3px; background: url(http://source.qunar.com/site/images/pay/quick_pay/icon_v1.png) no-repeat 0 -158px; padding-left: 15px;}
 /*\锟斤拷锟街э拷锟窖★拷锟侥匡拷list*/
 .b_validate_box td{ padding-top:18px; }
@@ -467,7 +471,7 @@ text-indent: -9999em; background: url(http://source.qunar.com/site/images/pay/qu
 .b_agreement .e_row_btn{ text-align:center; }
 
 /* own */
-.all_blind_bank { display: inline-block; float: left; padding-left: 20px; }
+.all_blind_bank {display: none;}
 .b_bank_list .title{font-weight:bold;padding-bottom:10px}
 .b_bank_list ul {padding-bottom:10px}
 .b_bank_list .e_open_ibank_long{ width:364px;}
@@ -475,7 +479,9 @@ text-indent: -9999em; background: url(http://source.qunar.com/site/images/pay/qu
 .b_card_list .e_card_type .common_card { width: 84px; float: left; padding-top: 12px; padding-right: 7px; font-size: 14px; font-family: Microsoft YaHei, SimHei; color: #333; }
 .b_card_list .e_bank_all { padding-left: 132px; margin-top: 18px; }
 
-#bindcardsCon .chose_all_card a, .all_blind_bank a{ padding: 5px; border: 1px solid #CAE1F6; background: #EBF5FF; font-weight: bold; }
+#bindcardsCon .chose_all_card a{ padding: 5px; border: 1px dashed #CAE1F6; background: #EBF5FF; font-weight: bold; }
+#bindcardsCon  .all_blind_bank{position: absolute;right:0;top:0;padding:0 20px;border:1px solid #eee;border-top:0;text-align: center;}
+#bindcardsCon  .all_blind_bank a{color:#aaa;height: 25px;line-height: 25px;cursor:pointer;}
 
 
 
@@ -525,6 +531,7 @@ body{text-align:left;}
 .payResult .ctl{text-align: center;vertical-align: middle;padding: 20px 10px 30px 10px;border-bottom: 1px solid #D9D9D9;}
 .payResult .msg{color:#999;padding: 20px 10px 30px 10px;}
 
+
 .payResult .ctl a{display: inline-block;height: 30px;width: 168px;line-height: 30px;background: url(/img/bg.png) no-repeat;margin: 0 12px;font-size: 14px;color: #555;}
 .payResult .ctn{padding: 0 5px 5px;}
 .payResult .msg .title{padding-bottom: 10px;font-size: 14px;}
@@ -552,5 +559,21 @@ body{text-align:left;}
 .notice_txt .detail_more{position:absolute;top:117px;left:0;width:990px}
 .notice_txt .detail_more_ctl{position: absolute;bottom: 0px;right: 30px;width: 100px;height: 30px;background: url(/img/dtl.png) no-repeat;line-height: 30px;text-align: center;}
 .notice_txt .detail_more_ctn{padding: 0px 20px 20px 87px;background: #F7FDFB;border-bottom: 3px solid #5ABEC6;}
-.notice_txt .detail_more_ctl a{color: #f5f5f5;}
+.notice_txt .detail_more_ctl a{color: #f5f5f5;width: 100px;height: 30px;display:inline-block;line-height: 30px;}
 .b_hd_mod .notice_state_success .notice_txt.bd{border-bottom: 3px solid #5ABEC6;}
+
+/*other bank*/
+.b_other_bank{width: 870px;}
+.b_other_bank .content_wrap{padding:15px 30px;}
+.b_other_bank .e_ops_button{padding-top: 20px;}
+.idsuggest-wrap{position: relative;}
+.idsuggest{width: 228px; border:1px solid #ccc; border-top:0; position: absolute; left:0; top:29px; }
+.idsuggest li a{display: block; color:#666; width: 100%; background: #fff; text-indent: 8px; height: 30px; line-height: 30px; }
+.idsuggest li a:hover{background: #4778da; color:#fff; }
+
+/*restip*/
+.restip{background: #fff;width: 470px;}
+.restip .content_wrap{padding:30px;height:400px;}
+.restip .content_wrap .c1{width: auto;}
+.restip .content_wrap .credit-bank-wrap{margin-left: 58px;}
+.restip .res-btn{background: url("http://source.qunar.com/site/images/pay/quick_pay/button.png") no-repeat scroll 0 -649px transparent;  color: #FFFFFF;  display: block;  height: 22px;  line-height: 22px;  text-align: center;  width: 100px;}

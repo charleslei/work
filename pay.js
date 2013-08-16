@@ -164,31 +164,66 @@ if(typeof QNR=="undefined"){
                           });
 						  
                          //快捷支付 显示全部绑定银行
-                         showAllBindBank.bind('click',function(e){
-                             e.preventDefault();
-                             bankLi.show(200).removeClass(highlightClass);
-                             bankLi.find('.close').hide();
-                             showAllBindBank.hide();
+                         if(bankLi.length > 3) $(".all_blind_bank").show();
+                         showAllBindBank.bind('click',function(){
+                            var $this = $(this),
+                              txt = $(this).attr("data-toggle");
+                            if(bankLi.filter(":hidden").length){
+                              bankLi.show(200);
+                            }else if(bankLi.length >3){
+                              bankLi.filter(":gt(2)").hide(200);
+                            }else{
+                              return false;
+                            }
+                            if(bankLi.length <= 3)
+                              $this.parent().hide();
+                            $this.attr("data-toggle",$this.text());
+                            $this.text(txt);
+                            return false;
                          });
+
+                         $("#choosebank").live("click",function(){
+                          me.showOtherBankDialog();
+                         });
+
+                         $(".idsuggest a").live("click",function(){
+                            var id = $(this).text();
+                            $(this).closest(".idsuggest-wrap").find("input").val(id);
+                            $(this).closest(".idsuggest").remove();
+                         });
+                         $(".idsuggest-wrap input").live("keyup",function(){
+                          // TODO:ajax get suggest
+                          if(true)
+                          $(this).siblings(".idsuggest").remove().end()
+                                .after('<ul class="idsuggest"> <li><a href="javascript:void(0)">6225 ********* 3529</a></li> <li><a href="javascript:void(0)">6225 ********* 3529</a></li> </ul>')
+                         }).live("blur",function(){
+                          $(this).siblings(".idsuggest").remove();
+                         })
 
                          bindcardsCon.delegate('li.js-choose-item', 'mouseenter',function(e){
                              $(this).addClass(highlightClass);
                              $(this).find('.close').show();
                          }).delegate('li.js-choose-item', 'mouseleave',function(e){
-                             if(showAllBindBank.is(':visible')) return;
                              $(this).removeClass(highlightClass);
+                             if(showAllBindBank.is(':visible')) return;
                              $(this).find('.close').hide();
                          }).delegate('.js-choose-card', 'click',function(e){
                              var el = $(this).closest('li'), checkedEle = el.find('input[type=radio]'),
                                  mb = checkedEle.attr('mobile'),
                                  bk = checkedEle.attr('bank'),
-                                 date = checkedEle.attr('valiDate');
+                                 date = checkedEle.attr('valiDate'),
+                                 ctl = $(this).attr("data-ctl");
                              var sibling = el.siblings('.js-choose-item');
                              sibling.hide(200);
 
                              checkedEle.attr('checked',true);
-                             el.addClass(highlightClass);
+                             // el.addClass(highlightClass);
+                             el.addClass("current");
+                             el.siblings().removeClass("current")
                              showAllBindBank.show();
+
+                             // 风险控制
+                             me.inputControl( ctl );
 
                              mobileStage.val(mb);
                              me.currentMobile = mb;
@@ -198,6 +233,13 @@ if(typeof QNR=="undefined"){
 
                              me.currentDate = date;
                              me.checkDateEnable();
+
+                             setTimeout(function(){
+                              if( bankLi.filter(":hidden").length >= 1){
+                              $(".all_blind_bank").show().find("a").attr("data-toggle","全部收起").text("全部展开");
+                             }
+                           },400)
+                             
                          });
 
                          $('#show_creditcard_online').click(function(){
@@ -234,7 +276,29 @@ if(typeof QNR=="undefined"){
 						  return false;
 						});
                      },
-
+        inputControl:function(ctl){
+          // 风险控制
+          if(!ctl){
+            // TODO:ajax get data
+            $.post("creditList.json",function(res){
+              if(res.data)
+               this._inputControlHandler( res.data );
+            });
+          }else{
+            this._inputControlHandler( eval( "("+ctl+ ")" ) );
+          }
+        },
+        _inputControlHandler:function( data ){
+          // 风险控制内部函数
+          var $wrap = $(".ftable:visible");
+          $.each(data,function(key,v){
+            var $target = $wrap.find("input[name="+key+"],select[name="+key+"]").closest("tr");
+            console.log(key,v,$target.length)
+            if($target.length){
+              !!v ? $target.show() : $target.hide();
+            }
+          });
+        },
         recheckMobileVcode: function(){
                                 if(!vcode.length){
                                     return;
@@ -277,6 +341,9 @@ if(typeof QNR=="undefined"){
                    },
  submitform : function(e){
                  var me = this;
+                 // for test
+                 me.showSubmitError();
+
                  this.formChecker.validateAll(function(ret) {
                    var valiHidden = me.valiHiddens();
 
@@ -308,7 +375,26 @@ if(typeof QNR=="undefined"){
                  }
                  syncForm.submit();
                },
+  showSubmitError:function(){
+    var me = this;
+      // this.payResultDlg = null;
+      var html = '<div class="b_fpanel restip b_pinfo_form">'+
+                  '<div class="container b_write_card">'+
+                  '<div class="inner e_write_inner">'+
+                  '<div class="e_title"><span class="title_txt">信息确认</span><a href="javascript:void(0)" class="close"></a></div>'+
+                  '<div class="content_wrap">'+
+                  '<div class="credit-bank-wrap"><div class="fL"><img title="CMB" src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png"></div><div class="fR">信用卡 ** <span>0578</span></div></div>'+
+                  '<table width="100%" cellspacing="0" cellpadding="0" class="ftable"> <tbody><tr class="js_credit_tr"> <td class="c1">姓名：</td> <td> <div class="ops_cardnum"> <div class="set input"> <input type="text" value="" placeholder="输入姓名需与注册银行卡相同" class="grey_txt txtbox" data-jvalidator-pattern="not_empty &amp; creditcardno" name="cardholder"> </div> <div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap"><em class="icon_tips iwrong"></em><em class="txt_tips">不能为空</em></span></div> </div> </td> </tr> <tr class="js_credit_tr"> <td class="c1">身份证：</td> <td> <div class="ops_cardnum"> <div class="set input idsuggest-wrap"> <input type="text" value="" placeholder="请输入与银行卡绑定的证件号" class="grey_txt txtbox" data-jvalidator-pattern="not_empty" name="identityCode"> </div> <div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap"><em class="icon_tips iright"></em></span></div> </div> </td> </tr><tr><td></td><td><a href="javascript:void(0)" class="res-btn">确认并支付</a></td></tr></table>'+
+                  '</div></div></div></div>';
 
+      this.payResultDlg = new QNR.htmlDialog(html);
+      this.payResultDlg.show();
+      $(".restip .close").one("click",function(){
+        me.payResultDlg.hide();
+        me.payResultDlg = null;
+        $(".restip").remove();
+      });
+    },
   getParam : function(){
                var me = this;
                var parm = me.getForm(payForm);
@@ -343,7 +429,44 @@ if(typeof QNR=="undefined"){
                          var ar = !!fth ? th.concat(fth) : th;
                          return !!ar ? ar.join(' ') : '';
                        },
-					   
+    // 显示添加其他信用卡
+		showOtherBankDialog:function(){
+      var me = this;
+      // this.payResultDlg = null;
+      var html = '<div class="b_fpanel b_other_bank b_pinfo_form">'+
+                  '<div class="container">'+
+                  '<div class="inner">'+
+                  '<div class="e_title"><span class="title_txt">选择其他信用卡</span><a href="javascript:void(0)" class="close"></a></div>'+
+                  '<div class="content_wrap">'+
+                  '</div></div></div></div>';
+      var obj = $("#allcardsCon,.b_pinfo_form .e_card_picwrap,.b_pinfo_form .credit-info-wrap,.b_pinfo_form .e_ops_button").show();
+
+      this.payResultDlg = new QNR.htmlDialog(html);
+      this.payResultDlg.show();
+      $(".b_other_bank .content_wrap").append( obj );
+      allcardsCon.show();
+      creditInfoWrap.hide();
+      bindcardsCon.find(".ftable").hide();
+
+      // close
+      $(".b_other_bank .close").one("click",function(){
+        var $wrap = $(this).closest(".b_fpanel");
+        $wrap.find(".content_wrap").children().appendTo(payForm);
+        allcardsCon.hide();
+        cardPicWrap.hide();
+        creditInfoWrap.hide();
+        me.payResultDlg.hide();
+        me.payResultDlg = null;
+        bindcardsCon.find(".ftable").show();
+        $(".b_other_bank").remove();
+      });
+
+      if (document.selection && document.selection.empty) {
+        document.selection.empty();  //IE
+      }else if(window.getSelection) {
+        window.getSelection().removeAllRanges(); //ff
+      }
+    },
     showPayResultDialog: function(){
     var me = this;
     this.payResultDlg = null;
