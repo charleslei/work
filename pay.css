@@ -490,7 +490,7 @@ body{text-align:left;}
 .debit_card .left_ctn .title{text-align:center;font-size:14px;}
 .debit_card td{padding-top:20px;}
 
-.debit_card .show_and_hide a{float:right;width:85px;height:20px;cursor:pointer;margin-right: 50px;}
+.debit_card .show_and_hide a{float:right;width:85px;height:20px;cursor:pointer;margin-right: 22px;}
 .debit_card .show_and_hide .up{background:url(/img/up.png) no-repeat right}
 .debit_card .show_and_hide .down{background:url(/img/down.png) no-repeat right}
 .b_bank_list .hide{display:none;}
@@ -526,4 +526,13 @@ body{text-align:left;}
 .payResult .ctl{text-align: center;vertical-align: middle;padding: 20px 10px 30px 10px;border-bottom: 1px solid #D9D9D9;}
 .payResult .msg{color:#999;padding: 20px 10px 30px 10px;}
 
-.payResult .ctl a{padding: 5px 30px;display: inline-block;height: 20px;line-height: 20px;background: #F0F0F0;border: 1px solid #D2D2D2;margin: 0 20px;font-size:14px;}
+.payResult .ctl a{display: inline-block;height: 30px;width: 168px;line-height: 30px;background: url(/img/bg.png) no-repeat;margin: 0 12px;font-size: 14px;color: #555;}
+.payResult .ctn{padding: 0 5px 5px;}
+.payResult .msg .title{padding-bottom: 10px;font-size: 14px;}
+.payResult .msg .title .t1,.payResult .msg .title .t2{display: inline-block;height: 16px;line-height: 16px;vertical-align: middle;font-weight: bold;}
+.payResult .msg .title .t1{width: 16px;background:url(/img/msg.png) no-repeat;margin-right: 5px;}
+.payResult .msg .active .head{font-weight:bold;color:#666;}
+.payResult .msg .more{padding: 12px 12px 12px 16px;;color:#666;}
+.show .down, .show .up{display:inline-block;width:11px;height:13px;line-height:11px;vertical-align:middle;}
+.show .down{background:url(/img/down.png) no-repeat}
+.show .up{background:url(/img/up.png) no-repeat}

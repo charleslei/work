@@ -89,21 +89,25 @@ if(typeof QNR=="undefined"){
                          });
                          me._checkBindCardShown();
                      },
-					 
-        initDebitCard: function(){
+						
+		initDebitCard: function(){
 						  $('#debit_card li label,#platform li label').click(function(){
 							var $this = $(this);
 							$this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
 						  })
 						  var hide_ele = $('#allcards .hide');
-						  $('#show_and_hide .up, #show_and_hide .down').click(function(){
+						  $('#show_and_hide .show').click(function(){
 							var $this = $(this);
-							if($this.is('.down')){
+							var spans = $this.find('span');
+							if(spans.eq(1).is('.down')){
+							  spans.eq(1).removeClass('down').addClass('up');
+							  spans.eq(0).text('收起更多银行');
 							  hide_ele.show();
 							}else{
+							  spans.eq(1).removeClass('up').addClass('down');
+							  spans.eq(0).text('展开更多银行');
 							  hide_ele.hide();
 							}
-							$this.hide().siblings().show();
 							return false;
 						  })
 						},
@@ -333,25 +337,41 @@ if(typeof QNR=="undefined"){
       window.getSelection().removeAllRanges(); //ff
     }
 
-    this.payResultDlg.dom.find('li label').click(function(){
+    this.payResultDlg.dom.find('.show').click(function(){
       var $this = $(this);
-      $this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
+      var spans = $this.find('span');
+	  if(spans.eq(1).is('.down')){
+		spans.eq(0).text('收起');
+		spans.eq(1).removeClass('down').addClass('up');
+		$this.parent().addClass('active').next('.more').show();
+	  }else{
+		spans.eq(0).text('查看');
+		spans.eq(1).removeClass('up').addClass('down');
+		$this.parent().removeClass('active').next('.more').hide();
+	  }
+	  return false;
     });
   },
 
   showCreditCardDialog: function(){
     var me = this;
     me.creditCardDlg = null;
-    var _html = quickPayTemplate.creditCardDialog.join(''), bankListCount = 0;
+    var _html = quickPayTemplate.creditCardDialog.join(''), idx = 0;
 
     bankItem = [];
     bankData = me.creditCardsBankList;
     $.each(bankData, function(k, v){
+	  
       bankItem.push('<li class="e_open_ibank">');
-      bankItem.push('<input type="radio" name="bankCode" id="'+ k +'" value="'+ k +'" class="radio_box">');
+	  if(idx != 0){
+		bankItem.push('<input type="radio" name="bankCode" id="'+ k +'" value="'+ k +'" class="radio_box">');
+	  }else{
+		bankItem.push('<input type="radio" checked name="bankCode" id="'+ k +'" value="'+ k +'" class="radio_box">');
+	  }
+      
       bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="'+ v.bankCode +'" src="'+ v.picUrl +'" /></span><span class="bank_name_txt"></span></label>');
       bankItem.push('</li>');
-      bankListCount++;
+	  idx++;
     });
     _html = _html.replace(/\{content\}/g,bankItem.join(''));
 
