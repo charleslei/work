@@ -40,6 +40,7 @@ if(typeof QNR=="undefined"){
         bindcardsCon = $('#bindcardsCon'),
         allcardsCon = $("#allcardsCon"),
         cardPicWrap = $('.e_card_picwrap'),
+        creditInfoWrap = $(".credit-info-wrap"),
         //TODO:
         //imageURL = '/images/site/images/pay/bankicon_1/',
         imageURL = 'http://source.qunar.com/site/images/pay/bankicon_1/',
@@ -114,12 +115,20 @@ if(typeof QNR=="undefined"){
                              me.submitform(e);
                          });
                          //银行卡号
-                         $("#credit_cardnum, #debit_cardnum").bind("keyup change", function () {
-                             var _self = $(this), text = _self.val();
-                             if (text) {
-                                 _self.val(me.formatCardNumber(text));
-                             }
-                         });
+                         $("#credit_cardnum, #debit_cardnum").bind("keyup change focus", function() {
+                            var _self = $(this),
+                              text = _self.val(),
+                              value;
+                            if (text) {
+                              value = me.formatCardNumber(text);
+                              _self.val( value );
+                              if( value.replace(/\s/g,"").length === 16 ){
+                                me.showCreditCardInfo( value );
+                              }else{
+                                me.hideCreditCardInfo();
+                              }
+                            }
+                          });
 
                          //手机号
                          $("#allcardsCon #mobile,#bindcardsCon #mobile").bind("keyup change", function () {
@@ -129,13 +138,25 @@ if(typeof QNR=="undefined"){
                              }
                          });
 
-                         $('#credit_cardbacknum').bind('focus', function(e){
-                             $('.card_pic .img').css('background-position','0 -142px');
-                         });
+                         $('#credit_cardbacknum').live('focus', function(e) {
+                            creditInfoWrap.hide();
+                            cardPicWrap.show();
+                            if(allcardsCon.is(":hidden"))
+                              cardPicWrap.addClass("simple")
+                            else
+                              cardPicWrap.removeClass("simple")
+                            $('.card_pic .img').css('background-position', '0 -142px');
+                          });
 
-                         payForm.delegate('.yselector_box', 'click', function(e){
-                             $('.card_pic .img').css('background-position','0 0');
-                         });
+                         payForm.delegate('.yselector_box', 'click', function(e) {
+                            creditInfoWrap.hide();
+                            cardPicWrap.show();
+                            if(allcardsCon.is(":hidden"))
+                              cardPicWrap.addClass("simple")
+                            else
+                              cardPicWrap.removeClass("simple")
+                            $('.card_pic .img').css('background-position', '0 0');
+                          });
                          //快捷支付 显示全部绑定银行
                          showAllBindBank.bind('click',function(e){
                              e.preventDefault();
@@ -356,7 +377,24 @@ if(typeof QNR=="undefined"){
     });
 
   },
-
+  showCreditCardInfo: function( cardId ){
+      var lastId = $.trim( cardId ).split(" ")[3];
+      $.get("creditList.json",function(res){
+        // TO DO:ajax data | 判断与之前是否
+        $(".credit-bank-wrap").html('<div class="fL"><img src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png" title="CMB"></div><div class="fR">信用卡 ** <span>'+lastId+'</span></div>');
+        $(".credit-bank").slideDown();
+        cardPicWrap.hide();
+        $(".credit-info").html('<p>网上交易限额</p> <table> <tr class="title"> <td>单笔限额(元)</td> <td>单日限额(元)</td> </tr> <tr> <td>小于2万元</td> <td>小于2万元</td> </tr> <tr class="title"> <td colspan="2">备注</td> </tr> <tr> <td colspan="2">客服热线<span>95588</span></td> </tr> </table>');
+        creditInfoWrap.show();
+      })  
+    },
+    hideCreditCardInfo: function(){
+      $(".credit-bank-wrap").html("");
+      $(".credit-bank").slideUp(0);
+      $(".credit-info").html("");
+      cardPicWrap.show();
+      creditInfoWrap.hide();
+    },
         netbankPay: function(prt, dlg){
           var me = this, params = [];
           var arr = prt.serializeArray(), bankCodeTag = false;
@@ -586,7 +624,8 @@ if(typeof QNR=="undefined"){
 
       checkDateEnable: function(){
                            //判断有效期是否有效；无效则警告；有效则隐藏时间；
-                           var date = this.currentDate || '1307', me = this;
+                           var date = this.currentDate && /^\d*$/.test(this.currentDate) || '1307',
+                              me = this;
                            dd = date.match(/\d{2}/g),
                               y = dd[0], m = dd[1],
                               dateNow = new Date(),
