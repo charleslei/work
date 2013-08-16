@@ -160,12 +160,27 @@ if(typeof QNR=="undefined"){
                           });
 						  
                          //快捷支付 显示全部绑定银行
-                         showAllBindBank.bind('click',function(e){
-                             e.preventDefault();
-                             bankLi.show(200).removeClass(highlightClass);
-                             bankLi.find('.close').hide();
-                             showAllBindBank.hide();
+                         if(bankLi.length > 3) $(".all_blind_bank").show();
+                         showAllBindBank.bind('click',function(){
+                            var $this = $(this),
+                              txt = $(this).attr("data-toggle");
+                            if(bankLi.filter(":hidden").length){
+                              bankLi.show(200);
+                            }else if(bankLi.length >3){
+                              bankLi.filter(":gt(2)").hide(200);
+                            }else{
+                              return false;
+                            }
+                            if(bankLi.length <= 3)
+                              $this.parent().hide();
+                            $this.attr("data-toggle",$this.text());
+                            $this.text(txt);
+                            return false;
                          });
+
+                         $("#choosebank").live("click",function(){
+                          me.showOtherBankDialog();
+                         })
 
                          bindcardsCon.delegate('li.js-choose-item', 'mouseenter',function(e){
                              $(this).addClass(highlightClass);
@@ -194,6 +209,13 @@ if(typeof QNR=="undefined"){
 
                              me.currentDate = date;
                              me.checkDateEnable();
+
+                             setTimeout(function(){
+                              if( bankLi.filter(":hidden").length >= 1){
+                              $(".all_blind_bank").show().find("a").attr("data-toggle","全部收起").text("全部展开");
+                             }
+                           },400)
+                             
                          });
 
                          $('#show_creditcard_online').click(function(){
@@ -316,7 +338,42 @@ if(typeof QNR=="undefined"){
                          var ar = !!fth ? th.concat(fth) : th;
                          return !!ar ? ar.join(' ') : '';
                        },
-					   
+    // 显示添加其他信用卡
+		showOtherBankDialog:function(){
+      var me = this;
+      // this.payResultDlg = null;
+      var html = '<div class="b_fpanel b_other_bank b_pinfo_form">'+
+                  '<div class="container">'+
+                  '<div class="inner">'+
+                  '<div class="e_title"><span class="title_txt">选择其他信用卡</span><a href="javascript:void(0)" class="close"></a></div>'+
+                  '<div class="content_wrap">'+
+                  '</div></div></div></div>';
+      var obj = $("#allcardsCon,.b_pinfo_form .e_card_picwrap,.b_pinfo_form .credit-info-wrap,.b_pinfo_form .e_ops_button").show();
+
+      this.payResultDlg = new QNR.htmlDialog(html);
+      this.payResultDlg.show();
+      $(".b_other_bank .content_wrap").append( obj );
+      allcardsCon.show();
+      creditInfoWrap.hide();
+
+      // close
+      $(".b_other_bank .close").one("click",function(){
+        var $wrap = $(this).closest(".b_fpanel");
+        $wrap.find(".content_wrap").children().appendTo(payForm);
+        allcardsCon.hide();
+        cardPicWrap.hide();
+        creditInfoWrap.hide();
+        me.payResultDlg.hide();
+        me.payResultDlg = null;
+        $(".b_other_bank").remove();
+      });
+
+      if (document.selection && document.selection.empty) {
+        document.selection.empty();  //IE
+      }else if(window.getSelection) {
+        window.getSelection().removeAllRanges(); //ff
+      }
+    },
     showPayResultDialog: function(){
     var me = this;
     this.payResultDlg = null;

@@ -88,23 +88,24 @@
                         <input name="credit" value="${credit}" class="hide" js-submit>
 
                         <!-- bind card container-->
-                        <div class="b_card_list b_validate_box b_write_card hide" id="bindcardsCon">
+                        <div class="b_card_list b_validate_box b_write_card" id="bindcardsCon">
                           <div class="e_write_inner">
                             <ul>
 
                               <li class="highlight js-choose-item"><div class="e_card_type clrfix"><div class="common_card"></div><div class="info_card js-choose-card"><input type="radio" checked name="bankAndType" data-id="${b.bankId}" value="${b.bankId},${b.cardType}" mobile="${b.mobile}"  bank="${b.bankCode}" valiDate="${b.creditCardValidDate}" class="radio_box" ><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" data-url="${b.picUrl}" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div><a href="javascript:;" js_bId="${b.bankId}" js_bType="${b.cardType}" js_bLastFNum="1111" class="close js_ops_link"></a></div></li>
-                              <li class="js-choose-item"><div class="e_card_type clrfix"><div class="common_card"></div><div class="info_card js-choose-card"><input type="radio" checked name="bankAndType" data-id="${b.bankId}" value="${b.bankId},${b.cardType}" mobile="${b.mobile}"  bank="${b.bankCode}" valiDate="${b.creditCardValidDate}" class="radio_box" ><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" data-url="${b.picUrl}" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div><a href="javascript:;" js_bId="${b.bankId}" js_bType="${b.cardType}" js_bLastFNum="1111" class="close js_ops_link"></a></div></li>
-                              <li class="js-choose-item"><div class="e_card_type clrfix"><div class="common_card"></div><div class="info_card js-choose-card"><input type="radio" checked name="bankAndType" data-id="${b.bankId}" value="${b.bankId},${b.cardType}" mobile="${b.mobile}"  bank="${b.bankCode}" valiDate="${b.creditCardValidDate}" class="radio_box" ><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" data-url="${b.picUrl}" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div><a href="javascript:;" js_bId="${b.bankId}" js_bType="${b.cardType}" js_bLastFNum="1111" class="close js_ops_link"></a></div></li>
+                              <li class="js-choose-item"><div class="e_card_type clrfix"><div class="common_card"></div><div class="info_card js-choose-card"><input type="radio" name="bankAndType" data-id="${b.bankId}" value="${b.bankId},${b.cardType}" mobile="${b.mobile}"  bank="${b.bankCode}" valiDate="${b.creditCardValidDate}" class="radio_box" ><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" data-url="${b.picUrl}" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div><a href="javascript:;" js_bId="${b.bankId}" js_bType="${b.cardType}" js_bLastFNum="1111" class="close js_ops_link"></a></div></li>
+                              <li class="js-choose-item"><div class="e_card_type clrfix"><div class="common_card"></div><div class="info_card js-choose-card"><input type="radio" name="bankAndType" data-id="${b.bankId}" value="${b.bankId},${b.cardType}" mobile="${b.mobile}"  bank="${b.bankCode}" valiDate="${b.creditCardValidDate}" class="radio_box" ><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" data-url="${b.picUrl}" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div><a href="javascript:;" js_bId="${b.bankId}" js_bType="${b.cardType}" js_bLastFNum="1111" class="close js_ops_link"></a></div></li>
+
 
                             </ul>
 
                             <div class="e_bank_all clrfix">
                               <div class="info_card">
-                                <div class="chose_card chose_all_card" id="dvchoose"><a id="choosebank" href="javascript:void(0);" class=""><span class="hl">+&nbsp;&nbsp;</span>选择其它银行</a></div>
+                                <div class="chose_card chose_all_card" id="dvchoose"><a id="choosebank" href="javascript:void(0);" class=""><span class="hl">+&nbsp;&nbsp;</span>添加其他信用卡</a></div>
                                 <div class="chose_card hide" id="dvrechoose"><img id="bankimg" /><a id="rechoosebank" class="chose_bank" href="javascript:void(0);">重新选择银行<b class="icon_up"></b></a></div>
                                 <div class="set popup_tips_wrap js_tipcontainer tip-panel" style="display:none"><span class="icon_tips_wrap"><em class="icon_tips iwrong"></em><em class="txt_tips"></em></span></div>
                                 <input type="hidden" class='bankname' id="bindbankname" name="bankCode" value="" data-jvalidator-pattern="choosebank">
-                                <span class="all_blind_bank chose_card"><a href="javascript:;" id="showAllBindBank"><span class="hl">+&nbsp;&nbsp;</span> 显示全部记录银行卡</a></span>
+                                <span class="all_blind_bank chose_card"><a href="javascript:;" id="showAllBindBank" data-toggle="全部收起">全部展开</a></span>
                               </div>
                             </div>
 

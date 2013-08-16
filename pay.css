@@ -242,7 +242,7 @@ a:hover { color:#f60; text-decoration:none; }
 .b_card_list .banklogo_box .bank_name{ vertical-align:middle; overflow:hidden; }
 .b_card_list .banklogo_box .bankcard_info{ border-left:1px solid #e5e5e5; display:inline-block; vertical-align:middle; padding:7px 10px 9px; color:#888; }
 .b_card_list .e_card_type .all_blind_bank{ float:left; display:inline-block; padding-left:8px; padding-top:26px; }
-.b_card_list .e_bank_all{ padding-left:100px;margin-top: 18px;}
+.b_card_list .e_bank_all{overflow: hidden;height:40px;line-height: 40px;border-top:1px solid #eee;padding-top: 10px;position: relative;margin-top: 18px;}
 .b_card_list .close{ _width: 50px; position: absolute;  right: 25px; top: 32px; display:inline-block; margin-top: 3px; background: url(http://source.qunar.com/site/images/pay/quick_pay/icon_v1.png) no-repeat 0 -158px; padding-left: 15px;}
 /*\锟斤拷锟街э拷锟窖★拷锟侥匡拷list*/
 .b_validate_box td{ padding-top:18px; }
@@ -467,7 +467,7 @@ text-indent: -9999em; background: url(http://source.qunar.com/site/images/pay/qu
 .b_agreement .e_row_btn{ text-align:center; }
 
 /* own */
-.all_blind_bank { display: inline-block; float: left; padding-left: 20px; }
+.all_blind_bank {display: none;}
 .b_bank_list .title{font-weight:bold;padding-bottom:10px}
 .b_bank_list ul {padding-bottom:10px}
 .b_bank_list .e_open_ibank_long{ width:364px;}
@@ -475,7 +475,9 @@ text-indent: -9999em; background: url(http://source.qunar.com/site/images/pay/qu
 .b_card_list .e_card_type .common_card { width: 84px; float: left; padding-top: 12px; padding-right: 7px; font-size: 14px; font-family: Microsoft YaHei, SimHei; color: #333; }
 .b_card_list .e_bank_all { padding-left: 132px; margin-top: 18px; }
 
-#bindcardsCon .chose_all_card a, .all_blind_bank a{ padding: 5px; border: 1px solid #CAE1F6; background: #EBF5FF; font-weight: bold; }
+#bindcardsCon .chose_all_card a{ padding: 5px; border: 1px dashed #CAE1F6; background: #EBF5FF; font-weight: bold; }
+#bindcardsCon  .all_blind_bank{position: absolute;right:0;top:0;padding:0 20px;border:1px solid #eee;border-top:0;text-align: center;}
+#bindcardsCon  .all_blind_bank a{color:#aaa;height: 25px;line-height: 25px;cursor:pointer;}
 
 
 
@@ -527,3 +529,8 @@ body{text-align:left;}
 .payResult .msg{color:#999;padding: 20px 10px 30px 10px;}
 
 .payResult .ctl a{padding: 5px 30px;display: inline-block;height: 20px;line-height: 20px;background: #F0F0F0;border: 1px solid #D2D2D2;margin: 0 20px;font-size:14px;}
+
+/*other bank*/
+.b_other_bank{width: 800px;}
+.b_other_bank .content_wrap{padding:15px 30px;}
+.b_other_bank .e_ops_button{padding-top: 20px;}
