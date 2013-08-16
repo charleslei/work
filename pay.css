@@ -538,3 +538,25 @@ body{text-align:left;}
 .b_other_bank{width: 800px;}
 .b_other_bank .content_wrap{padding:15px 30px;}
 .b_other_bank .e_ops_button{padding-top: 20px;}
+.idsuggest-wrap{position: relative;}
+.idsuggest{
+	width: 228px;
+	border:1px solid #ccc;
+	border-top:0;
+	position: absolute;
+	left:0;
+	top:29px;
+}
+.idsuggest li a{
+	display: block;
+	color:#666;
+	width: 100%;
+	background: #fff;
+	text-indent: 8px;
+	height: 30px;
+	line-height: 30px;
+}
+.idsuggest li a:hover{
+	background: #4778da;
+	color:#fff;
+};

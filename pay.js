@@ -180,6 +180,18 @@ if(typeof QNR=="undefined"){
 
                          $("#choosebank").live("click",function(){
                           me.showOtherBankDialog();
+                         });
+
+                         $(".idsuggest a").live("click",function(){
+                            var id = $(this).text();
+                            $(this).closest(".idsuggest-wrap").find("input").val(id);
+                            $(this).closest(".idsuggest").remove();
+                         });
+                         $(".idsuggest-wrap input").live("keyup",function(){
+                          // TODO:ajax get suggest
+                          if(true)
+                          $(this).siblings(".idsuggest").remove().end()
+                                .after('<ul class="idsuggest"> <li><a href="javascript:void(0)">6225 ********* 3529</a></li> <li><a href="javascript:void(0)">6225 ********* 3529</a></li> </ul>')
                          })
 
                          bindcardsCon.delegate('li.js-choose-item', 'mouseenter',function(e){
