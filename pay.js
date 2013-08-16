@@ -89,8 +89,8 @@ if(typeof QNR=="undefined"){
                          });
                          me._checkBindCardShown();
                      },
-						
-		initDebitCard: function(){
+					 
+        initDebitCard: function(){
 						  $('#debit_card li label,#platform li label').click(function(){
 							var $this = $(this);
 							$this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
@@ -276,29 +276,31 @@ if(typeof QNR=="undefined"){
 						  return false;
 						});
                      },
-        inputControl:function(ctl){
-          // 风险控制
-          if(!ctl){
-            // TODO:ajax get data
-            $.post("creditList.json",function(res){
-              if(res.data)
-               this._inputControlHandler( res.data );
-            });
-          }else{
-            this._inputControlHandler( eval( "("+ctl+ ")" ) );
-          }
-        },
-        _inputControlHandler:function( data ){
-          // 风险控制内部函数
-          var $wrap = $(".ftable:visible");
-          $.each(data,function(key,v){
-            var $target = $wrap.find("input[name="+key+"],select[name="+key+"]").closest("tr");
-            console.log(key,v,$target.length)
-            if($target.length){
-              !!v ? $target.show() : $target.hide();
-            }
-          });
-        },
+					 
+		inputControl:function(ctl){
+			  // 风险控制
+			  if(!ctl){
+				// TODO:ajax get data
+				$.post("creditList.json",function(res){
+				  if(res.data)
+				   this._inputControlHandler( res.data );
+				});
+			  }else{
+				this._inputControlHandler( eval( "("+ctl+ ")" ) );
+			  }
+			},
+			_inputControlHandler:function( data ){
+			  // 风险控制内部函数
+			  var $wrap = $(".ftable:visible");
+			  $.each(data,function(key,v){
+				var $target = $wrap.find("input[name="+key+"],select[name="+key+"]").closest("tr");
+				console.log(key,v,$target.length)
+				if($target.length){
+				  !!v ? $target.show() : $target.hide();
+				}
+			  });
+			},
+
         recheckMobileVcode: function(){
                                 if(!vcode.length){
                                     return;
@@ -341,7 +343,7 @@ if(typeof QNR=="undefined"){
                    },
  submitform : function(e){
                  var me = this;
-                 // for test
+				 // for test
                  me.showSubmitError();
 
                  this.formChecker.validateAll(function(ret) {
@@ -375,26 +377,28 @@ if(typeof QNR=="undefined"){
                  }
                  syncForm.submit();
                },
-  showSubmitError:function(){
-    var me = this;
-      // this.payResultDlg = null;
-      var html = '<div class="b_fpanel restip b_pinfo_form">'+
-                  '<div class="container b_write_card">'+
-                  '<div class="inner e_write_inner">'+
-                  '<div class="e_title"><span class="title_txt">信息确认</span><a href="javascript:void(0)" class="close"></a></div>'+
-                  '<div class="content_wrap">'+
-                  '<div class="credit-bank-wrap"><div class="fL"><img title="CMB" src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png"></div><div class="fR">信用卡 ** <span>0578</span></div></div>'+
-                  '<table width="100%" cellspacing="0" cellpadding="0" class="ftable"> <tbody><tr class="js_credit_tr"> <td class="c1">姓名：</td> <td> <div class="ops_cardnum"> <div class="set input"> <input type="text" value="" placeholder="输入姓名需与注册银行卡相同" class="grey_txt txtbox" data-jvalidator-pattern="not_empty &amp; creditcardno" name="cardholder"> </div> <div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap"><em class="icon_tips iwrong"></em><em class="txt_tips">不能为空</em></span></div> </div> </td> </tr> <tr class="js_credit_tr"> <td class="c1">身份证：</td> <td> <div class="ops_cardnum"> <div class="set input idsuggest-wrap"> <input type="text" value="" placeholder="请输入与银行卡绑定的证件号" class="grey_txt txtbox" data-jvalidator-pattern="not_empty" name="identityCode"> </div> <div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap"><em class="icon_tips iright"></em></span></div> </div> </td> </tr><tr><td></td><td><a href="javascript:void(0)" class="res-btn">确认并支付</a></td></tr></table>'+
-                  '</div></div></div></div>';
+			   
+	showSubmitError:function(){
+			var me = this;
+			  // this.payResultDlg = null;
+			  var html = '<div class="b_fpanel restip b_pinfo_form">'+
+						  '<div class="container b_write_card">'+
+						  '<div class="inner e_write_inner">'+
+						  '<div class="e_title"><span class="title_txt">信息确认</span><a href="javascript:void(0)" class="close"></a></div>'+
+						  '<div class="content_wrap">'+
+						  '<div class="credit-bank-wrap"><div class="fL"><img title="CMB" src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png"></div><div class="fR">信用卡 ** <span>0578</span></div></div>'+
+						  '<table width="100%" cellspacing="0" cellpadding="0" class="ftable"> <tbody><tr class="js_credit_tr"> <td class="c1">姓名：</td> <td> <div class="ops_cardnum"> <div class="set input"> <input type="text" value="" placeholder="输入姓名需与注册银行卡相同" class="grey_txt txtbox" data-jvalidator-pattern="not_empty &amp; creditcardno" name="cardholder"> </div> <div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap"><em class="icon_tips iwrong"></em><em class="txt_tips">不能为空</em></span></div> </div> </td> </tr> <tr class="js_credit_tr"> <td class="c1">身份证：</td> <td> <div class="ops_cardnum"> <div class="set input idsuggest-wrap"> <input type="text" value="" placeholder="请输入与银行卡绑定的证件号" class="grey_txt txtbox" data-jvalidator-pattern="not_empty" name="identityCode"> </div> <div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap"><em class="icon_tips iright"></em></span></div> </div> </td> </tr><tr><td></td><td><a href="javascript:void(0)" class="res-btn">确认并支付</a></td></tr></table>'+
+						  '</div></div></div></div>';
 
-      this.payResultDlg = new QNR.htmlDialog(html);
-      this.payResultDlg.show();
-      $(".restip .close").one("click",function(){
-        me.payResultDlg.hide();
-        me.payResultDlg = null;
-        $(".restip").remove();
-      });
-    },
+			  this.payResultDlg = new QNR.htmlDialog(html);
+			  this.payResultDlg.show();
+			  $(".restip .close").one("click",function(){
+				me.payResultDlg.hide();
+				me.payResultDlg = null;
+				$(".restip").remove();
+			  });
+			},
+
   getParam : function(){
                var me = this;
                var parm = me.getForm(payForm);
@@ -429,8 +433,9 @@ if(typeof QNR=="undefined"){
                          var ar = !!fth ? th.concat(fth) : th;
                          return !!ar ? ar.join(' ') : '';
                        },
-    // 显示添加其他信用卡
-		showOtherBankDialog:function(){
+					
+// 显示添加其他信用卡
+	showOtherBankDialog:function(){
       var me = this;
       // this.payResultDlg = null;
       var html = '<div class="b_fpanel b_other_bank b_pinfo_form">'+
@@ -467,86 +472,87 @@ if(typeof QNR=="undefined"){
         window.getSelection().removeAllRanges(); //ff
       }
     },
-    showPayResultDialog: function(){
-    var me = this;
-    this.payResultDlg = null;
-    var _html = quickPayTemplate.payDoneDialog.join('');
-
-    //_html = _html.replace(/\{content\}/g,bankItem.join(''));
-
-    this.payResultDlg = new QNR.htmlDialog(_html);
-    this.payResultDlg.show();
-
-    if (document.selection && document.selection.empty) {
-      document.selection.empty();  //IE
-    }else if(window.getSelection) {
-      window.getSelection().removeAllRanges(); //ff
-    }
-
-    this.payResultDlg.dom.find('.show').click(function(){
-      var $this = $(this);
-      var spans = $this.find('span');
-	  if(spans.eq(1).is('.down')){
-		spans.eq(0).text('收起');
-		spans.eq(1).removeClass('down').addClass('up');
-		$this.parent().addClass('active').next('.more').show();
-	  }else{
-		spans.eq(0).text('查看');
-		spans.eq(1).removeClass('up').addClass('down');
-		$this.parent().removeClass('active').next('.more').hide();
-	  }
-	  return false;
-    });
 	
-	this.payResultDlg.dom.find("#payRes_close").bind("click",function(){
+    showPayResultDialog: function(){
+		var me = this;
+		this.payResultDlg = null;
+		var _html = quickPayTemplate.payDoneDialog.join('');
+
+		//_html = _html.replace(/\{content\}/g,bankItem.join(''));
+
+		this.payResultDlg = new QNR.htmlDialog(_html);
+		this.payResultDlg.show();
+
+		if (document.selection && document.selection.empty) {
+		  document.selection.empty();  //IE
+		}else if(window.getSelection) {
+		  window.getSelection().removeAllRanges(); //ff
+		}
+
+		this.payResultDlg.dom.find('.show').click(function(){
+		  var $this = $(this);
+		  var spans = $this.find('span');
+		  if(spans.eq(1).is('.down')){
+			spans.eq(0).text('收起');
+			spans.eq(1).removeClass('down').addClass('up');
+			$this.parent().addClass('active').next('.more').show();
+		  }else{
+			spans.eq(0).text('查看');
+			spans.eq(1).removeClass('up').addClass('down');
+			$this.parent().removeClass('active').next('.more').hide();
+		  }
+		  return false;
+		});
+	
+		this.payResultDlg.dom.find("#payRes_close").bind("click",function(){
                              me.payResultDlg.hide();
                            });
   },
 
-  showCreditCardDialog: function(){
-    var me = this;
-    me.creditCardDlg = null;
-    var _html = quickPayTemplate.creditCardDialog.join(''), idx = 0;
+	showCreditCardDialog: function(){
+		var me = this;
+		me.creditCardDlg = null;
+		var _html = quickPayTemplate.creditCardDialog.join(''), idx = 0;
 
-    bankItem = [];
-    bankData = me.creditCardsBankList;
-    $.each(bankData, function(k, v){
-	  
-      bankItem.push('<li class="e_open_ibank">');
-	  if(idx != 0){
-		bankItem.push('<input type="radio" name="bankCode" id="'+ k +'" value="'+ k +'" class="radio_box">');
-	  }else{
-		bankItem.push('<input type="radio" checked name="bankCode" id="'+ k +'" value="'+ k +'" class="radio_box">');
-	  }
-      
-      bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="'+ v.bankCode +'" src="'+ v.picUrl +'" /></span><span class="bank_name_txt"></span></label>');
-      bankItem.push('</li>');
-	  idx++;
-    });
-    _html = _html.replace(/\{content\}/g,bankItem.join(''));
+		bankItem = [];
+		bankData = me.creditCardsBankList;
+		$.each(bankData, function(k, v){
+		  
+		  bankItem.push('<li class="e_open_ibank">');
+		  if(idx != 0){
+			bankItem.push('<input type="radio" name="bankCode" id="'+ k +'" value="'+ k +'" class="radio_box">');
+		  }else{
+			bankItem.push('<input type="radio" checked name="bankCode" id="'+ k +'" value="'+ k +'" class="radio_box">');
+		  }
+		  
+		  bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="'+ v.bankCode +'" src="'+ v.picUrl +'" /></span><span class="bank_name_txt"></span></label>');
+		  bankItem.push('</li>');
+		  idx++;
+		});
+		_html = _html.replace(/\{content\}/g,bankItem.join(''));
 
-    me.creditCardDlg = new QNR.htmlDialog(_html);
-    me.creditCardDlg.show();
+		me.creditCardDlg = new QNR.htmlDialog(_html);
+		me.creditCardDlg.show();
 
-    if (document.selection && document.selection.empty) {
-      document.selection.empty();  //IE
-    }else if(window.getSelection) {
-      window.getSelection().removeAllRanges(); //ff
-    }
+		if (document.selection && document.selection.empty) {
+		  document.selection.empty();  //IE
+		}else if(window.getSelection) {
+		  window.getSelection().removeAllRanges(); //ff
+		}
 
-    me.creditCardDlg.dom.find('li label').click(function(){
-      var $this = $(this);
-      $this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
-    });
+		me.creditCardDlg.dom.find('li label').click(function(){
+		  var $this = $(this);
+		  $this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
+		});
 
-    me.creditCardDlg.dom.find('#btnCreditSubmit_next').click(function(e){
-      me.netbankPay(me.creditCardDlg.dom.find('form'), me.creditCardDlg);
-      return false;
-    })
-    $("#banllist_close, #cancelbank").bind("click",function(){
-      me.creditCardDlg.hide();
-    });
-  },
+		me.creditCardDlg.dom.find('#btnCreditSubmit_next').click(function(e){
+		  me.netbankPay(me.creditCardDlg.dom.find('form'), me.creditCardDlg);
+		  return false;
+		})
+		$("#banllist_close, #cancelbank").bind("click",function(){
+		  me.creditCardDlg.hide();
+		});
+	  },
   
   showCreditCardInfo: function( cardId ){
       var lastId = $.trim( cardId ).split(" ")[3];
