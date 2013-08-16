@@ -45,10 +45,33 @@
           <div class="b_hd_mod">
             <div class="e_notice_content notice_state_success">
               <div class="notice_icon icon_state_success"></div>
-              <div class="notice_txt">
+              <div class="notice_txt bd">
                 <h3>订单提交成功，请您尽快付款！</h3>
-                <div class="detail"><span class="order_num">订单号：<em>1111111111111111111111122</em></span><span class="tc">商户：<em class="tc_name">qunar.com</em></span></div>
-                <div class="pay_sum">应付金额<span class="sum_num"><b>fasdfasdfasdf</b></span><em class="yuan">元</em></div>
+                <div class="detail">
+				  <table>
+				    <tr>
+				      <td>订单号：</td>
+				      <td class='order_num'>1111111111111111111111122</td>
+				      <td>商品名称：</td>
+				      <td class='order_num'>这里最多十个字符啊！...</td>
+				      <td>金额</td>
+				      <td><span class="sum_num"><b>fasdfasdfasdf</b></span><em class="yuan">元</em></td>
+				    </tr>
+				  </table>
+				</div>
+				<div class='detail_more'>
+				  <div class='detail_more_ctl'><a href='#' class='show'><span>订单详情</span><span class='down_1'></span></a></div>
+				  <div class='detail_more_ctn hide'>
+				    <table>
+				  	<tr><td>房型：</td><td>五星级/豪华总统套房</td></tr>
+				  	<tr><td>入住人：</td><td>李雷/韩梅梅</td></tr>
+				  	<tr><td>入住日期：</td><td>2020年1月14日</td></tr>
+				  	<tr><td>离店日期：</td><td>2222年11月11日</td></tr>
+				  	<tr><td>备注：</td><td>相亲相爱一辈子</td></tr>
+				    </table>
+				  </div>
+				</div>
+				
               </div>
             </div>
           </div>
@@ -298,7 +321,7 @@
                       <table>
                         <tr>
                           <td class='left_ctn'><div class='title'>储蓄卡网银支付</div></td>
-                          <td><span>需开通网银，如未开通请选择<a href='#'>信用卡支付</a></span></td>
+                          <td><span>需开通网银，如未开通请选择<a href='#' id='payByCreditCard'>信用卡支付</a></span></td>
                         </tr>
                         <tr>
                           <td></td>
@@ -369,7 +392,7 @@
                       <table>
                         <tr>
                           <td class='left_ctn'><div class='title'>支付平台</div></td>
-                          <td><span>跳转至平台页面完成付款<a href='#'>信用卡支付</a></span></td>
+                          <td><span>跳转至平台页面完成付款</span></td>
                         </tr>
                         <tr>
                           <td></td>

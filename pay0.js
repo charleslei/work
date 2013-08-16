@@ -1599,7 +1599,7 @@ var quickPayTemplate = {
 	payDoneDialog : ['<div class="b_fpanel b_chose_bank ">',
 									'<div class="container payResult">',
 										'<div class="inner">',
-											'<div class="e_title"><span class="title_txt">支付结果</span></div>',
+											'<div class="e_title"><a id="payRes_close" href="javascript:void(0);" class="close">关闭</a><span class="title_txt">支付结果</span></div>',
 											'<div class="content_wrap">',
 												'<div class="ctl"><a href="#">支付成功</a><a href="#">支付失败，继续支付</a></div>',
 												'<div class="msg">',

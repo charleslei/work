@@ -500,7 +500,6 @@ body{text-align:left;}
 .e_ops_button1 span{margin-left:10px;color:#999}
 
 
-.notice_txt{border-bottom: 3px solid #5ABEC6;}
 .b_header{border-bottom:none}
 .b_payfor_content{padding:0}
 .b_main_pay{padding:10px}
@@ -536,3 +535,22 @@ body{text-align:left;}
 .show .down, .show .up{display:inline-block;width:11px;height:13px;line-height:11px;vertical-align:middle;}
 .show .down{background:url(/img/down.png) no-repeat}
 .show .up{background:url(/img/up.png) no-repeat}
+
+.show .down, .show .up, .show .down_1, .show .up_1{display:inline-block;width:11px;height:13px;line-height:11px;vertical-align:middle;}
+.show .down{background:url(/img/down.png) no-repeat}
+.show .up{background:url(/img/up.png) no-repeat}
+.show .down_1{background:url(/img/down_1.png) no-repeat}
+.show .up_1{background:url(/img/up_1.png) no-repeat}
+
+
+.b_hd_mod .notice_txt .detail{ padding-bottom:6px; font-size:14px; color:#999; }
+.b_hd_mod .notice_txt .detail .order_num{ padding-right:45px; }
+.b_hd_mod .notice_txt .detail .order_num em{ font-family:Tahoma, Geneva, sans-serif; color:#555; }
+.b_hd_mod .notice_txt .detail .tc_name{ color:#555; }
+.b_hd_mod .e_notice_content{position:relative;z-index:100;}
+
+.notice_txt .detail_more{position:absolute;top:117px;left:0;width:990px}
+.notice_txt .detail_more_ctl{position: absolute;bottom: 0px;right: 30px;width: 100px;height: 30px;background: url(/img/dtl.png) no-repeat;line-height: 30px;text-align: center;}
+.notice_txt .detail_more_ctn{padding: 0px 20px 20px 87px;background: #F7FDFB;border-bottom: 3px solid #5ABEC6;}
+.notice_txt .detail_more_ctl a{color: #f5f5f5;}
+.b_hd_mod .notice_state_success .notice_txt.bd{border-bottom: 3px solid #5ABEC6;}

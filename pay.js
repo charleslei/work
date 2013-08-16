@@ -210,6 +210,29 @@ if(typeof QNR=="undefined"){
 							me.netbankPay($this.parents('form'));
 							return false;
 						 });
+						 
+						 //跳转到信用卡支付
+						 $('#payByCreditCard').click(function(){
+						   $('.trigger_item').eq(0).click();
+						   return false;
+						 })
+						//订单详情 
+						$('.detail_more_ctl .show').click(function(){
+						  var $this = $(this);
+						  var spans = $this.find('span');
+						  if(spans.eq(1).is('.down_1')){
+							spans.eq(0).text('收起');
+							spans.eq(1).removeClass('down_1').addClass('up_1');
+							$this.parent().next('.detail_more_ctn').show();
+							$this.parents('.notice_txt').removeClass('bd');
+						  }else{
+							spans.eq(0).text('订单详情');
+							spans.eq(1).removeClass('up_1').addClass('down_1');
+							$this.parent().next('.detail_more_ctn').hide();
+							$this.parents('.notice_txt').addClass('bd');
+						  }
+						  return false;
+						});
                      },
 
         recheckMobileVcode: function(){
@@ -351,6 +374,10 @@ if(typeof QNR=="undefined"){
 	  }
 	  return false;
     });
+	
+	this.payResultDlg.dom.find("#payRes_close").bind("click",function(){
+                             me.payResultDlg.hide();
+                           });
   },
 
   showCreditCardDialog: function(){
