@@ -535,28 +535,25 @@ body{text-align:left;}
 .payResult .ctl a{padding: 5px 30px;display: inline-block;height: 20px;line-height: 20px;background: #F0F0F0;border: 1px solid #D2D2D2;margin: 0 20px;font-size:14px;}
 
 /*other bank*/
-.b_other_bank{width: 800px;}
+.b_other_bank{width: 870px;}
 .b_other_bank .content_wrap{padding:15px 30px;}
 .b_other_bank .e_ops_button{padding-top: 20px;}
 .idsuggest-wrap{position: relative;}
-.idsuggest{
-	width: 228px;
-	border:1px solid #ccc;
-	border-top:0;
-	position: absolute;
-	left:0;
-	top:29px;
+.idsuggest{width: 228px; border:1px solid #ccc; border-top:0; position: absolute; left:0; top:29px; }
+.idsuggest li a{display: block; color:#666; width: 100%; background: #fff; text-indent: 8px; height: 30px; line-height: 30px; }
+.idsuggest li a:hover{background: #4778da; color:#fff; }
+
+/*restip*/
+.restip{background: #fff;width: 470px;}
+.restip .content_wrap{padding:30px;height:400px;}
+.restip .content_wrap .c1{width: auto;}
+.restip .content_wrap .credit-bank-wrap{margin-left: 58px;}
+.restip .res-btn{
+  background: url("http://source.qunar.com/site/images/pay/quick_pay/button.png") no-repeat scroll 0 -649px transparent;
+  color: #FFFFFF;
+  display: block;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  width: 100px;
 }
-.idsuggest li a{
-	display: block;
-	color:#666;
-	width: 100%;
-	background: #fff;
-	text-indent: 8px;
-	height: 30px;
-	line-height: 30px;
-}
-.idsuggest li a:hover{
-	background: #4778da;
-	color:#fff;
-};

@@ -192,6 +192,8 @@ if(typeof QNR=="undefined"){
                           if(true)
                           $(this).siblings(".idsuggest").remove().end()
                                 .after('<ul class="idsuggest"> <li><a href="javascript:void(0)">6225 ********* 3529</a></li> <li><a href="javascript:void(0)">6225 ********* 3529</a></li> </ul>')
+                         }).live("blur",function(){
+                          $(this).siblings(".idsuggest").remove();
                          })
 
                          bindcardsCon.delegate('li.js-choose-item', 'mouseenter',function(e){
@@ -312,6 +314,9 @@ if(typeof QNR=="undefined"){
                    },
  submitform : function(e){
                  var me = this;
+                 // for test
+                 me.showSubmitError();
+
                  this.formChecker.validateAll(function(ret) {
                    var valiHidden = me.valiHiddens();
 
@@ -343,7 +348,26 @@ if(typeof QNR=="undefined"){
                  }
                  syncForm.submit();
                },
+  showSubmitError:function(){
+    var me = this;
+      // this.payResultDlg = null;
+      var html = '<div class="b_fpanel restip b_pinfo_form">'+
+                  '<div class="container b_write_card">'+
+                  '<div class="inner e_write_inner">'+
+                  '<div class="e_title"><span class="title_txt">信息确认</span><a href="javascript:void(0)" class="close"></a></div>'+
+                  '<div class="content_wrap">'+
+                  '<div class="credit-bank-wrap"><div class="fL"><img title="CMB" src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png"></div><div class="fR">信用卡 ** <span>0578</span></div></div>'+
+                  '<table width="100%" cellspacing="0" cellpadding="0" class="ftable"> <tbody><tr class="js_credit_tr"> <td class="c1">姓名：</td> <td> <div class="ops_cardnum"> <div class="set input"> <input type="text" value="" placeholder="输入姓名需与注册银行卡相同" class="grey_txt txtbox" data-jvalidator-pattern="not_empty &amp; creditcardno" name="cardholder"> </div> <div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap"><em class="icon_tips iwrong"></em><em class="txt_tips">不能为空</em></span></div> </div> </td> </tr> <tr class="js_credit_tr"> <td class="c1">身份证：</td> <td> <div class="ops_cardnum"> <div class="set input idsuggest-wrap"> <input type="text" value="" placeholder="请输入与银行卡绑定的证件号" class="grey_txt txtbox" data-jvalidator-pattern="not_empty" name="identityCode"> </div> <div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap"><em class="icon_tips iright"></em></span></div> </div> </td> </tr><tr><td></td><td><a href="javascript:void(0)" class="res-btn">确认并支付</a></td></tr></table>'+
+                  '</div></div></div></div>';
 
+      this.payResultDlg = new QNR.htmlDialog(html);
+      this.payResultDlg.show();
+      $(".restip .close").one("click",function(){
+        me.payResultDlg.hide();
+        me.payResultDlg = null;
+        $(".restip").remove();
+      });
+    },
   getParam : function(){
                var me = this;
                var parm = me.getForm(payForm);
