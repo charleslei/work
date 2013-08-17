@@ -517,6 +517,9 @@ if(typeof QNR=="undefined"){
         }
         return false;
       });
+	  this.payResultDlg.dom.find('.ctl a').click(function(){
+		//TODO:
+	  });
 
       this.payResultDlg.dom.find("#payRes_close").bind("click",function(){
         me.payResultDlg.hide();
