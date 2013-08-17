@@ -30,20 +30,13 @@ if(typeof QNR=="undefined"){
   var radios = bankLi.find('input[type="radio"]');
   //显示隐藏和选择银行;
   var highlightClass= "highlight";
-  var morebank = $('.more_bank');
-  var hidebank = $('.hide_bank');
   var mobileStage = $('#mobile-number #mobile');
   var vcode = $('#vCode');
-  var jquery_dg = old_dg = old_defCarddg = jquery_defCarddg = null;
-  var bindCards = {};
   var bindcardsCon = $('#bindcardsCon');
   var allcardsCon = $("#allcardsCon");
   var cardPicWrap = $('.e_card_picwrap');
   var creditInfoWrap = $(".credit-info-wrap");
   var imageURL = 'http://source.qunar.com/site/images/pay/bankicon_1/';
-  var bindUL = bindcardsCon.find('ul');
-  var noImgBank = ['ZJCZCBANK', 'YCCCBANK', 'WUXIRCBANK', 'SDEBANK', 'SQBANK', 'SXYDRCBANK', 'LJBANK', 'LZBANK', 'JINHUABANK', 'JSPRCU', 'HNPRU', 'FJPRCU', 'ORDOSBANK', 'DYBANK', 'DALIANBANK', 'JYRCBANK', 'XJKCCB', 'XMCCB', 'FJHXBANK', 'LZCCB', 'DRCBANK', 'HBXH', 'SUZHOUBANK', 'AYB', 'SMXBANK', 'HBSBANK', 'ZHOUKBANK', 'YBCCB', 'YCCCB', 'HAINANBANK', 'GUILINBANK', 'KSRCB', 'TCRCB', 'JXSNXS', 'NMGNXS', 'WUHAICB', 'JCCBANK', 'JZBANK', 'SXNXYB', 'YQCCB', 'FTYZB', 'SZNCCB', 'ASCCB', 'FSBANK', 'QJCCB', 'GXNLS', 'NANHAIBANK', 'JLNLS', 'QHNB', 'CZCCB', 'HDCB', 'SBANK', 'TSBANK', 'ZJKCCB', 'DYCCB', 'SNCCB', 'ZGBANK', 'LSSCB', 'LSZSH', 'YAANBANK', 'NDHB'];
-
   //倒计时
   var tmin = $("#mins");
   var tsec = $('#sec');
@@ -1018,13 +1011,7 @@ if(typeof QNR=="undefined"){
     },
 
     parseImgURL: function(code){
-      var url = '';
-      if($.inArray(code,noImgBank) > -1){
-        url = imageURL + 'nologo.png';
-      }else{
-        url = imageURL + code.toLowerCase() + '.png';
-      }
-      return url;
+      return imageURL + code.toLowerCase() + '.png';
     }
   };
   var unionPay = new unionPay();
