@@ -573,11 +573,25 @@ body{text-align:left;}
 .idsuggest li a:hover{background: #4778da; color:#fff; }
 
 /*restip*/
-.restip{background: #fff;width: 470px;}
-.restip .content_wrap{padding:30px;height:400px;}
-.restip .content_wrap .c1{width: auto;}
+.restip{background: #fff;width: 500px;}
+.restip .content_wrap{padding:30px;}
+.restip .content_wrap .c1{width: 54px;}
 .restip .content_wrap .credit-bank-wrap{margin-left: 58px;}
 .restip .res-btn{background: url("http://source.qunar.com/site/images/pay/quick_pay/button.png") no-repeat scroll 0 -649px transparent;  color: #FFFFFF;  display: block;  height: 22px;  line-height: 22px;  text-align: center;  width: 100px;}
 
 .server_icon{background: url(/img/24.png) no-repeat;display: inline-block;width: 16px;height: 16px;vertical-align: middle;margin: 4px 5px 6px 16px;line-height: 16px;}
 strong{font-weight:bold;}
+
+
+.b_card_list li.highlight .banklogo_box{ border: 1px solid #5ABEC6;}
+.b_card_list li.highlight .bankcard_info{ border-left: 1px solid #5ABEC6;background-color:#F5F5F5}
+.b_card_list li.js-choose-item table.info {font-size: 12px; height: 60px; position: absolute; right: 20px; top: 10px; width: 350px; }
+.b_card_list li.js-choose-item table.info td{border:1px solid #EDEDED;text-align: center;padding:0px 10px;height:35px;vertical-align:middle;}
+.b_card_list li.js-choose-item table.info th{border:1px solid #EDEDED;text-align: center;padding:0px 10px;height:25px;vertical-align:middle;background: #EDEDED;}
+
+.encryption{ padding-right:5px; font-size:14px; color:#999; vertical-align:middle;}
+
+.confirmCardInfo{padding: 0px 0px 10px 35px;;font-size: 14px;}
+.confirmCardInfo .t1{width: 16px;background: url(/img/msg.png) no-repeat;margin-right: 5px;display: inline-block;height: 16px;line-height: 16px;vertical-align: middle;}
+
+.b_pinfo_form .ops_cardnum .confirm input{width:180px}

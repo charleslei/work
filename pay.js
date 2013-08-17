@@ -392,25 +392,42 @@ if(typeof QNR=="undefined"){
       syncForm.submit();
     },
 
-    showSubmitError:function(){
+    showSubmitError:function(info){
       var me = this;
       // this.payResultDlg = null;
       // TODO:
-      var html = '<div class="b_fpanel restip b_pinfo_form">'+
-        '<div class="container b_write_card">'+
-        '<div class="inner e_write_inner">'+
-        '<div class="e_title"><span class="title_txt">信息确认</span><a href="javascript:void(0)" class="close"></a></div>'+
-        '<div class="content_wrap">'+
-        '<div class="credit-bank-wrap"><div class="fL"><img title="CMB" src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png"></div><div class="fR">信用卡 ** <span>0578</span></div></div>'+
-        '<table width="100%" cellspacing="0" cellpadding="0" class="ftable"> <tbody><tr class="js_credit_tr"> <td class="c1">姓名：</td> <td> <div class="ops_cardnum"> <div class="set input"> <input type="text" value="" placeholder="输入姓名需与注册银行卡相同" class="grey_txt txtbox" data-jvalidator-pattern="not_empty &amp; creditcardno" name="cardholder"> </div> <div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap"><em class="icon_tips iwrong"></em><em class="txt_tips">不能为空</em></span></div> </div> </td> </tr> <tr class="js_credit_tr"> <td class="c1">身份证：</td> <td> <div class="ops_cardnum"> <div class="set input idsuggest-wrap"> <input type="text" value="" placeholder="请输入与银行卡绑定的证件号" class="grey_txt txtbox" data-jvalidator-pattern="not_empty" name="identityCode"> </div> <div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap"><em class="icon_tips iright"></em></span></div> </div> </td> </tr><tr><td></td><td><a href="javascript:void(0)" class="res-btn">确认并支付</a></td></tr></table>'+
-        '</div></div></div></div>';
-
-      this.payResultDlg = new QNR.htmlDialog(html);
-      this.payResultDlg.show();
+	  var html = quickPayTemplate.confirmCardInfo.join('');
+	  //replace img tel
+	  var img = '<img title="CMB" src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png">';
+	  var tel = '111'
+	  html = html.replace(/{img}/g, img).replace(/{tel}/g, tel);
+      me.payResultDlg = new QNR.htmlDialog(html);
+      me.payResultDlg.show();
       $(".restip .close").one("click",function(){
         me.payResultDlg.hide();
         me.payResultDlg = null;
         $(".restip").remove();
+      });	  
+	  
+	  me.payResultDlg.dom.find('#re_confirm').click(function(){
+	    //TODO: commit
+	  
+	  })
+	  me.formChecker1 = me.payResultDlg.dom.find("[data-jvalidator-pattern]").jvalidator({
+        validation_events:['blur'],
+        on: {
+          invalid: function(evt,el,patterns) {
+            var e = $(el).parent().siblings(".js_tipcontainer");
+            e.removeClass("popup_tips_wrap_clr");
+            var _msg = quickPayTemplate.icon_wrong.join('');
+            e.html( _msg.replace(/\{content\}/g,  patterns[0].message) ).show();
+          },
+          valid: function(evt,el,patterns) {
+            var e = $(el).parent().siblings(".js_tipcontainer");
+            e.removeClass("popup_tips_wrap_clr");
+            e.html(quickPayTemplate.icon_right.join('')).show();
+          }
+        }
       });
     },
 
@@ -450,6 +467,7 @@ if(typeof QNR=="undefined"){
 
     // 显示添加其他信用卡
     showOtherBankDialog:function(){
+	  //TODO
       var me = this;
       // this.payResultDlg = null;
       var html = '<div class="b_fpanel b_other_bank b_pinfo_form">'+
