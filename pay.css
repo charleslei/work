@@ -556,7 +556,7 @@ body{text-align:left;}
 .b_hd_mod .notice_txt .detail .tc_name{ color:#555; }
 .b_hd_mod .e_notice_content{position:relative;z-index:100;}
 
-.notice_txt .detail_more{position:absolute;top:117px;left:0;width:990px}
+.notice_txt .detail_more{position:absolute;top:120px;left:0;width:990px}
 .notice_txt .detail_more_ctl{position: absolute;bottom: 0px;right: 30px;width: 100px;height: 30px;background: url(/img/dtl.png) no-repeat;line-height: 30px;text-align: center;}
 .notice_txt .detail_more_ctn{padding: 0px 20px 20px 87px;background: #F7FDFB;border-bottom: 3px solid #5ABEC6;}
 .notice_txt .detail_more_ctl a{color: #f5f5f5;width: 100px;height: 30px;display:inline-block;line-height: 30px;}
