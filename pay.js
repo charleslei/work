@@ -260,12 +260,12 @@ if(typeof QNR=="undefined"){
         if(spans.eq(1).is('.down_1')){
           spans.eq(0).text('收起');
           spans.eq(1).removeClass('down_1').addClass('up_1');
-          $this.parent().next('.detail_more_ctn').show();
+          $this.parent().addClass('detail_more_ctl1').next('.detail_more_ctn').show();
           $this.parents('.notice_txt').removeClass('bd');
         }else{
           spans.eq(0).text('订单详情');
           spans.eq(1).removeClass('up_1').addClass('down_1');
-          $this.parent().next('.detail_more_ctn').hide();
+          $this.parent().removeClass('detail_more_ctl1').next('.detail_more_ctn').hide();
           $this.parents('.notice_txt').addClass('bd');
         }
         return false;
