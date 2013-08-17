@@ -23,7 +23,7 @@ if(typeof QNR=="undefined"){
   var expires_month = $(".expires_month");
   var bankname = $('.bankname');
   var allbankname = $('#allbankname');
-  var bindbankname = $('#bindbankname');
+  //var bindbankname = $('#bindbankname');
   var payForm = $("#quickpayform");
   var numRegExp = /^\s*[0-9][\d]*\s*$/i;
   var bankLi = $('.js-choose-item');
@@ -162,7 +162,7 @@ if(typeof QNR=="undefined"){
       if(bankLi.length > 3) $(".all_blind_bank").show();
 
       showAllBindBank.bind('click',function(){
-        var $this = $(this), txt = $(this).attr("data-toggle");
+        var $this = $(this), spans = $this.find('span');
         if(bankLi.filter(":hidden").length){
           bankLi.show(200);
         }else if(bankLi.length >3){
@@ -174,9 +174,14 @@ if(typeof QNR=="undefined"){
         if(bankLi.length <= 3){
           $this.parent().hide();
         }
-
-        $this.attr("data-toggle",$this.text());
-        $this.text(txt);
+		
+        if(spans.eq(1).is('.down')){
+          spans.eq(1).removeClass('down').addClass('up');
+          spans.eq(0).text('全部收起');
+        }else{
+          spans.eq(1).removeClass('up').addClass('down');
+          spans.eq(0).text('全部展开');
+        }
         return false;
       });
 
@@ -199,31 +204,30 @@ if(typeof QNR=="undefined"){
       });
 
       bindcardsCon.delegate('li.js-choose-item', 'mouseenter',function(e){
-        $(this).addClass(highlightClass);
-        $(this).find('.close').show();
+	    var $this = $(this), ipt = $this.find('input:checked');
+		if(ipt.length == 0){
+          $(this).addClass(highlightClass);
+		}
       }).delegate('li.js-choose-item', 'mouseleave',function(e){
-        $(this).removeClass(highlightClass);
-        if(showAllBindBank.is(':visible')) return;
-        $(this).find('.close').hide();
+	  	var $this = $(this), ipt = $this.find('input:checked');
+		if(ipt.length == 0){
+          $(this).removeClass(highlightClass);
+		}
       }).delegate('.js-choose-card', 'click',function(e){
         var el = $(this).closest('li'), checkedEle = el.find('input[type=radio]');
         var mb = checkedEle.attr('mobile'), bk = checkedEle.attr('bank');
         var date = checkedEle.attr('valiDate'), ctl = $(this).attr("data-ctl");
-        var sibling = el.siblings('.js-choose-item');
-        sibling.hide(200);
 
         checkedEle.attr('checked',true);
-        // el.addClass(highlightClass);
-        el.addClass("current");
-        el.siblings().removeClass("current");
-        showAllBindBank.show();
+        el.addClass("current").addClass(highlightClass);
+        el.siblings().removeClass("current").removeClass(highlightClass);
 
         // 风险控制
         me.inputControl( ctl );
 
         mobileStage.val(mb);
         me.currentMobile = mb;
-        bindbankname.val(bk);
+        //bindbankname.val(bk);
         me.currentBank = bk;
         me.recheckMobileVcode();
 
@@ -302,15 +306,15 @@ if(typeof QNR=="undefined"){
         // TODO:ajax get data
         $.post("creditList.json",function(res){
           if(res.data){
-            this._inputControlHandler( res.data );
+            this.inputControlHandler( res.data );
           }
         });
       }else{
-        this._inputControlHandler( eval( "("+ctl+ ")" ) );
+        this.inputControlHandler($.parseJSON(ctl));
       }
     },
 
-    _inputControlHandler:function( data ){
+    inputControlHandler:function( data ){
       // 风险控制内部函数
       // TODO
       var $wrap = $(".ftable:visible");
@@ -519,6 +523,7 @@ if(typeof QNR=="undefined"){
       });
 	  this.payResultDlg.dom.find('.ctl a').click(function(){
 		//TODO:
+		return false;
 	  });
 
       this.payResultDlg.dom.find("#payRes_close").bind("click",function(){
@@ -621,19 +626,6 @@ if(typeof QNR=="undefined"){
       me.showPayResultDialog();
     },
 
-    _refreshBindCard: function(obj){
-      var id = obj.id,me = this;
-      var bankVal = id + ',' + obj.cardType, mob = obj.telphone, bk = obj.bankCode;
-      var date = obj.validate, cardNumA = obj.cardNo.split('*');
-      var cardNum = cardNumA[cardNumA.length -1], img = me.parseImgURL(bk);
-
-      var li = '<li class="js-choose-item highlight" style="display: list-item;"><div class="e_card_type clrfix"><div class="common_card">常用卡</div><div class="info_card js-choose-card"><input checked type="radio" name="bankAndType" value="' + bankVal + '" mobile="' + mob + '" bank="' + bk + '" validate="' + date + '" class="radio_box"><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" style="background-image: url(' + img + ');background-position: 0px 0px;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">' + cardNum + '</em></span></label></div><a href="javascript:;" js_bid="' + id + '" js_btype="1" js_blastfnum="' + cardNum + '" class="close js_ops_link">删除</a></div></li>';
-      bankLi.eq(bankLi.length - 1).remove();
-      bindUL.append(li);
-      bankLi = $('.js-choose-item');
-      radios = bankLi.find('input[type="radio"]');
-    },
-
     //短信验证码
     initMobile : function(){
       var form = payForm;
@@ -710,7 +702,7 @@ if(typeof QNR=="undefined"){
         this.currentBank = radios.filter(':checked').attr('bank')||'';
         this.currentDate = radios.filter(':checked').attr('valiDate')||'';
         mobileStage.val(this.currentMobile);
-        bindbankname.val(this.currentBank);
+        //bindbankname.val(this.currentBank);
         cardPicWrap.hide();
       }else{
         allcardsCon.show();
@@ -732,6 +724,7 @@ if(typeof QNR=="undefined"){
     },
 
     //被隐藏的input校验
+	//TODO: 选择银行卡，的判断
     valiHiddens : function(){
       var me = this, res = true, m, y, bkEle;
       var y0 = dateNow.getFullYear().toString().match(/\d{2}/g)[1];
@@ -739,11 +732,11 @@ if(typeof QNR=="undefined"){
       if(me.checkBindCardShown()){
         m = bindcardsCon.find('.expires_month');
         y = bindcardsCon.find('.expires_year');
-        bkEle = bindbankname;
+        //bkEle = bindbankname;
       }else{
         m = allcardsCon.find('.expires_month');
         y = allcardsCon.find('.expires_year');
-        bkEle = allbankname;
+        //bkEle = allbankname;
       }
       if(!(m.get(0).selectedIndex) || !(y.get(0).selectedIndex) || (+$(y).val() <= +y0 && +$(m).val() < +m0 )){
         me.showTips(y,'请选择有效期');
@@ -885,7 +878,7 @@ if(typeof QNR=="undefined"){
       });
       $.jvalidator.addPattern({
         name: 'idcard',
-        message: '输入的身份证错误，请核对后重新填写',
+        message: '请输入正确的身份证号码',
         validate: function(value, callback) {
           callback( QNR.patterns.idcard.test(value) );
         }
