@@ -577,3 +577,7 @@ body{text-align:left;}
 .restip .content_wrap .c1{width: auto;}
 .restip .content_wrap .credit-bank-wrap{margin-left: 58px;}
 .restip .res-btn{background: url("http://source.qunar.com/site/images/pay/quick_pay/button.png") no-repeat scroll 0 -649px transparent;  color: #FFFFFF;  display: block;  height: 22px;  line-height: 22px;  text-align: center;  width: 100px;}
+
+
+.server_icon{background: url(/img/24.png) no-repeat;display: inline-block;width: 16px;height: 16px;vertical-align: middle;margin: 4px 5px 6px 16px;line-height: 16px;}
+strong{font-weight:bold;}
