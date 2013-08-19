@@ -197,15 +197,15 @@ if(typeof QNR=="undefined"){
       });
 
       bindcardsCon.delegate('li.js-choose-item', 'mouseenter',function(e){
-	    var $this = $(this), ipt = $this.find('input:checked');
-		if(ipt.length == 0){
+        var $this = $(this), ipt = $this.find('input:checked');
+        if(ipt.length == 0){
           $(this).addClass(highlightClass);
-		}
+        }
       }).delegate('li.js-choose-item', 'mouseleave',function(e){
-	  	var $this = $(this), ipt = $this.find('input:checked');
-		if(ipt.length == 0){
+        var $this = $(this), ipt = $this.find('input:checked');
+        if(ipt.length == 0){
           $(this).removeClass(highlightClass);
-		}
+        }
       }).delegate('.js-choose-card', 'click',function(e){
         var el = $(this).closest('li'), checkedEle = el.find('input[type=radio]');
         var mb = checkedEle.attr('mobile'), bk = checkedEle.attr('bank');
@@ -356,7 +356,6 @@ if(typeof QNR=="undefined"){
 
     submitform : function(e){
       var me = this;
-      // for test
       // TODO
       me.showSubmitError();
 
@@ -396,24 +395,24 @@ if(typeof QNR=="undefined"){
       var me = this;
       // this.payResultDlg = null;
       // TODO:
-	  var html = quickPayTemplate.confirmCardInfo.join('');
-	  //replace img tel
-	  var img = '<img title="CMB" src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png">';
-	  var tel = '111'
-	  html = html.replace(/{img}/g, img).replace(/{tel}/g, tel);
+      var html = quickPayTemplate.confirmCardInfo.join('');
+      //replace img tel
+      var img = '<img title="CMB" src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png">';
+      var tel = '111'
+        html = html.replace(/{img}/g, img).replace(/{tel}/g, tel);
       me.payResultDlg = new QNR.htmlDialog(html);
       me.payResultDlg.show();
       $(".restip .close").one("click",function(){
         me.payResultDlg.hide();
         me.payResultDlg = null;
         $(".restip").remove();
-      });	  
-	  
-	  me.payResultDlg.dom.find('#re_confirm').click(function(){
-	    //TODO: commit
-	  
-	  })
-	  me.formChecker1 = me.payResultDlg.dom.find("[data-jvalidator-pattern]").jvalidator({
+      });
+
+      me.payResultDlg.dom.find('#re_confirm').click(function(){
+        //TODO: commit
+
+      })
+      me.formChecker1 = me.payResultDlg.dom.find("[data-jvalidator-pattern]").jvalidator({
         validation_events:['blur'],
         on: {
           invalid: function(evt,el,patterns) {
@@ -532,10 +531,15 @@ if(typeof QNR=="undefined"){
         }
         return false;
       });
-	  this.payResultDlg.dom.find('.ctl a').click(function(){
-		//TODO:
-		return false;
-	  });
+      this.payResultDlg.dom.find('.ctl a').click(function(){
+        //TODO: url;
+        var $this = $(this);
+        if($this.is('#paySuccess')){
+
+        }else if($this.is('#payFail')){
+        }
+        return false;
+      });
 
       this.payResultDlg.dom.find("#payRes_close").bind("click",function(){
         me.payResultDlg.hide();
@@ -735,7 +739,7 @@ if(typeof QNR=="undefined"){
     },
 
     //被隐藏的input校验
-	//TODO: 选择银行卡，的判断
+    //TODO: 选择银行卡，的判断
     valiHiddens : function(){
       var me = this, res = true, m, y, bkEle;
       var y0 = dateNow.getFullYear().toString().match(/\d{2}/g)[1];
@@ -908,7 +912,7 @@ if(typeof QNR=="undefined"){
         message: '请输入正确的信用卡号',
         validate: function(value, validationCallback) {
           var isMasterCard = numRegExp.test($.trim(value).replace(/\s/g, ''));
-          //todo 记得删除对beta的判断
+          //TODO 记得删除对beta的判断
           //TODO
           isMasterCard = isMasterCard&& me.isValidMasterCard($.trim(value).replace(/\s/g, ''));
 
