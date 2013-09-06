@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link href="u-pay-success-dev.css" rel="stylesheet" type="text/css"/>
+    <title>【去哪儿网】支付成功页面-去哪儿网Qunar.com</title>
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/static/js/compatibilityUtils/build/DD_belatedPNG-min.js"></script>
+    <script type="text/javascript">
+      DD_belatedPNG.fix('.png24');
+    </script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="xs_wrap">
+      <div class="xs_header">
+        <div class="login">
+          <p class="welcome"><span>去哪儿网客服电话：<strong>10101234</strong></span><span class='server_icon'></span><span>7x24服务</span></p>
+          <!--<c:if test="${not empty userName}">
+          <p class="right_link" id="js_Login">${userName}，您好！</p>
+          </c:if>-->
+        </div>
+      </div>
+    </div>
+    <div class="q_page_container">
+      <div class="q_page_wrap">
+        <div class="q_page">
+          <div class="b_header">
+            <div class="header_inner">
+              <div class="e_header_logo png24"></div>
+              <span class="e_header_title">支付</span>
+            </div>
+          </div>
+		    <div class="b_payfor_content">
+                <div class="b_hd_mod">
+                    <div class="e_notice_content notice_state_success_center">
+                        <div class="notice_icon  icon_state_wrong"></div>
+                        <div class="notice_txt">
+                            <div class="pay_sum"><span class="sub_title">网络繁忙，支付失败</span></div>
+							<p class="recur tint tip-txt" id='info2'></p>
+                        </div>
+						<div class='notice_txt'>
+							<p class='sub_title'>支付失败可能原因：</p>
+							<ol>
+								<li>1、	您的卡号、有效期、卡背面末三位数字等卡信息输入有误</li>
+								<li>2、	您的银行卡支付限额不足</li>
+								<li>3、	您绑定的银行卡已更换手机号</li>
+							</ol>
+						</div>
+                    </div>
+                </div>
+            </div>
+          
+          <!--底部的安全贴士-->
+          <div class="b_safe_tips">
+            <p class="lead">安全贴士：</p>
+            <ul class="liststyle_disc">
+              <li>请您确认浏览器地址必须为https开头</li>
+              <li>您的账户信息请妥善保管并尽量避免在网吧等公共场所进行支付</li>
+            </ul>
+          </div>
+          <!--\底部的安全贴士-->            
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/u-pay-success-dev.js"></script>
+    <!--<script type="text/javascript"  src="${loginJs}" /></script-->
+    <script type="text/javascript">
+      /*(function(){
+       window._ba_utm_init = function(GA){ 
+         window['_ba_utm_l'] = 'pay';
+         window['_ba_utm_s'] = '868';
+         window['_ba_utm_ex'] = {};
+         };
+       //-- load ga script
+       var s = document.createElement('script');
+       s.src = '/static/payment/prd/scripts/ga-<%@include file='/include/.ver'%>.js'; 
+       var head = document.getElementsByTagName('head');
+       if(head&&head[0]) { head[0].appendChild(s); }
+       })();*/
+     </script>
+     <script language="JavaScript">  
+ 　　  javascript:window.history.forward(1);
+ 　　</script>  
+
+   </body>
+ </html>

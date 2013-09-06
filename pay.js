@@ -36,6 +36,7 @@ if(typeof QNR=="undefined"){
   var allcardsCon = $("#allcardsCon");
   var cardPicWrap = $('.e_card_picwrap');
   var creditInfoWrap = $(".credit-info-wrap");
+  //TODO:
   var imageURL = 'http://source.qunar.com/site/images/pay/bankicon_1/';
   //倒计时
   var tmin = $("#mins");
@@ -45,6 +46,14 @@ if(typeof QNR=="undefined"){
 
   function unionPay(){
     this._init();
+    this.netPayUrl = '/page/union/netbankPay.do?';
+    this.vcodeNoUidUrl = baseurl + "SendVcodeNoUid.do";
+    this.errorUrl = baseurl + 'error.do?type=timeout';
+    this.checkCardBinUrl = baseurl + 'CheckCardBin.do',
+    this.checkVcodeNoUidUrl = baseurl + 'CheckVcodeNoUid.do',
+    this.getPayResultUrl = '';
+
+    this.getBankInfoUrl = '/page/uinon/getBankInfo.do';
   }
   unionPay.prototype = {
     _init : function(){
@@ -73,7 +82,7 @@ if(typeof QNR=="undefined"){
       $('.js-bank-icon').each(function(){
         var $this = $(this), cardCode = $.trim($this.parents('.js-choose-card').find('input.radio_box').attr('bank'));
         var bankicon= me.parseImgURL(cardCode);
-        $this.css('background-image','url('+bankicon+')');
+        $this.css('background-image','url(' + bankicon + ')');
       });
       me.checkBindCardShown();
     },
@@ -348,7 +357,7 @@ if(typeof QNR=="undefined"){
       var oldtime=$('#oldtime').val();
       var dur = countNum-( formattime(newtime)-formattime(oldtime) );
       var timeout=function(){
-        window.location.href= baseurl + 'error.do?type=timeout';
+        window.location.href= this.errorUrl;
       };
 
       var timeCount = new QNR.timeCount(dur,{min:tmin,sec:tsec},timeout);
@@ -531,75 +540,91 @@ if(typeof QNR=="undefined"){
         }
         return false;
       });
+
       this.payResultDlg.dom.find('.ctl a').click(function(){
         //TODO: url;
         var $this = $(this);
         if($this.is('#paySuccess')){
-
+          getPayResult(true);
         }else if($this.is('#payFail')){
+          getPayResult(false);
         }
         return false;
       });
+    },
 
-      this.payResultDlg.dom.find("#payRes_close").bind("click",function(){
-        me.payResultDlg.hide();
+    getPayResult: function(uPress, func){
+      var url = '';
+      //TODO:
+      $.ajax({
+        url: this.getPayResultUrl,
+        type: 'POST',
+        data: {},
+        dataType: 'JSON',
+        success: function(e){
+
+          func && func();
+        }
       });
     },
 
     showCreditCardDialog: function(){
       var me = this;
-      me.creditCardDlg = null;
-      var _html = quickPayTemplate.creditCardDialog.join(''), idx = 0;
+      if(!me.creditCardDlg){
+        var _html = quickPayTemplate.creditCardDialog.join(''), idx = 0;
 
-      bankItem = [];
-      bankData = me.creditCardsBankList;
-      $.each(bankData, function(k, v){
-        bankItem.push('<li class="e_open_ibank">');
-        if(idx != 0){
+        /*bankItem = [];
+          bankData = me.creditCardsBankList;
+          $.each(bankData, function(k, v){
+          bankItem.push('<li class="e_open_ibank">');
+          if(idx != 0){
           bankItem.push('<input type="radio" name="bankCode" id="'+ k +'" value="'+ k +'" class="radio_box">');
-        }else{
+          }else{
           bankItem.push('<input type="radio" checked name="bankCode" id="'+ k +'" value="'+ k +'" class="radio_box">');
+          }
+
+          bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="'+ v.bankCode +'" src="'+ v.picUrl +'" /></span><span class="bank_name_txt"></span></label>');
+          bankItem.push('</li>');
+          idx++;
+          });*/
+
+        var $html = $(_html);
+        $html.find('.debit_card_ctn').append($('#creditCardListCtn').find('form'));
+
+        me.creditCardDlg = new QNR.htmlDialog($html);
+        me.creditCardDlg.show();
+
+        if (document.selection && document.selection.empty) {
+          document.selection.empty();  //IE
+        }else if(window.getSelection) {
+          window.getSelection().removeAllRanges(); //ff
         }
 
-        bankItem.push('<label class="bank_logo_box"><span class="bank_logo"><img title="'+ v.bankCode +'" src="'+ v.picUrl +'" /></span><span class="bank_name_txt"></span></label>');
-        bankItem.push('</li>');
-        idx++;
-      });
+        me.creditCardDlg.dom.find('li label').click(function(){
+          var $this = $(this);
+          $this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
+        });
 
-      _html = _html.replace(/\{content\}/g,bankItem.join(''));
-
-      me.creditCardDlg = new QNR.htmlDialog(_html);
-      me.creditCardDlg.show();
-
-      if (document.selection && document.selection.empty) {
-        document.selection.empty();  //IE
-      }else if(window.getSelection) {
-        window.getSelection().removeAllRanges(); //ff
+        me.creditCardDlg.dom.find('#btnCreditSubmit_next').click(function(e){
+          me.netbankPay(me.creditCardDlg.dom.find('form'), me.creditCardDlg);
+          return false;
+        })
+        $("#banllist_close, #cancelbank").bind("click",function(){
+          me.creditCardDlg.hide();
+        });
+      }else{
+        me.creditCardDlg.show();
       }
-
-      me.creditCardDlg.dom.find('li label').click(function(){
-        var $this = $(this);
-        $this.siblings().attr('checked',true).parent().addClass('active').siblings().removeClass('active');
-      });
-
-      me.creditCardDlg.dom.find('#btnCreditSubmit_next').click(function(e){
-        me.netbankPay(me.creditCardDlg.dom.find('form'), me.creditCardDlg);
-        return false;
-      })
-      $("#banllist_close, #cancelbank").bind("click",function(){
-        me.creditCardDlg.hide();
-      });
     },
 
     showCreditCardInfo: function( cardId ){
       var lastId = $.trim( cardId ).split(" ")[3];
-      $.get("creditList.json",function(res){
-        // TO DO:ajax data | 判断与之前是否
+      $.get(this.getBankInfoUrl, {}, function(res){
         // TODO
         $(".credit-bank-wrap").html('<div class="fL"><img src="http://source.qunar.com/site/images/pay/bankicon_1/cmb.png" title="CMB"></div><div class="fR">信用卡 ** <span>'+lastId+'</span></div>');
         $(".credit-bank").slideDown();
         cardPicWrap.hide();
-        $(".credit-info").html('<p>网上交易限额</p> <table> <tr class="title"> <td>单笔限额(元)</td> <td>单日限额(元)</td> </tr> <tr> <td>小于2万元</td> <td>小于2万元</td> </tr> <tr class="title"> <td colspan="2">备注</td> </tr> <tr> <td colspan="2">客服热线<span>95588</span></td> </tr> </table>');
+        $(".credit-info").html('<p>网上交易限额</p><table><tr class="title"><td>单笔限额(元)</td><td>单日限额(元)</td></tr><tr><td>小于2万元</td><td>小于2万元</td></tr><tr class="title"><td colspan="2">备注</td></tr><tr><td colspan="2">客服热线<span>95588</span></td></tr> </table>');
         creditInfoWrap.show();
       })
     },
@@ -631,8 +656,8 @@ if(typeof QNR=="undefined"){
       });
 
       var queryParam = decodeURIComponent($.param(arr, true));
-      var netPayUrl = '/page/union/netbankPay.do?' + queryParam;
-      window.open(netPayUrl, 'netPay');
+      //TODO: window id;
+      window.open(this.netPayUrl + queryParam, 'netPay');
 
       if(dlg){
         dlg.hide();
@@ -663,7 +688,7 @@ if(typeof QNR=="undefined"){
       };
 
       QNR.phoneValid({
-        url: baseurl+"SendVcodeNoUid.do",
+        url: this.vcodeNoUidUrl,
         button: _button,
         message: _message,
         callback: function(data){
@@ -923,7 +948,7 @@ if(typeof QNR=="undefined"){
 
           if(isMasterCard&&bankname.val()){
             $.ajax({
-              url: baseurl + 'CheckCardBin.do',
+              url: this.checkCardBinUrl,
               data: params,
               type: 'post',
               dataType: 'json',
@@ -955,7 +980,7 @@ if(typeof QNR=="undefined"){
 
           if(isMatch&&QNR.patterns.mobile.test(_mobile)){
             $.ajax({
-              url: baseurl+'CheckVcodeNoUid.do',
+              url: this.checkVcodeNoUidUrl,
               data: { mobile: _mobile, vcode: value, messageType: 1 },
               type: 'post',
               dataType: 'json',
@@ -1004,40 +1029,10 @@ if(typeof QNR=="undefined"){
       });
     },
 
-    getCreditCarddList: function(callback){
-      var me = this;
-      var uid = QNR.PayInfo ? QNR.PayInfo.userid : '';
-      //TODO:
-      var url = "/creditList.json";
-      $.ajax({
-        url: url,
-        type: "POST",
-        dataType: 'json',
-        success: function(res){
-          if(res && res.ret && res.data){
-            var creditCards = res.data.baseCard || [], creditCardsLen = creditCards.length;
-            var creditCardsData = {}, bank, img;
-
-            for(var i=0;i<creditCardsLen;i++){
-              bank = creditCards[i];
-              img = me.parseImgURL(bank.bankCode);
-              bank.picUrl = img;
-              creditCardsData[creditCards[i].bankCode] = bank;
-            }
-
-            unionPay.creditCardsBankList = creditCardsData;
-            callback && callback();
-          }
-        }
-      })
-    },
-
     parseImgURL: function(code){
       return imageURL + code.toLowerCase() + '.png';
     }
   };
+
   var unionPay = new unionPay();
-  $(function(){
-    unionPay.getCreditCarddList();
-  });
 })(jQuery);
