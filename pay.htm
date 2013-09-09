@@ -62,7 +62,7 @@ QNR.PayInfo={userid:""};
                   <li class="title_right" id="pay_count_detail"><span>支付</span><span class="sum_num"><b>0.01</b></span><span>元</span></li>
                 </ul>
 
-                <div class="detail_more">
+                <div class="detail_more clrfix">
                   <div class="pay_count"><span>支付</span><span class="sum_num"><b>0.01</b></span><span>元</span></div>
                   <div class="detail_more_ctl"><a href="http://paybeta2.qunar.com/payServer/api/CashierPay.do#" class="show"><span class='desc'>订单详情</span><span class="down_1"></span></a></div>
                   <div class="detail_more_ctn hide">
@@ -97,24 +97,18 @@ QNR.PayInfo={userid:""};
                 <!--信用卡支付 开始-->
                 <div class="e_tab_content js-typepanel" data-type="quickpay">
                   <div class="tab_content_inner tab_content_inner1">
-                    <div class="b_pinfo_form">
+                    <div class="b_pinfo_form" id="quickpayformctn">
 
-                      <form name="quickpayform" class="quickpayform" id="quickpayform" action="https://paybeta2.qunar.com/payServer/page/cashier/motoPay.do" method="post" target="_blank">
-                        <input name="busiTypeId" value="FLIGHT" class="hide" js-submit="">
-                        <input name="merchantCode" value="testDaiGou" class="hide" js-submit="">
-                        <input name="orderNo" value="java20130906130752931" class="hide" js-submit="">
-                        <input name="orderDate" value="20130906130752" class="hide" js-submit="">
-                        <input name="HMAC" value="b45866bbcd3dd8769683b5285e562f54" class="hide" js-submit="">
-
+                      <form name="quickpayform" class="quickpayform" id="bindcardsCon" action="https://paybeta2.qunar.com/payServer/page/cashier/motoPay.do" method="post" target="_blank">
                         <!-- bind card container-->
-                        <div class="b_card_list b_validate_box b_write_card" id="bindcardsCon">
+                        <div class="b_card_list b_validate_box b_write_card">
                           <ul class="bindcard_list">
                             <!-- 注：风控写入data-ctl属性 -->
 
                             <li class="js-choose-item highlight current   ">
                             <div class="e_card_type clrfix">
                               <div class="common_card"></div>
-                              <div class="info_card js-choose-card" data-ctl="{&quot;identityCode&quot;:&quot;false&quot;,&quot;cvv&quot;:&quot;true&quot;,&quot;vCode&quot;:&quot;false&quot;,&quot;cardholder&quot;:&quot;false&quot;,&quot;validate&quot;:&quot;false&quot;,&quot;mobile&quot;:&quot;false&quot;}"><input type="radio" name="cardId" data-id="16" value="16" bankcode="CMBC" tppcode="UMPAY" channel="0" isdirect="0" mobile="15010107839" class="radio_box" checked=""><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" data-url="http://source.qunar.com/site/images/pay/bankicon_1/cmbc.png" style="background-image: url(http://source.qunar.com/site/images/pay/bankicon_1/cmbc.png); background-position: 0px 0px;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">9771</em></span></label></div>
+                              <div class="info_card js-choose-card" data-ctl="{&quot;identityCode&quot;:&quot;false&quot;,&quot;cvv&quot;:&quot;true&quot;,&quot;vCode&quot;:&quot;false&quot;,&quot;cardholder&quot;:&quot;false&quot;,&quot;validate&quot;:&quot;false&quot;,&quot;mobile&quot;:&quot;false&quot;}"><input type="radio" name="cardId" data-id="16" value="16" bankcode="CMBC" tppcode="UMPAY" channel="0" isdirect="0" mobile="15010107839" class="radio_box" checked=""><label class="banklogo_box" for=""><span class="bank_name js-bank-icon" style="background-image: url(http://source.qunar.com/site/images/pay/bankicon_1/cmbc.png); background-position: 0px 0px;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">9771</em></span></label></div>
                               <div class="table-box">
                                 <table class="info hide">
                                   <tbody>
@@ -201,17 +195,17 @@ QNR.PayInfo={userid:""};
                             <!-- info  -->
                             <div class="e_card_picwrap hide" style="display: block;"><div class="card_pic"><div class="img" style="background-position: -176px 0px;"></div></div></div>
                             <!-- info end -->
-                            <div class="e_bank_all clrfix">
+                            <div class="e_bank_all">
                               <div class="info_card clrfix">
                                 <div class="chose_card chose_all_card" id="dvchoose"><a id="choosebank" href="javascript:void(0);" class="choosebank"><span class="hl"></span><span>使用其他信用卡</span></a></div>
-                                <div class="all_blind_bank chose_card"><a href="javascript:;" id="showAllBindBank" class="show"><span>全部展开</span><span class="down"></span></a></div>
+                                <div class="all_blind_bank chose_card"><a href="javascript:;" id="showAllBindBank" class="show"><span class="desc">全部展开</span><span class="down"></span></a></div>
 
                               </div>
                             </div>
 
-                            <table cellpadding="0" cellspacing="0" width="100%" class="ftable">
+                            <table cellpadding="0" cellspacing="0" width="100%" height="100%">
                               <tbody>
-                                <tr class="js_credit_tr hide" id="cardholder" style="display: none;">
+                                <tr class="js_credit_tr hide" id="cardholderCtn">
                                   <td class="c1">姓名</td>
                                   <td>
                                     <div class="ops_cardnum">
@@ -220,7 +214,7 @@ QNR.PayInfo={userid:""};
                                     </div>
                                   </td>
                                 </tr>
-                                <tr class="js_credit_tr hide" id="identityCode" style="display: none;">
+                                <tr class="js_credit_tr hide" id="identityCodeCtn">
                                   <td class="c1">身份证</td>
                                   <td>
                                     <div class="ops_cardnum">
@@ -229,7 +223,7 @@ QNR.PayInfo={userid:""};
                                     </div>
                                   </td>
                                 </tr>
-                                <tr class="js_credit_tr hide" id="validate" style="display: none;">
+                                <tr class="js_credit_tr hide" id="validateCtn">
                                   <td class="c1">有效期</td>
                                   <td>
                                     <div class="ops_date">
@@ -240,7 +234,7 @@ QNR.PayInfo={userid:""};
                                     <div class="set popup_tips_wrap js_tipcontainer" style="display:none"></div>
                                   </td>
                                 </tr>
-                                <tr class="js_credit_tr hide" id="cvv" style="display: table-row;">
+                                <tr class="js_credit_tr hide" id="cvvCtn">
                                   <td class="c1">卡背面三位数</td>
                                   <td>
                                     <div class="ops_cardback">
@@ -249,7 +243,7 @@ QNR.PayInfo={userid:""};
                                     </div>
                                   </td>
                                 </tr>
-                                <tr class="js_credit_tr hide" id="mobile" style="display: none;">
+                                <tr class="js_credit_tr hide" id="mobileCtn">
                                   <td class="c1">手机号</td>
                                   <td>
                                     <div id="mobile-number">
@@ -258,7 +252,7 @@ QNR.PayInfo={userid:""};
                                     </div>
                                   </td>
                                 </tr>
-                                <tr class="js_credit_tr hide" id="vCode" style="display: none;">
+                                <tr class="js_credit_tr hide" id="vCodeCtn">
                                   <td class="c1">短信验证码</td>
                                   <td>
                                     <div class="ops_icode">
@@ -272,10 +266,13 @@ QNR.PayInfo={userid:""};
                             </table>
                           </div>
                         </div>
-                        <!--bind card container-->
+                        <div class="js-qn-pay e_ops_button clrfix"><a class="btn_submit" id="btnSubmitBindCard">确认付款</a></div>
+                      </form>
+                      <!--bind card container-->
 
-                        <!-- all cards container-->
-                        <div class="b_validate_box b_write_card hide" id="allcardsCon">
+                      <!-- all cards container-->
+                      <form name="quickpayform" class="quickpayform hide" id="allcardsCon" action="https://paybeta2.qunar.com/payServer/page/cashier/motoPay.do" method="post" target="_blank">
+                        <div class="b_validate_box b_write_card">
                           <div class="e_write_inner">
                             <input name="pmCode" value="NOCARD" type="hidden">
                             <!-- info  -->
@@ -368,8 +365,8 @@ QNR.PayInfo={userid:""};
                         </div>
                         <!-- all cards container end-->
 
-                        <div class="js-qn-pay e_ops_button clrfix"><button class="btn_large_submit" id="btnSubmit" type="button">同意协议并付款</button></div>
-                        <div class="pay_online e_ops_button e_ops_button2 hide clrfix"><button class="btn_submit" id="btnOnlineSubmit" type="button">确定</button><a href="#" class="dash_border_a" id="returnAndModify">返回修改</a></div>
+                        <div class="js-qn-pay e_ops_button clrfix"><a class="btn_large_submit" id="btnSubmitAllCard">同意协议并付款</a></div>
+                        <div class="pay_online e_ops_button e_ops_button2 hide clrfix"><a class="btn_submit" id="btnOnlineSubmit">确定</a><a href="#" class="dash_border_a" id="returnAndModify">返回修改</a></div>
                       </form>
                     </div>
                   </div>
