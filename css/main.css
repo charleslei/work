@@ -1,0 +1,60 @@
+blockbgBODY {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px;
+}
+img {border:0 none;}
+ul,li{ list-style-type:none;}
+
+.index_bg01 {
+	BACKGROUND: url(../images/banner_bg01.gif) repeat-x 0px 0px
+}
+.index_bg02 {
+	BACKGROUND: url(../images/banner_bg02.gif) repeat-x 0px 0px
+}
+.index_bg03 {
+	BACKGROUND: url(../images/banner_bg03.gif) repeat-x 0px 0px
+}
+.index_bg04 {
+	BACKGROUND: url(../images/banner_bg04.gif) repeat-x 0px 0px
+}
+.index_bg05 {
+	BACKGROUND: url(../images/banner_bg05.gif) repeat-x 0px 0px
+}
+#warp {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 100%; PADDING-RIGHT: 0px; HEIGHT: 400px;; PADDING-TOP: 0px;
+}
+.banner {
+	Z-INDEX: 99; MARGIN: 0px auto; WIDTH: 981px; HEIGHT: 357px; _width: 973px
+}
+.banner_l {
+	MARGIN-TOP: 147px; WIDTH: 23px; FLOAT: left
+}
+.banner_r {
+	MARGIN-TOP: 147px; WIDTH: 23px; FLOAT: left
+}
+.bannerImg {
+	POSITION: relative; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 960px; PADDING-RIGHT: 0px; FLOAT: left; PADDING-TOP: 0px
+}
+.bannerImg .bannerPage {
+	POSITION: absolute; TOP: 360px; LEFT: 450px
+}
+.bannerImg .bannerPage A {
+	MARGIN-RIGHT: 2px
+}
+.bannerImg .bannerPage A IMG {
+	VERTICAL-ALIGN: middle
+}
+.slides_container {
+	POSITION: relative; WIDTH: 960px; OVERFLOW: hidden
+}
+.pagination {
+	MARGIN: 26px auto 0px
+}
+.pagination LI {
+	MARGIN: 0px 1px; FLOAT: left
+}
+.pagination LI A {
+	BACKGROUND-IMAGE: url(../images/pagination.png); WIDTH: 15px; DISPLAY: block; BACKGROUND-POSITION: 0px -1px; FLOAT: left; HEIGHT: 0px; OVERFLOW: hidden; PADDING-TOP: 12px
+}
+.pagination LI.current A {
+	BACKGROUND-POSITION: 0px -18px
+}

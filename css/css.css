@@ -1,0 +1,103 @@
+/*----公共样式部分2013-07-08----*/
+* {margin:0;padding:0;}
+li {list-style:none;}
+a {text-decoration:none;color:#000;}
+body {font-size:12px;}
+.clear {clear:both;}
+.empty {margin:0 auto;width:50px;height:10px;}
+img {border:0;vertical-align:middle;}
+.dm10{display:inline;height:10px;overflow:hidden;width:100%;float:left;}
+.dm20{display:inline;height:20px;overflow:hidden;width:100%;float:left;}
+.fleft{float:left;}
+/*--首页begin2013-07-08---*/
+
+/*字体样式*/
+.item1{display:inline-block;font-size:18px;color:#20348b;font-family:微软雅黑;padding:2px 7px;}
+.item2{color:#000;font-family:微软雅黑;font-size:14px;background:url(../images/squee.jpg) no-repeat scroll left center;font-weight:bold;}
+.font-z{font-size:14px;font-weight:bold;font-family:微软雅黑;color:#333;}
+/*头文件部分*/
+.head{height:100px;width:100%;border-top:2px solid #000;position: relative;}
+.header_wrap{width:960px;margin:0  auto;padding:12px 0 15px;}
+.header_logo{float:left;padding-top:10px;}
+.header_logo a{width:135px;height:56px;float:left;}
+.header_top{float: left;height: 2px;background: #E2442A;position: absolute;top: 0;}
+.header_menu{float:left;width:580px;}
+.header_menu_nav{float:right;height:25px;line-height:25px;margin-top:35px;}
+.header_menu_nav li{float:left;margin-left:42px;}
+.header_menu_nav li a{font-size:16px;line-height:20px;font-weight:bold;color:#5e5d5c;font-family:Arial,Microsoft YaHei,黑体,宋体,sans-serif}
+.header_menu_nav li a:hover,.header_menu_nav li a.on{color:#e1432a;}
+.header_menu_nav li .active{color:#e1432a;border-top: 2px solid red;padding-top: 48px;}
+.header_call{float:right;position:relative;top:28px;}
+.header_call a{flaot:left;}
+
+/*中间内容部分2013-07-08*/
+.main{margin:0 auto;width:960px;}
+.main .advantage {height:380px;}
+.main .advantage .advantageblock {height:230px;width:299px; float:left; border-right: #ccc 1px dotted;margin:50px 0 0 0;}
+.main .advantage .advhguo{width:280px;color:#333;font-size:12px;font-family:宋体;line-height:22px;letter-spacing:1px;}
+.main .advantage .title{width:280px;float:left;font-family:微软雅黑;font-size:14px;height:40px;line-height:40px;margin-top:8px;}
+.main .advantage .title a{color:#e1432a;font-weight:bold;}
+.main .advantage .advantageblock h3 { height:39px ; line-height: 39px; margin-bottom:20px; padding-left:44px;font-size:18px; color:#1d3688;font-family:微软雅黑 }
+.main .advantage .advh21 { background: url(../images/ico1.gif) no-repeat;}
+.main .advantage .advh22 { background: url(../images/ico2.gif) no-repeat;}
+.main .advantage .advh23 { background: url(../images/ico3.gif) no-repeat;}
+
+/*更多新闻部分*/
+.main .process {height:84px; }
+.main .process .processleft{width:112px; height:84px; background:url(../images/processleft.gif) no-repeat; float:left}
+.main .process .processcon { height:84px;background:url(../images/processbg.gif) repeat-x;overflow:hidden;}
+.main .process .processcon .prolist {float:left; padding:5px 19px 0 0; text-align:center;}
+
+/*底端部分*/
+.footer {height:70px; padding-top:30px; color:#333; line-height:18px; font-size:12px;}
+.footer a {color:#333;}
+.footer a:hover {color:#e1432a;}
+.pagewidth{width:960px;margin:0 auto;text-align:center;line-height:30px;font-family:宋体;}
+
+/*列表页部分2013-07-09*/
+
+/*产品与服务*/
+.product_banner{width:960px;margin:0 auto;height:83px;}
+.positionInside{ width:960px; height:33px; margin:0 auto; background:url(../images/line2.jpg) no-repeat 205px top; padding-top:33px;display:none;}
+.positionInside span{ color:#333333; padding-left:60px; padding-right:10px;	}
+.positionInside a{ color:#333;}
+.positionInside{ color:#333;}
+
+.guo01{
+	background-image: url(../images/product.jpg);
+	background-repeat: no-repeat;
+}
+.guo02{
+	background-image: url(../images/resolve.jpg);
+	background-repeat: no-repeat;
+}
+.guo03{
+	background-image: url(../images/about.jpg);
+	background-repeat: no-repeat;
+}
+.nbox { width: 960px;margin:0 auto;position:relative;top:30px;height:1320px}
+
+.nleft{ float: left; width: 280px; height:1260px;margin:0;padding:0;background:#D8D8D8;}
+.nleft ul{float:left;font-size:14px;width:260px;}
+.nleft ul li{width:250px;flaot:left;text-align:left;height:45px;line-height:45px;padding-left:30px;border-bottom:1px solid #ddd;background:#cecece;}
+.nleft ul li a{font-size:12px;font-weight:bold;color:#666;font-family:宋体;letter-spacing:2px;}
+.nleft ul .sel{width:250px;flaot:left;text-align:left;height:45px;line-height:45px;padding-left:30px;border-bottom:1px solid #ccc;color:#fff;background:#ec602d;}
+.nleft ul .sel a{color:#fff;font-size:12px;font-family:宋体;letter-spacing:2px;}
+.lmenu{width:280px;margin:0;float:left;}
+
+.nright{ float: left; width: 680px;height:1260px; padding:0;margin:0; background:#f0f0f0;}
+.nright .newslist{width:650px;padding-left:30px;float:left;}
+.nright .bantt { width:620px; height: 40px; float: left; margin: 30px 0 0 0;border-bottom:2px solid #ccc;}
+.nright .bantt .ti { float: left; font-size: 28px; color: #666; height: 28px; line-height: 28px; font-family:微软雅黑;}
+
+.big_yi{width:620px;height:auto;overflow: hidden;float:left;}
+.big_yi .font-ikt{margin:15px 0 0 0;text-indent:20px;float:left;width:600px;}
+.list-js{width:600px;float:left;margin-left:20px;}
+.list-js span{font-size:14px;font-weight:bold;}
+.list-fenye{border-bottom:1px dashed #CCCCCC;margin:10px 0;}
+.list-fenye p{color:#333;letter-spacing:1px;line-height:25px;}
+.list-fenye p font{color:#333;letter-spacing:1px;line-height:30px;}
+.list-js .course{float:left;margin:0 auto;}
+.course li{clear:both;color:333;border-bottom:1px dashed #CCCCCC;line-height:35px;}
+.course li span{float:left;color:#333;font-weight:bold;width:100px;text-align:right;}
+.course li p{float:left;width:550px;text-align:left;padding-left:20px;display:inline;text-indent:0;letter-spacing:1px;text-align:justify;}
