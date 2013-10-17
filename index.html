@@ -1,116 +1,117 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>网站-首页</title>
-<link href="css/css.css" type="text/css" rel="stylesheet" />
-<link href="css/main.css" type="text/css" rel="stylesheet" />
-<script type=text/javascript src="js/jquery-1.4.4.min.js"></script>
-<script type=text/javascript src="js/slides.jquery.js"></script>
-</head>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站-首页</title>
+    <link href="css/css.css" type="text/css" rel="stylesheet" />
+    <link href="css/main.css" type="text/css" rel="stylesheet" />
+    <script type=text/javascript src="js/jquery-1.4.4.min.js"></script>
+    <script type=text/javascript src="js/slides.jquery.js"></script>
+  </head>
 
-<body>
-<div class="head">
-	<div class="header_wrap">
-	  <div class="header_logo"><a href="#"><img src="images/logo.png" width="135" height="56"></a></div>
+  <body>
+    <div class="head">
+      <div class="header_wrap">
+        <div class="header_logo"><a href="#"><img src="images/logo.png" width="135" height="56"></a></div>
         <div class="header_menu">
-        	<ul class="header_menu_nav">
-            	<li class="g1"><a class="active" href="index.html">首页</a></li>
-                <li class="g2"><a href="list_product.html">产品与服务</a></li>
-                <li class="g3"><a href="resolve.html">解决方案</a></li>
-                <li class="g4"><a href="about_us.html">关于我们</a></li>
-            </ul>
+          <ul class="header_menu_nav">
+            <li class="g1"><a class="active" href="index.html">首页</a></li>
+            <li class="g2"><a href="list_product.html">产品与服务</a></li>
+            <li class="g3"><a href="resolve.html">解决方案</a></li>
+            <li class="g4"><a href="about_us.html">关于我们</a></li>
+          </ul>
         </div>
         <p class="header_call">
-        	<a href="http://weibo.com/u/1764201661" target="new"><img src="images/sina.gif" width="25" height="25" border="0"></a>
-            <a href="#"><img src="images/cll.gif"><span class="item1">400-687-6875</span></a>
-        </p><div class="header_top"></div>
-  </div>
-</div>
-<div id="warp">
-<script>
-	//保证导航栏背景与图片轮播背景一起显示
-	$("#mainbody").removeClass();
-	$("#mainbody").addClass("index_bg05");
-</script>
-<script>
-	$(function(){
-		//滚动Banner图片的显示
-		$('#slides').slides({
-			preload: false,
-			preloadImage: '/images/loading.gif',
-			effect: 'fade',
-			slideSpeed: 400,
-			fadeSpeed: 100,
-			play: 3000,
-			pause: 100,
-			hoverPause: true
-		});
-        	$('#js-news').ticker();
-    	});
-	</script>
-<!-- 滚动图片 -->
-  <div id="slides" class="banner">
-    <!--<div class="banner_l"><a class="prev" href="#"><img alt="上一页" src="images/banner_l.png" width="24" height="43"></a></div>-->
-    <div class="bannerImg">
-      <div class="slides_container">
-        <div id="banner_pic_3"><a href="#" target="_blank"><img src="images/banner01.jpg" width="960" height="406"></a></div>
-        <div style="DISPLAY: none" id="banner_pic_1"><a href="#" target="_blank"><img src="images/banner02.jpg" width="960" height="406"></a></div>
-        <div style="DISPLAY: none" id="banner_pic_2"><a href="#" target="_blank"><img src="images/banner03.jpg" width="960" height="406"></a></div>
-      </div>
+        <a href="http://weibo.com/u/1764201661" target="new"><img src="images/sina.gif" width="25" height="25" border="0"></a>
+        <a href="#"><img src="images/cll.gif"><span class="item1">400-687-6875</span></a>
+        </p>
+      </div><div class="header_top"></div><div class="header_active_top"></div>
     </div>
-    <!--<div class="banner_r"><a class="next" href="#"><img alt="下一页" src="images/banner_r.png" width="24" height="43"></a></div>-->
-  </div>
-<!-- 滚动图片 --> 
-  <div class="main">
-	<div class="advantage">
-    	<div class="advantageblock advh21">
-        	<h3 class="advh21">关于我们</h3>
+    <div id="warp">
+      <script>
+        //保证导航栏背景与图片轮播背景一起显示
+        $("#mainbody").removeClass();
+        $("#mainbody").addClass("index_bg05");
+      </script>
+      <script>
+        $(function(){
+          //滚动Banner图片的显示
+          $('#slides').slides({
+            preload: false,
+            preloadImage: '/images/loading.gif',
+            effect: 'fade',
+            slideSpeed: 400,
+            fadeSpeed: 100,
+            play: 3000,
+            pause: 100,
+            hoverPause: true
+          });
+          $('#js-news').ticker();
+        });
+      </script>
+      <!-- 滚动图片 -->
+      <div id="slides" class="banner">
+        <!--<div class="banner_l"><a class="prev" href="#"><img alt="上一页" src="images/banner_l.png" width="24" height="43"></a></div>-->
+        <div class="bannerImg">
+          <div class="slides_container">
+            <div id="banner_pic_3"><a href="#" target="_blank"><img src="images/banner01.jpg" width="960" height="406"></a></div>
+            <div style="DISPLAY: none" id="banner_pic_1"><a href="#" target="_blank"><img src="images/banner02.jpg" width="960" height="406"></a></div>
+            <div style="DISPLAY: none" id="banner_pic_2"><a href="#" target="_blank"><img src="images/banner03.jpg" width="960" height="406"></a></div>
+          </div>
+        </div>
+        <!--<div class="banner_r"><a class="next" href="#"><img alt="下一页" src="images/banner_r.png" width="24" height="43"></a></div>-->
+      </div>
+      <!-- 滚动图片 -->
+      <div class="main">
+        <div class="advantage">
+          <div class="advantageblock advh21">
+            <h3 class="advh21">关于我们</h3>
             <div class="advhguo">
-            北京弘通天网信息咨询有限公司前身是北京弘通天网剪报咨询有限公司。公司业务开始于1985年，是国内较早从事媒体监侧与业务分析的专业企业。<br>公司在发展过程中与新华社下属的新闻研究所，清华大学，中国人民大学等多家专业结构
+              北京弘通天网信息咨询有限公司前身是北京弘通天网剪报咨询有限公司。公司业务开始于1985年，是国内较早从事媒体监侧与业务分析的专业企业。<br>公司在发展过程中与新华社下属的新闻研究所，清华大学，中国人民大学等多家专业结构
             </div>
             <div class="title"><a href="about_us.html">查看更多&gt;&gt;</a></div>
-        </div>
-        <div class="advantageblock fastItem" style="padding-left:30px;">
-          	<h3 class="advh22">产品与服务</h3>
+          </div>
+          <div class="advantageblock fastItem" style="padding-left:30px;">
+            <h3 class="advh22">产品与服务</h3>
             <div class="advhguo">
-            	<span class="item2">&nbsp;媒体深度数据挖掘与分析</span>
-                <p>资深的公关专家，专业的分析师团队，科学的分析方法，为您提供全面的数据深度挖掘与媒体影响力评估分析。</p>
-                <span class="item2">&nbsp;媒体监测服务</span>
-                <p>7*24小时全媒监测，保证第一手新鲜咨询。</p>
-        	</div>
+              <span class="item2">&nbsp;媒体深度数据挖掘与分析</span>
+              <p>资深的公关专家，专业的分析师团队，科学的分析方法，为您提供全面的数据深度挖掘与媒体影响力评估分析。</p>
+              <span class="item2">&nbsp;媒体监测服务</span>
+              <p>7*24小时全媒监测，保证第一手新鲜咨询。</p>
+            </div>
             <div class="title"><a href="list_product.html">查看更多&gt;&gt;</a></div>
           </div>
-        <div class="advantageblock fastItem" style="padding-left:30px;border:none;">
-          	<h3 class="advh23">解决方案</h3>
+          <div class="advantageblock fastItem" style="padding-left:30px;border:none;">
+            <h3 class="advh23">解决方案</h3>
             <div class="advhguo">
-            	<span class="item2">&nbsp;媒体舆情监测</span>
-                <p>采用新一代搜索引擎技术，时时监测。</p>
-                <span class="item2">&nbsp;网络微博专项监测与分析</span>
-                <p>四大微博专项监测，时时采集论热点。</p>
-                <span class="item2">&nbsp;网络口碑监测</span>
-                <p>关注企业，产品热点，收集企业相关口碑信息。</p>               
-        	</div>
+              <span class="item2">&nbsp;媒体舆情监测</span>
+              <p>采用新一代搜索引擎技术，时时监测。</p>
+              <span class="item2">&nbsp;网络微博专项监测与分析</span>
+              <p>四大微博专项监测，时时采集论热点。</p>
+              <span class="item2">&nbsp;网络口碑监测</span>
+              <p>关注企业，产品热点，收集企业相关口碑信息。</p>
+            </div>
             <div class="title"><a href="resolve.html">查看更多&gt;&gt;</a></div>
           </div>
-    </div>
-    <div class="process">
-    <!-- 服务流程-->
-        
-            <div class="processcon">
-           	 <a href="http://www.xlmediawatch.com/" target="_blank" class="prolist"><img width="220" height="74" src="images/xlct.png" ></a>
-             <a href="http://www.tsjc.tsinghua.edu.cn/publish/jc/index.html" target="_blank" class="prolist"><img width="220" height="74" src="images/xwcbxy.png"></a>
-             <a href="http://www.media.tsinghua.edu.cn:1081/" target="_blank" class="prolist"><img width="220" height="74" src="images/TICC.PNG"></a>
-             <a href="http://www.gapp.gov.cn/" target="_blank" class="prolist"><img width="220" height="74" src="images/zhrm.png"></a>     
-          </div>       
         </div>
-</div>
-  <div class="footer">
-  	<div class="pagewidth">
-    	 Copyright Media Monitors 2010 <a href="http://www.xlmediawatch.com">http://www.xlmediawatch.com</a> 版权所有 北京弘通天网有限公司<br>
-		北京市东城区鼓楼东大街净土胡同15号北楼二层 京ICP备 10054924 &nbsp;&nbsp;
-	</div>
-  </div>
-</div>
-</body>
+        <div class="process">
+          <!-- 服务流程-->
+
+          <div class="processcon">
+            <a href="http://www.xlmediawatch.com/" target="_blank" class="prolist"><img width="220" height="74" src="images/xlct.png" ></a>
+            <a href="http://www.tsjc.tsinghua.edu.cn/publish/jc/index.html" target="_blank" class="prolist"><img width="220" height="74" src="images/xwcbxy.png"></a>
+            <a href="http://www.media.tsinghua.edu.cn:1081/" target="_blank" class="prolist"><img width="220" height="74" src="images/TICC.png"></a>
+            <a href="http://www.gapp.gov.cn/" target="_blank" class="prolist"><img width="220" height="74" src="images/zhrm.png"></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="pagewidth">
+          Copyright Media Monitors 2010 <a href="http://www.xlmediawatch.com">http://www.xlmediawatch.com</a> 版权所有 北京弘通天网有限公司<br>
+          北京市东城区鼓楼东大街净土胡同15号北楼二层 京ICP备 10054924 &nbsp;&nbsp;
+        </div>
+      </div>
+    </div>
+    <script type=text/javascript src="js/other.js"></script>
+  </body>
 </html>

@@ -23,7 +23,7 @@ ul,li{ list-style-type:none;}
 	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 100%; PADDING-RIGHT: 0px; HEIGHT: 400px;; PADDING-TOP: 0px;
 }
 .banner {
-	Z-INDEX: 99; MARGIN: 0px auto; WIDTH: 981px; HEIGHT: 357px; _width: 973px
+	Z-INDEX: 99; MARGIN: 0px auto; WIDTH: 960px; HEIGHT: 357px; _width: 973px
 }
 .banner_l {
 	MARGIN-TOP: 147px; WIDTH: 23px; FLOAT: left
