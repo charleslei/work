@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<title>【去哪儿网】支付出错页面-去哪儿网Qunar.com</title>
+<meta content="" name="keywords" />
+<meta content="" name="description" />
+<link href="/static/payment/prd/styles/u-pay-done.css" rel="stylesheet" type="text/css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/static/js/compatibilityUtils/build/DD_belatedPNG-min.js"></script>
+    <script type="text/javascript">
+      DD_belatedPNG.fix('.png24');
+    </script>
+    <![endif]-->
+</head>
+<body>
+<form id="direct-form" action ="" method="post">
+<input type="hidden" name="checkOrderStatusUrl" value="${checkOrderStatusUrl}"/>
+<input type="hidden" name="cashierPayUrl" value="${cashierPayUrl}"/>
+<input name="submitBtn" type="submit" class="hide"/>
+</form>
+<div class="xs_wrap">
+    <div class="xs_header">
+        <div class="login">
+            <p class="welcome"><span>去哪儿网客服电话：<strong>10101234</strong></span><span class='server_icon'></span><span>7x24服务</span></p>
+			<c:if test="${not empty userName}">
+				 <p class="right_link" id="js_Login">${userName}，您好！</p>
+			</c:if>
+        </div>
+    </div>
+</div>
+<div class="q_page_container">
+    <div class="q_page_wrap">
+        <div class="q_page">
+            <div class="b_header clrfix">
+              <span class="e_header_logo png24"></span>
+              <span class="e_header_title">支付</span>
+            </div>
+            <div class="b_payfor_content">
+                <div class="b_hd_mod">
+                    <div class="z_notice_ctn clrfix">
+                        <div class="z_notice_icon icon_wrong"></div>
+                        <div class="z_notice_txt">
+                            <div class="pay_sum"><span class="sub_title" id="unknown-check">网络繁忙，结果未知</span></div>
+							<p class="recur tint tip-txt" id='info2'><span>抱歉当前未收到银行支付确认结果，为避免重复支付，您可以点击 </span><a class="a_span" href="javascript:;" id="recheck">重新查询结果</a><span> 再次查看支付结果。</span><br/><span>如果确认支付失败，可以点击 </span><a href="javascript:;" class="a_span" id="retry">返回重试</a><span> 继续支付。</span></p>
+							<p class="recur tint tip-txt" id='info1'></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--底部的安全贴士-->
+            <div class="b_safe_tips">
+                <p class="lead">温馨提示：</p>
+                <ul class="liststyle_disc">
+                  <li>多种支付方式，轻松解决支付问题</li>
+                  <li>您的账户信息请妥善保管并尽量避免在网吧等公共场所进行支付</li>
+                </ul>
+            </div>
+            <!--\底部的安全贴士-->
+            <div class='pay-footer'>
+              <p>去哪儿网&nbsp;版权所有&nbsp;©&nbsp;京ICP备05021087号</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./js/u-pay-done.js"></script>
+<script type="text/javascript">
+(function(){
+	window._ba_utm_init = function(GA){ 
+		window['_ba_utm_l'] = 'pay';
+		window['_ba_utm_s'] = '939';
+		window['_ba_utm_ex'] = {};
+	};
+	//-- load ga script
+	var s = document.createElement('script');
+	s.src = '/static/payment/prd/scripts/ga-<%@include file='/include/.ver'%>.js'; 
+	var head = document.getElementsByTagName('head');
+	if(head&&head[0]) { head[0].appendChild(s); }
+})();
+</script>
+<script language="JavaScript">  
+ 　　  javascript:window.history.forward(1);
+ 　　</script>
+</body>
+</html>
