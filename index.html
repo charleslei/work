@@ -81,9 +81,9 @@
                     <!--网银支付的tabn内容区-->
                     <div class="e_tab_trigger">
                       <div class="tab_nav">
-                        <a class="trigger_item" data-num="0">信用卡</a>
+                        <a class="trigger_item trigger_item_current" data-num="0">信用卡</a>
                         <a class="trigger_item" data-num="1">储蓄卡</a>
-                        <a class="trigger_item trigger_item_current" data-num="2">银行卡支付</a>
+                        <a class="trigger_item " data-num="2">银行卡支付</a>
                         <a class="trigger_item" data-num="3">支付平台</a>
                       </div>
 
@@ -94,7 +94,7 @@
                     <div class="e_tab_content js-typepanel" data-o="0" style="display: block;">
                       <div class="tab_content_inner tab_content_inner1">
                         <div class="b_pinfo_form">
-                          <form class="quickpayform creditCardCon" id="creditCardCon" action="https://paybeta4.qunar.com/payServer/page/cashier/motoPay.do" method="post" target="_blank">
+                          <form class="creditCardCon" id="creditCardCon" action="https://paybeta4.qunar.com/payServer/page/cashier/motoPay.do" method="post" target="_blank">
                             <input name="busiTypeId" value="FLIGHT" type='hidden' >
                             <input name="merchantCode" value="testDaiGou" type="hidden" >
                             <input name="orderNo" value="java20131031102154877" type="hidden" >
@@ -108,13 +108,13 @@
                                 <div class="e_card_picwrap hide"><div class="card_pic"><div class="img"></div></div></div>
                                 <div class="credit-info-wrap"><div class="credit-info"></div></div>
                                 <!-- info end -->
-                                <table cellpadding="0" cellspacing="0" width="100%">
+                                <table cellpadding="0" cellspacing="0" width="100%" height="100%" >
                                   <tbody>
                                     <tr class="js_credit_tr">
                                       <td class="c1 c2">信用卡卡号</td>
                                       <td>
                                         <div class="ops_cardnum">
-                                          <div class="set input"><input type="text" name="cardId" data-jvalidator-pattern="not_empty &amp; creditcardno" class="grey_txt credit_cardnum txtbox txtbox1" placeholder="只输入卡号，自动匹配银行" maxlength="30"></div>
+                                          <div class="set input"><input type="text" name="cardId" data-jvalidator-pattern="not_empty &amp; creditcardno" class="grey_txt cardnum txtbox txtbox1" placeholder="只输入卡号，自动匹配银行" maxlength="30"></div>
                                           <div class="set popup_tips_wrap js_tipcontainer"></div>
                                         </div>
                                       </td>
@@ -126,10 +126,10 @@
                                     <tr class="js_credit_tr">
                                       <td class="c1">证件</td>
                                       <td>
-									    <div class="identity_card_type_ctn">
-                                          <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option><option value="02">护照</option></select></div>
+                                        <div class="identity_card_type_ctn">
+                                          <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option></select></div>
                                         </div>
-										<div class='date_middle'></div>
+                                        <div class='date_middle'></div>
                                         <div class="ops_idcard">
                                           <div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty &amp; idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div>
                                           <div class="set popup_tips_wrap js_tipcontainer"></div>
@@ -148,7 +148,7 @@
                                     <tr class="js_credit_tr">
                                       <td class="c1">有效期</td>
                                       <td>
-									    <div class="ops_date">
+                                        <div class="ops_date">
                                           <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month"><option value="请选择月份">请选择月份</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div>
                                           <div class='date_middle'></div>
                                           <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year"></select></div>
@@ -189,12 +189,16 @@
                                       <td class="c1"></td>
                                       <td><label class='rem_card_box'><input type="checkbox" name="isBind" checked="" value="1" class="radio_box"><span>记住此卡，下次支付更方便</span></label></td>
                                     </tr>
+                                    <tr>
+                                      <td class="c1"></td>
+                                      <td><div class="e_ops_button"><a class="btn_large_submit" id="creditCardSubmit">同意协议并付款</a><a href="https://paybeta4.qunar.com/payServer/commonCardAgree.jsp" target="blank" class="btn_desc protoInfo">《去哪儿网常用卡支付协议》</a></div></td>
+                                    </tr>
+
                                   </tbody>
                                 </table>
                               </div>
                             </div>
 
-                            <div class="e_ops_button clrfix"><a class="btn_large_submit" id="creditCardSubmit">同意协议并付款</a><a href="https://paybeta4.qunar.com/payServer/commonCardAgree.jsp" target="blank" class="btn_desc protoInfo">《去哪儿网常用卡支付协议》</a></div>
                           </form>
 
                           <div class="to_bank"><a id="show_creditcard_online" class="dash_border_a" href="javascript:;">信用卡网上银行</a><span>跳转至银行页面完成付款</span></div>
@@ -207,7 +211,7 @@
                     <div class="e_tab_content js-typepanel" data-o="1" style="display: none;">
                       <div class="tab_content_inner tab_content_inner1">
                         <div class="b_pinfo_form">
-                          <form class="quickpayform debitCardCon" id="debitCardCon" action="https://paybeta4.qunar.com/payServer/page/cashier/motoPay.do" method="post" target="_blank">
+                          <form class="debitCardCon" id="debitCardCon" action="https://paybeta4.qunar.com/payServer/page/cashier/motoPay.do" method="post" target="_blank">
                             <input name="busiTypeId" value="FLIGHT" type="hidden" >
                             <input name="merchantCode" value="testDaiGou" type="hidden" >
                             <input name="orderNo" value="java20131031102154877" type="hidden" >
@@ -220,35 +224,43 @@
                                 <!-- info  -->
                                 <div class="credit-info-wrap"><div class="credit-info"></div></div>
                                 <!-- info end -->
-                                <table cellpadding="0" cellspacing="0" width="100%">
+                                <table cellpadding="0" cellspacing="0" width="100%" height="100%" >
                                   <tbody>
-                                    <tr class="js_credit_tr">
+                                    <tr class="js_debit_tr">
                                       <td class="c1 c2">储蓄卡卡号</td>
                                       <td>
                                         <div class="ops_cardnum">
-                                          <div class="set input"><input type="text" name="cardId" data-jvalidator-pattern="not_empty &amp; creditcardno" class="grey_txt credit_cardnum txtbox txtbox1" placeholder="只输入卡号，自动匹配银行" maxlength="30"></div>
+                                          <div class="set input"><input type="text" name="cardId" data-jvalidator-pattern="not_empty &amp; creditcardno" class="grey_txt cardnum txtbox txtbox1" placeholder="只输入卡号，自动匹配银行" maxlength="30"></div>
                                           <div class="set popup_tips_wrap js_tipcontainer"></div>
                                         </div>
                                       </td>
+                                    </tr>
+                                    <tr class="pay_online hide">
+                                      <td class="c1"></td>
+                                      <td><div class="online-bank-wrap"><span class="online-logo"><img src="/images/site/images/pay/quick_pay/upoppay.png"></span></div></td>
+                                    </tr>
+                                    <tr class="pay_online hide">
+                                      <td class="c1"></td>
+                                      <td><div class="e_ops_button clrfix"><a class="btn_submit" id="debitCardSubmitNext">下一步</a><span class="btn_desc">跳转至银行页面完成付款</span></div></td>
                                     </tr>
                                     <tr class="credit-bank">
                                       <td class="c1"></td>
                                       <td><div class="credit-bank-wrap"></div></td>
                                     </tr>
-									<tr class="js_credit_tr">
+                                    <tr class="js_debit_tr">
                                       <td class="c1">证件</td>
                                       <td>
-									    <div class="identity_card_type_ctn">
+                                        <div class="identity_card_type_ctn">
                                           <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option><option value="02">护照</option></select></div>
                                         </div>
-										<div class='date_middle'></div>
+                                        <div class='date_middle'></div>
                                         <div class="ops_idcard">
                                           <div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty &amp; idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div>
                                           <div class="set popup_tips_wrap js_tipcontainer"></div>
                                         </div>
                                       </td>
                                     </tr>
-                                    <tr class="js_credit_tr">
+                                    <tr class="js_debit_tr">
                                       <td class="c1">姓名</td>
                                       <td>
                                         <div class="ops_cardnum">
@@ -257,8 +269,7 @@
                                         </div>
                                       </td>
                                     </tr>
-                                    
-                                    <tr>
+                                    <tr class="js_debit_tr">
                                       <td class="c1">银行预留手机号</td>
                                       <td>
                                         <div class="ops_mobile">
@@ -267,7 +278,7 @@
                                         </div>
                                       </td>
                                     </tr>
-                                    <tr>
+                                    <tr class="js_debit_tr">
                                       <td class="c1">短信验证码</td>
                                       <td>
                                         <div class="ops_icode">
@@ -278,16 +289,18 @@
                                         </div>
                                       </td>
                                     </tr>
-                                    <tr>
+                                    <tr class="js_debit_tr">
                                       <td class="c1"></td>
                                       <td><label class='rem_card_box'><input type="checkbox" name="isBind" checked="" value="1" class="radio_box"><span>记住此卡，下次支付更方便</span></label></td>
+                                    </tr>
+                                    <tr class="js_debit_tr">
+                                      <td class="c1"></td>
+                                      <td><div class="e_ops_button"><a class="btn_large_submit" id="debitCardSubmit">同意协议并付款</a><a href="https://paybeta4.qunar.com/payServer/commonCardAgree.jsp" target="blank" class="btn_desc protoInfo">《去哪儿网常用卡支付协议》</a></div></td>
                                     </tr>
                                   </tbody>
                                 </table>
                               </div>
                             </div>
-
-                            <div class="e_ops_button clrfix"><a class="btn_large_submit" id="debitCardSubmit">同意协议并付款</a><a href="https://paybeta4.qunar.com/payServer/commonCardAgree.jsp" target="blank" class="btn_desc protoInfo">《去哪儿网常用卡支付协议》</a></div>
                           </form>
 
                           <div class="to_bank"><a id="show_debitcard_online" class="dash_border_a" href="javascript:;">储蓄卡网上银行</a> <span>跳转至银行页面完成付款</span></div>
@@ -299,7 +312,7 @@
                     <div class="e_tab_content js-typepanel hide" data-o="2" style="display: none;">
                       <div class="tab_content_inner tab_content_inner1">
                         <div class="b_pinfo_form">
-                          <form class="quickpayform allCardCon" id="allCardCon" action="${usuallyCardpayUrl}" method="post" target="_blank">
+                          <form class="allCardCon" id="allCardCon" action="${usuallyCardpayUrl}" method="post" target="_blank">
                             <div class="b_card_list b_validate_box b_write_card">
                               <div>
                                 <ul class='bindcard_list'>
@@ -308,7 +321,7 @@
                                   <div style="margin:2px;">
                                     <div class="e_card_type clrfix">
                                       <div class="common_card"></div>
-                                      <div class="info_card js-choose-card clrfix" data-ctl='{"identityType":"false","identityCode":"false","cvv":"true","vCode":"false","cardholder":"false","validate":"false","mobile":"false"}'><input type="radio"  name="cardId" data-id="117" value="117"  bankCode="CITIC" tppCode="PREUMPAY" channel="0" isDirect="0" mobile="18610641700" inputItemHMAC="bAFveupI8ifWOweaDr0xtg==" class="radio_box" checked ><label class="banklogo_box"><span class="bank_name js-bank-icon" style="background-image:url(${vo.picUrl})" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div>
+                                      <div class="info_card js-choose-card clrfix" data-ctl='{"identityType":"true","identityCode":"true","cvv":"true","vCode":"true","cardholder":"true","validate":"true","mobile":"true"}'><input type="radio"  name="cardId" data-id="117" value="117"  bankCode="CITIC" tppCode="PREUMPAY" channel="0" isDirect="0" mobile="18610641700" inputItemHMAC="bAFveupI8ifWOweaDr0xtg==" class="radio_box" checked ><label class="banklogo_box"><span class="bank_name js-bank-icon" style="background-image:url(./images/site/images/pay/bankicon_1/boc.png)" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div>
                                     </div>
                                   </div>
                                   </li>
@@ -316,7 +329,7 @@
                                   <div style="margin:2px;">
                                     <div class="e_card_type clrfix">
                                       <div class="common_card"></div>
-                                      <div class="info_card js-choose-card clrfix" data-ctl='{"identityType":"false","identityCode":"false","cvv":"true","vCode":"false","cardholder":"false","validate":"false","mobile":"false"}'><input type="radio"  name="cardId" data-id="117" value="117"  bankCode="CITIC" tppCode="PREUMPAY" channel="0" isDirect="0" mobile="18610641700" inputItemHMAC="bAFveupI8ifWOweaDr0xtg==" class="radio_box"  ><label class="banklogo_box"><span class="bank_name js-bank-icon" style="background-image:url(${vo.picUrl})" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div>
+                                      <div class="info_card js-choose-card clrfix" data-ctl='{"identityType":"false","identityCode":"false","cvv":"true","vCode":"false","cardholder":"false","validate":"false","mobile":"false"}'><input type="radio"  name="cardId" data-id="117" value="117"  bankCode="CITIC" tppCode="PREUMPAY" channel="0" isDirect="0" mobile="18610641700" inputItemHMAC="bAFveupI8ifWOweaDr0xtg==" class="radio_box"  ><label class="banklogo_box"><span class="bank_name js-bank-icon" style="background-image:url(./images/site/images/pay/bankicon_1/boc.png)" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div>
                                     </div>
                                   </div>
                                   </li>
@@ -324,7 +337,7 @@
                                   <div style="margin:2px;">
                                     <div class="e_card_type clrfix">
                                       <div class="common_card"></div>
-                                      <div class="info_card js-choose-card clrfix" data-ctl='{"identityType":"false","identityCode":"false","cvv":"true","vCode":"false","cardholder":"false","validate":"false","mobile":"false"}'><input type="radio"  name="cardId" data-id="117" value="117"  bankCode="CITIC" tppCode="PREUMPAY" channel="0" isDirect="0" mobile="18610641700" inputItemHMAC="bAFveupI8ifWOweaDr0xtg==" class="radio_box"  ><label class="banklogo_box"><span class="bank_name js-bank-icon" style="background-image:url(${vo.picUrl})" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div>
+                                      <div class="info_card js-choose-card clrfix" data-ctl='{"identityType":"false","identityCode":"false","cvv":"true","vCode":"false","cardholder":"false","validate":"false","mobile":"false"}'><input type="radio"  name="cardId" data-id="117" value="117"  bankCode="CITIC" tppCode="PREUMPAY" channel="0" isDirect="0" mobile="18610641700" inputItemHMAC="bAFveupI8ifWOweaDr0xtg==" class="radio_box"  ><label class="banklogo_box"><span class="bank_name js-bank-icon" style="background-image:url(./images/site/images/pay/bankicon_1/boc.png)" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div>
                                     </div>
                                   </div>
                                   </li>
@@ -332,7 +345,7 @@
                                   <div style="margin:2px;">
                                     <div class="e_card_type clrfix">
                                       <div class="common_card"></div>
-                                      <div class="info_card js-choose-card clrfix" data-ctl='{"identityType":"false","identityCode":"false","cvv":"true","vCode":"false","cardholder":"false","validate":"false","mobile":"false"}'><input type="radio"  name="cardId" data-id="117" value="117"  bankCode="CITIC" tppCode="PREUMPAY" channel="0" isDirect="0" mobile="18610641700" inputItemHMAC="bAFveupI8ifWOweaDr0xtg==" class="radio_box"  ><label class="banklogo_box"><span class="bank_name js-bank-icon" style="background-image:url(${vo.picUrl})" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div>
+                                      <div class="info_card js-choose-card clrfix" data-ctl='{"identityType":"false","identityCode":"false","cvv":"true","vCode":"false","cardholder":"false","validate":"false","mobile":"false"}'><input type="radio"  name="cardId" data-id="117" value="117"  bankCode="CITIC" tppCode="PREUMPAY" channel="0" isDirect="0" mobile="18610641700" inputItemHMAC="bAFveupI8ifWOweaDr0xtg==" class="radio_box"  ><label class="banklogo_box"><span class="bank_name js-bank-icon" style="background-image:url(./images/site/images/pay/bankicon_1/boc.png)" style="background-position:0 0;"></span><span class="bankcard_info">信用卡 <span class="encryption">**</span><em class="last_num">1111</em></span></label></div>
                                     </div>
                                   </div>
                                   </li>
@@ -351,6 +364,19 @@
                               <div class="e_write_inner">
                                 <input name="pmCode" value="PREQCARD" type="hidden">
                                 <table cellpadding="0" cellspacing="0" width="100%" height="100%" >
+                                  <tr class="js_credit_tr hide" id="identityCodeCtn">
+                                    <td class="c1">证件</td>
+                                    <td>
+                                      <div class="identity_card_type_ctn">
+                                        <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option><option value="02">护照</option></select></div>
+                                      </div>
+                                      <div class='date_middle'></div>
+                                      <div class="ops_idcard">
+                                        <div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty &amp; idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div>
+                                        <div class="set popup_tips_wrap js_tipcontainer"></div>
+                                      </div>
+                                    </td>
+                                  </tr>
                                   <tr class="js_credit_tr hide" id="cardholderCtn">
                                     <td class="c1">姓名</td>
                                     <td>
@@ -360,18 +386,10 @@
                                       </div>
                                     </td>
                                   </tr>
-                                  <tr class="js_credit_tr hide" id="identityCodeCtn">
-                                    <td class="c1">身份证</td>
-                                    <td>
-                                      <div class="ops_cardnum">
-                                        <div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty & idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div>
-                                        <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                      </div>
-                                    </td>
-                                  </tr>
                                   <tr class="js_credit_tr hide" id="validateCtn">
                                     <td class="c1">有效期</td>
-                                    <td><div class="ops_date">
+                                    <td>
+                                      <div class="ops_date">
                                         <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month"><option value="请选择月份">请选择月份</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div>
                                         <div class='date_middle'></div>
                                         <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year"></select></div>
@@ -418,17 +436,113 @@
 
                           <div class="to_bank"><a id="show_allcard_online" class="dash_border_a" href="javascript:;">储蓄卡，信用卡网上银行</a> <span>跳转至银行页面完成付款</span></div>
 
+                          <!--选择其他银行卡的内容-->
                         </div>
                       </div>
                     </div>
 
+
+                    <div class="b_pinfo_form hide" id="allOtherCardCon">
+                      <div class="b_card_list b_validate_box b_write_card">
+                        <div class="e_write_inner">
+                          <input name="pmCode" value="PREQCARD" type="hidden">                                <!-- info  -->
+                          <div class="e_card_picwrap hide"><div class="card_pic"><div class="img"></div></div></div>
+                          <div class="credit-info-wrap"><div class="credit-info"></div></div>
+                          <!-- info end -->
+                          <table cellpadding="0" cellspacing="0" width="100%" height="100%" id="allOtherCardTable">
+                            <tbody>
+                              <tr class="js_credit_tr">
+                                <td class="c1 c2">信用卡卡号</td>
+                                <td>
+                                  <div class="ops_cardnum">
+                                    <div class="set input"><input type="text" name="cardId" data-jvalidator-pattern="not_empty &amp; creditcardno" class="grey_txt cardnum txtbox txtbox1" placeholder="只输入卡号，自动匹配银行" maxlength="30"></div>
+                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr class="credit-bank">
+                                <td class="c1"></td>
+                                <td><div class="credit-bank-wrap"></div></td>
+                              </tr>
+                              <tr class="js_credit_tr" id="identityCodeCtn">
+                                <td class="c1">证件</td>
+                                <td>
+                                  <div class="identity_card_type_ctn">
+                                    <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option><option value="02">护照</option></select></div>
+                                  </div>
+                                  <div class='date_middle'></div>
+                                  <div class="ops_idcard">
+                                    <div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty &amp; idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div>
+                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr class="js_credit_tr" id="cardholderCtn">
+                                <td class="c1">姓名</td>
+                                <td>
+                                  <div class="ops_cardnum">
+                                    <div class="set input"><input type="text" name="cardholder" data-jvalidator-pattern="not_empty & cardholder" class="grey_txt txtbox" placeholder="输入姓名需与注册银行卡相同" value=""></div>
+                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr class="js_credit_tr" id="validateCtn">
+                                <td class="c1">有效期</td>
+                                <td><div class="ops_date">
+                                    <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month"><option value="请选择月份">请选择月份</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div>
+                                    <div class='date_middle'></div>
+                                    <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year"></select></div>
+                                  </div>
+                                  <div class="set popup_tips_wrap js_tipcontainer"></div>
+                                </td>
+                              </tr>
+                              <tr class="js_credit_tr" id="cvvCtn">
+                                <td class="c1">卡背面三位数</td>
+                                <td>
+                                  <div class="ops_cardback">
+                                    <div class="set input"><input name="cvv" id="credit_cardbacknum" data-jvalidator-pattern="not_empty & creditcardcvv" type="text" class="txtbox" placeholder="请输入信用卡背面的末三位数字" maxlength="3"></div>
+                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr class="js_credit_tr" id="mobileCtn">
+                                <td class="c1">手机号</td>
+                                <td>
+                                  <div id="mobile-number">
+                                    <div class="set input"><input type="text" readonly placeholder="请输入银行预留手机号" value="" class="txtbox"  id="mobile" name="mobile" maxlength="13"></div>
+                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr class="js_credit_tr" id="vCodeCtn">
+                                <td class="c1">短信验证码</td>
+                                <td>
+                                  <div class="ops_icode">
+                                    <div class="set input"><input type="text" class="txtbox" value="" name="vCode" data-jvalidator-pattern="not_empty & vcode" placeholder="请输入验证码" maxlength="6"></div>
+                                    <a placeholder="get-permit" class="btn" href="javascript:void(0);" js-reset-class="get_code" js-sent-class="btn_grey"><em>免费获取</em></a>
+                                    <div class="set popup_tips_wrap js_tipcontainer" placeholder="get-permit-error"></div>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="c1"></td>
+                                <td><a class="btn_submit" id="btnSubmitBindCard">确认付款</a><div class="set popup_tips_wrap js_tipcontainer"></div></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+
                     <!--平台支付-->
                     <div class="e_tab_content js-typepanel hide" data-o="3" style="display: none;">
                       <div class="tab_content_inner">
-                        <div class="b_bank_list debit_card" id="platform">
-                          <form name="platpayform" class="quickpayform" id="platpayform" action="https://paybeta4.qunar.com/payServer/page/cashier/netbankPay.do" method="post" target="_blank">
-                            <table>
-                              <tbody><tr>
+                        <div class="b_pinfo_form b_bank_list" id="platform">
+                          <form name="platpayform" class="plat_pay_card" id="platpayform" action="https://paybeta4.qunar.com/payServer/page/cashier/netbankPay.do" method="post" target="_blank">
+                            <table cellpadding="0" cellspacing="0" width="100%" height="100%" >
+                              <tbody>
+                                <tr>
                                   <td class="left_ctn"><div class="title">支付平台</div></td>
                                   <td><span>跳转至平台页面完成付款</span></td>
                                 </tr>
@@ -436,7 +550,6 @@
                                   <td></td>
                                   <td>
                                     <ul class="inline">
-
                                       <li class="e_open_ibank">
                                       <input pmcode="GWCARD" type="radio" name="bankCode" id="ALIPAY" value="ALIPAY" class="radio_box" checked="">
                                       <label class="bank_logo_box"><span class="bank_logo"><img title="支付宝会员" src="./images/site/images/pay/bankicon_1/alipay.png"></span><span class="bank_name_txt"></span></label>
@@ -455,7 +568,8 @@
                                     </ul>
                                   </td>
                                 </tr>
-                            </tbody></table>
+                              </tbody>
+                            </table>
                             <div class="e_ops_button e_ops_button1 clrfix"><a class="btn_submit" id="btnSubmitPlatform_next">下一步</a><span class="btn_desc">跳转至平台页面完成付款</span></div>
                           </form>
                         </div>
@@ -464,7 +578,7 @@
 
                     <!-- 网上银行列表，包括信用卡和储蓄卡 -->
                     <div id="allCardListCtn" class="hide">
-                      <form name="creditpayform" class="quickpayform" action="https://paybeta4.qunar.com/payServer/page/cashier/netbankPay.do" method="post" target="_blank">
+                      <form name="creditpayform" action="https://paybeta4.qunar.com/payServer/page/cashier/netbankPay.do" method="post" target="_blank">
                         <div class='b_chose_bank'>
                           <div class='tab clrfix'>
                             <div class='tab-t hide t1'><div class='item'>信用卡网上支付</div></div>
