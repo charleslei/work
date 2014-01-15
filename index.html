@@ -37,8 +37,8 @@
       <input id="oldtime" value="20131031102154" class="hide" type="hidden">
       <!--<input id="newtime" value="20131031102203" class="hide" type="hidden">
       <input id="validtime" value="20131115102202" class="hide" type="hidden">-->
-            <input id="newtime" value="20131113000000" class="hide" type="hidden">
-      <input id="validtime" value="20131113235959" class="hide" type="hidden">
+      <input id="newtime" value="20131114000000" class="hide" type="hidden">
+      <input id="validtime" value="20131114235959" class="hide" type="hidden">
 
 
       <div class="q_page_container">
@@ -61,10 +61,10 @@
                           <div class="ctn">
                             <h3>担保提示</h3>
                             <ul>
-                              <li>夜间及节假日预订，商家与酒店确认房间时间较长，您可以在此之前直接担保；</li>
-                              <li>担保成功后，一旦确认有房，担保金额将直接抵扣房费；</li>
-                              <li>如确认无房，担保自动撤销；</li>
-                              <li>其他时间预订，确认时间一般需要20分钟，您可直接担保或等待商家确认有房后支付。</li>
+                              <li class="clrfix"><span>1.</span><p>夜间及节假日预订，商家与酒店确认房间时间较长，您可以在此之前直接担保；</p></li>
+                              <li class="clrfix"><span>2.</span><p>担保成功后，一旦确认有房，担保金额将直接抵扣房费；</p></li>
+                              <li class="clrfix"><span>3.</span><p>如确认无房，担保自动撤销；</p></li>
+                              <li class="clrfix"><span>4.</span><p>其他时间预订，确认时间一般需要20分钟，您可直接担保或等待商家确认有房后支付。</p></li>
                             </ul>
                           </div>
                         </div>
@@ -114,8 +114,8 @@
                     <div class="e_tab_trigger">
                       <div class="tab_nav">
                         <a class="trigger_item " data-num="0">信用卡</a>
-                        <a class="trigger_item trigger_item_current" data-num="1">储蓄卡</a>
-                        <a class="trigger_item " data-num="2">银行卡支付</a>
+                        <a class="trigger_item " data-num="1">储蓄卡</a>
+                        <a class="trigger_item trigger_item_current" data-num="2">银行卡支付</a>
                         <a class="trigger_item" data-num="3">支付平台</a>
                       </div>
 
@@ -144,12 +144,7 @@
                                   <tbody>
                                     <tr class="js_credit_tr">
                                       <td class="c1 c2">信用卡卡号</td>
-                                      <td>
-                                        <div class="ops_cardnum">
-                                          <div class="set input"><input type="text" name="cardId" data-jvalidator-pattern="not_empty & mastercardno" class="grey_txt cardnum txtbox txtbox1" placeholder="只输入卡号，自动匹配银行" maxlength="30"></div>
-                                          <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                        </div>
-                                      </td>
+                                      <td><div class="ops_cardnum"><div class="set input"><input type="text" name="cardId" data-jvalidator-pattern="not_empty & mastercardno" class="grey_txt cardnum txtbox txtbox1" placeholder="只输入卡号，自动匹配银行" maxlength="30"></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                                     </tr>
                                     <tr class="credit-bank">
                                       <td class="c1"></td>
@@ -157,65 +152,27 @@
                                     </tr>
                                     <tr class="js_credit_tr">
                                       <td class="c1">证件</td>
-                                      <td>
-                                        <div class="identity_card_type_ctn">
-                                          <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option></select></div>
-                                        </div>
-                                        <div class='date_middle'></div>
-                                        <div class="ops_idcard">
-                                          <div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty & idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div>
-                                          <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                        </div>
-                                      </td>
+                                      <td><div class="identity_card_type_ctn"><div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option></select></div></div><div class='date_middle'></div><div class="ops_idcard"><div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty & idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                                     </tr>
                                     <tr class="js_credit_tr">
                                       <td class="c1">姓名</td>
-                                      <td>
-                                        <div class="ops_cardnum">
-                                          <div class="set input"><input type="text" name="cardholder" data-jvalidator-pattern="not_empty & cardholder" class="grey_txt txtbox" placeholder="输入姓名需与注册银行卡相同" value=""></div>
-                                          <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                        </div>
-                                      </td>
+                                      <td><div class="ops_cardnum"><div class="set input"><input type="text" name="cardholder" data-jvalidator-pattern="not_empty & cardholder" class="grey_txt txtbox" placeholder="输入姓名需与注册银行卡相同" value=""></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                                     </tr>
                                     <tr class="js_credit_tr">
                                       <td class="c1">有效期</td>
-                                      <td>
-                                        <div class="ops_date">
-                                          <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month"><option value="请选择月份">请选择月份</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div>
-                                          <div class='date_middle'></div>
-                                          <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year"></select></div>
-                                        </div>
-                                        <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                      </td>
+                                      <td><div class="ops_date"><div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month"><option value="请选择月份">请选择月份</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div><div class='date_middle'></div><div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year"></select></div></div><div class="set popup_tips_wrap js_tipcontainer"></div></td>
                                     </tr>
                                     <tr class="js_credit_tr">
                                       <td class="c1">卡背面三位数</td>
-                                      <td>
-                                        <div class="ops_cardback">
-                                          <div class="set input"><input name="cvv" id="credit_cardbacknum" data-jvalidator-pattern="not_empty & creditcardcvv" type="text" class="txtbox" placeholder="请输入信用卡背面的末三位数字" maxlength="3" value=""></div>
-                                          <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                        </div>
-                                      </td>
+                                      <td><div class="ops_cardback"><div class="set input"><input name="cvv" id="credit_cardbacknum" data-jvalidator-pattern="not_empty & creditcardcvv" type="text" class="txtbox" placeholder="请输入信用卡背面的末三位数字" maxlength="3" value=""></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                                     </tr>
                                     <tr class="js_credit_tr">
                                       <td class="c1">银行预留手机号</td>
-                                      <td>
-                                        <div class="ops_mobile">
-                                          <div class="set input"><input type="text" placeholder="请输入手机号" class="txtbox" data-jvalidator-pattern="not_empty & mobile" id="mobile" name="mobile" maxlength="13" value=""></div>
-                                          <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                        </div>
-                                      </td>
+                                      <td><div class="ops_mobile"><div class="set input"><input type="text" placeholder="请输入手机号" class="txtbox" data-jvalidator-pattern="not_empty & mobile" id="mobile" name="mobile" maxlength="13" value=""></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                                     </tr>
                                     <tr class="js_credit_tr">
                                       <td class="c1">短信验证码</td>
-                                      <td>
-                                        <div class="ops_icode">
-                                          <div class="set input"><input type="text" name="vCode" id="validcode" class="txtbox" data-jvalidator-pattern="not_empty & vcode" placeholder="请输入验证码" maxlength="6"></div>
-                                          <a placeholder="get-permit" class="btn" href="javascript:void(0);" js-reset-class="get_code" js-sent-class="btn_grey"><em>免费获取</em></a>
-
-                                          <div class="set popup_tips_wrap js_tipcontainer" placeholder="get-permit-error"></div>
-                                        </div>
-                                      </td>
+                                      <td><div class="ops_icode"><div class="set input"><input type="text" name="vCode" id="validcode" class="txtbox" data-jvalidator-pattern="not_empty & vcode" placeholder="请输入验证码" maxlength="6"></div><a placeholder="get-permit" class="btn" href="javascript:void(0);" js-reset-class="get_code" js-sent-class="btn_grey"><em>免费获取</em></a><div class="set popup_tips_wrap js_tipcontainer" placeholder="get-permit-error"></div></div></td>
                                     </tr>
                                     <tr class="js_credit_tr">
                                       <td class="c1"></td>
@@ -261,17 +218,13 @@
                                       <td class="c1 c2">储蓄卡卡号</td>
                                       <td><div class="ops_cardnum"><div class="set input"><input type="text" name="cardId" data-jvalidator-pattern="not_empty & mastercardno" class="grey_txt cardnum txtbox txtbox1" placeholder="只输入卡号，自动匹配银行" maxlength="30"></div><div class="set popup_tips_wrap js_tipcontainer"><span class="icon_tips_wrap info first"><em class="icon_tips"></em><em class="txt_tips">仅支持 建设银行、工商银行、中国银行、农业银行，其他银行需跳转至 <a href="#" id="show_debitcard_online_1" class="dash_border_a">网上银行支付</a></em></span></div></div></td>
                                     </tr>
-                                    <tr class="credit-bank pay_online hide">
+                                    <tr class="credit-bank">
                                       <td class="c1"></td>
-                                      <td><div class="online-bank-wrap"><span class="online-logo"><img src="/images/site/images/pay/quick_pay/upoppay.png"></span></div></td>
+                                      <td><div class="credit-bank-wrap"></div></td>
                                     </tr>
                                     <tr class="pay_online hide">
                                       <td class="c1"></td>
                                       <td><div class="e_ops_button clrfix"><a class="btn_submit" id="debitCardSubmitNext">下一步</a><span class="btn_desc">跳转至银行页面完成付款</span></div></td>
-                                    </tr>
-                                    <tr class="credit-bank">
-                                      <td class="c1"></td>
-                                      <td><div class="credit-bank-wrap"></div></td>
                                     </tr>
                                     <tr class="js_debit_tr">
                                       <td class="c1">证件</td>
@@ -352,11 +305,7 @@
                                 </ul>
 
                                 <!-- info  -->
-                                <div class="e_bank_all clrfix">
-                                  <div class="info_card clrfix">
-                                    <div class="chose_card chose_all_card" id="dvchoose"><a id="choosebank" href="javascript:void(0);" class="choosebank"><span class="hl"></span><span class='con'>使用其他银行卡</span></a></div><c:if test="${fn:length(allBindCard) > 3 }"><div class="all_blind_bank chose_card"><a href="javascript:;" id="showAllBindBank" class='show'><span class="desc">全部展开</span><span class="down"></span></a></div></c:if>
-                                  </div>
-                                </div>
+                                <div class="e_bank_all clrfix"><div class="info_card clrfix"><div class="chose_card chose_all_card" id="dvchoose"><a id="choosebank" href="javascript:void(0);" class="choosebank"><span class="hl"></span><span class='con'>使用其他银行卡</span></a></div><c:if test="${fn:length(allBindCard) > 3 }"><div class="all_blind_bank chose_card"><a href="javascript:;" id="showAllBindBank" class='show'><span class="desc">全部展开</span><span class="down"></span></a></div></c:if></div></div>
                                 <!-- info end -->
                               </div>
 
@@ -366,64 +315,27 @@
                                 <table cellpadding="0" cellspacing="0" width="100%" height="100%" >
                                   <tr class="js_credit_tr hide" target="identityCodeCtn">
                                     <td class="c1">证件</td>
-                                    <td>
-                                      <div class="identity_card_type_ctn">
-                                        <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option><option value="02">护照</option></select></div>
-                                      </div>
-                                      <div class='date_middle'></div>
-                                      <div class="ops_idcard">
-                                        <div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty & idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div>
-                                        <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                      </div>
-                                    </td>
+                                    <td><div class="identity_card_type_ctn"><div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option><option value="02">护照</option></select></div></div><div class='date_middle'></div><div class="ops_idcard"><div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty & idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                                   </tr>
                                   <tr class="js_credit_tr hide" target="cardholderCtn">
                                     <td class="c1">姓名</td>
-                                    <td>
-                                      <div class="ops_cardnum">
-                                        <div class="set input"><input type="text" name="cardholder" data-jvalidator-pattern="not_empty & cardholder" class="grey_txt txtbox" placeholder="输入姓名需与注册银行卡相同" value=""></div>
-                                        <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                      </div>
-                                    </td>
+                                    <td><div class="ops_cardnum"><div class="set input"><input type="text" name="cardholder" data-jvalidator-pattern="not_empty & cardholder" class="grey_txt txtbox" placeholder="输入姓名需与注册银行卡相同" value=""></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                                   </tr>
                                   <tr class="js_credit_tr hide" target="validateCtn">
                                     <td class="c1">有效期</td>
-                                    <td>
-                                      <div class="ops_date">
-                                        <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month"><option value="请选择月份">请选择月份</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div>
-                                        <div class='date_middle'></div>
-                                        <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year"></select></div>
-                                      </div>
-                                      <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                    </td>
+                                    <td><div class="ops_date"><div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month"><option value="请选择月份">请选择月份</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div><div class='date_middle'></div><div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year"></select></div></div><div class="set popup_tips_wrap js_tipcontainer"></div></td>
                                   </tr>
                                   <tr class="js_credit_tr hide" target="cvvCtn">
                                     <td class="c1">卡背面三位数</td>
-                                    <td>
-                                      <div class="ops_cardback">
-                                        <div class="set input"><input name="cvv" id="credit_cardbacknum" data-jvalidator-pattern="not_empty & creditcardcvv" type="text" class="txtbox" placeholder="请输入信用卡背面的末三位数字" maxlength="3"></div>
-                                        <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                      </div>
-                                    </td>
+                                    <td><div class="ops_cardback"><div class="set input"><input name="cvv" id="credit_cardbacknum" data-jvalidator-pattern="not_empty & creditcardcvv" type="text" class="txtbox" placeholder="请输入信用卡背面的末三位数字" maxlength="3"></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                                   </tr>
                                   <tr class="js_credit_tr hide" target="mobileCtn">
                                     <td class="c1">手机号</td>
-                                    <td>
-                                      <div id="mobile-number">
-                                        <div class="set input"><input type="text" readonly placeholder="请输入银行预留手机号" value="" class="txtbox"  id="mobile" name="mobile" maxlength="13"></div>
-                                        <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                      </div>
-                                    </td>
+                                    <td><div id="mobile-number"><div class="set input"><input type="text" readonly placeholder="请输入银行预留手机号" value="" class="txtbox"  id="mobile" name="mobile" maxlength="13"></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                                   </tr>
                                   <tr class="js_credit_tr hide" target="vCodeCtn">
                                     <td class="c1">短信验证码</td>
-                                    <td>
-                                      <div class="ops_icode">
-                                        <div class="set input"><input type="text" class="txtbox" value="" name="vCode" data-jvalidator-pattern="not_empty & vcode" placeholder="请输入验证码" maxlength="6"></div>
-                                        <a placeholder="get-permit" class="btn" href="javascript:void(0);" js-reset-class="get_code" js-sent-class="btn_grey"><em>免费获取</em></a>
-                                        <div class="set popup_tips_wrap js_tipcontainer" placeholder="get-permit-error"></div>
-                                      </div>
-                                    </td>
+                                    <td><div class="ops_icode"><div class="set input"><input type="text" class="txtbox" value="" name="vCode" data-jvalidator-pattern="not_empty & vcode" placeholder="请输入验证码" maxlength="6"></div><a placeholder="get-permit" class="btn" href="javascript:void(0);" js-reset-class="get_code" js-sent-class="btn_grey"><em>免费获取</em></a><div class="set popup_tips_wrap js_tipcontainer" placeholder="get-permit-error"></div></div></td>
                                   </tr>
                                   <tr>
                                     <td class="c1"></td>
@@ -450,96 +362,51 @@
                           <div class="e_card_picwrap hide"><div class="card_pic"><div class="img"></div></div></div>
                           <div class="credit-info-wrap"><div class="credit-info"></div></div>
                           <!-- info end -->
-                          <table cellpadding="0" cellspacing="0" width="100%" height="100%" id="allOtherCardTable">
+                          <table cellpadding="0" cellspacing="0" width="100%" height="100%" id="all_other_card_table">
                             <tbody>
-                              <tr class="js_credit_tr">
-                                <td class="c1 c2">信用卡卡号</td>
-                                <td>
-                                  <div class="ops_cardnum">
-                                    <div class="set input"><input type="text" name="cardId" data-jvalidator-pattern="not_empty & creditcardno" class="grey_txt cardnum txtbox txtbox1" placeholder="只输入卡号，自动匹配银行" maxlength="30"></div>
-                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                  </div>
-                                </td>
+                              <tr>
+                                <td class="c1 c2">银行卡卡号</td>
+                                <td><div class="ops_cardnum"><div class="set input"><input type="text" name="cardId" data-jvalidator-pattern="not_empty" class="grey_txt cardnum txtbox txtbox1" placeholder="只输入卡号，自动匹配银行" maxlength="30"></div><div class="set popup_tips_wrap js_tipcontainer" style="display: block;"><span class="icon_tips_wrap info first"><em class="icon_tips"></em><em class="txt_tips">支持信用卡、储蓄卡，无需开通网银即可支付</em></span></div></div></td>
                               </tr>
-                              <tr class="credit-bank">
+                              <tr class="js_other_card_search">
+                                <td class="c1"></td>
+                                <td><a class="btn_submit" id="btn_submit_search_card">下一步</a><div class="set popup_tips_wrap js_tipcontainer"></div></td>
+                              </tr>
+                              <tr class="credit-bank hide">
                                 <td class="c1"></td>
                                 <td><div class="credit-bank-wrap"></div></td>
                               </tr>
-                              <tr>
+                              <tr class='js_other_card_submit_online hide'>
                                 <td class="c1"></td>
-                                <td><a class="btn_submit" id="btnSubmitSearchCard">下一步</a><div class="set popup_tips_wrap js_tipcontainer"></div></td>
+                                <td><a class="btn_submit" id="btn_submit_online_pay">下一步</a><div class="set popup_tips_wrap js_tipcontainer"></div></td>
                               </tr>
-                              <tr class="credit-bank pay_online hide">
-                                <td class="c1"></td>
-                                <td><div class="online-bank-wrap"><span class="online-logo"><img src="/images/site/images/pay/quick_pay/upoppay.png"></span></div></td>
-                              </tr>
-                              <tr>
-                                <td class="c1"></td>
-                                <td><a class="btn_submit" id="btnSubmitOnlinePay">下一步</a><div class="set popup_tips_wrap js_tipcontainer"></div></td>
-                              </tr>
-                              <tr class="js_credit_tr" id="identityCodeCtn">
+                              <tr class="js_other_card_tr js_other_card_tr1 hide" target="identityCodeCtn">
                                 <td class="c1">证件</td>
-                                <td>
-                                  <div class="identity_card_type_ctn">
-                                    <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option><option value="02">护照</option></select></div>
-                                  </div>
-                                  <div class='date_middle'></div>
-                                  <div class="ops_idcard">
-                                    <div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty & idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div>
-                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                  </div>
-                                </td>
+                                <td><div class="identity_card_type_ctn"><div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" class='identity_card_type' name="month"><option value="01">身份证</option><option value="02">护照</option></select></div></div><div class='date_middle'></div><div class="ops_idcard"><div class="set input"><input type="text" name="identityCode" data-jvalidator-pattern="not_empty & idcard" class="grey_txt txtbox" placeholder="请输入与银行卡绑定的证件号" value=""></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                               </tr>
-                              <tr class="js_credit_tr" id="cardholderCtn">
+                              <tr class="js_other_card_tr js_other_card_tr1 hide" target="cardholderCtn">
                                 <td class="c1">姓名</td>
-                                <td>
-                                  <div class="ops_cardnum">
-                                    <div class="set input"><input type="text" name="cardholder" data-jvalidator-pattern="not_empty & cardholder" class="grey_txt txtbox" placeholder="输入姓名需与注册银行卡相同" value=""></div>
-                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                  </div>
-                                </td>
+                                <td><div class="ops_cardnum"><div class="set input"><input type="text" name="cardholder" data-jvalidator-pattern="not_empty & cardholder" class="grey_txt txtbox" placeholder="输入姓名需与注册银行卡相同" value=""></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                               </tr>
-                              <tr class="js_credit_tr" id="validateCtn">
+                              <tr class="js_other_card_tr hide" target="validateCtn">
                                 <td class="c1">有效期</td>
-                                <td><div class="ops_date">
-                                    <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month"><option value="请选择月份">请选择月份</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div>
-                                    <div class='date_middle'></div>
-                                    <div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year"></select></div>
-                                  </div>
-                                  <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                </td>
+                                <td><div class="ops_date"><div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_month" class='expires_month' name="month"><option value="请选择月份">请选择月份</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></div><div class='date_middle'></div><div class="csparest csparest_province"><select data-jvalidator-pattern="not_empty" id="expires_year" class='expires_year' name="year"></select></div></div><div class="set popup_tips_wrap js_tipcontainer"></div></td>
                               </tr>
-                              <tr class="js_credit_tr" id="cvvCtn">
+                              <tr class="js_other_card_tr hide" target="cvvCtn">
                                 <td class="c1">卡背面三位数</td>
-                                <td>
-                                  <div class="ops_cardback">
-                                    <div class="set input"><input name="cvv" id="credit_cardbacknum" data-jvalidator-pattern="not_empty & creditcardcvv" type="text" class="txtbox" placeholder="请输入信用卡背面的末三位数字" maxlength="3"></div>
-                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                  </div>
-                                </td>
+                                <td><div class="ops_cardback"><div class="set input"><input name="cvv" id="credit_cardbacknum" data-jvalidator-pattern="not_empty & creditcardcvv" type="text" class="txtbox" placeholder="请输入信用卡背面的末三位数字" maxlength="3"></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                               </tr>
-                              <tr class="js_credit_tr" id="mobileCtn">
+                              <tr class="js_other_card_tr js_other_card_tr1 hide" target="mobileCtn">
                                 <td class="c1">手机号</td>
-                                <td>
-                                  <div id="mobile-number">
-                                    <div class="set input"><input type="text" readonly placeholder="请输入银行预留手机号" value="" class="txtbox"  id="mobile" name="mobile" maxlength="13"></div>
-                                    <div class="set popup_tips_wrap js_tipcontainer"></div>
-                                  </div>
-                                </td>
+                                <td><div id="mobile-number"><div class="set input"><input type="text" readonly placeholder="请输入银行预留手机号" value="" class="txtbox"  id="mobile" name="mobile" maxlength="13"></div><div class="set popup_tips_wrap js_tipcontainer"></div></div></td>
                               </tr>
-                              <tr class="js_credit_tr" id="vCodeCtn">
+                              <tr class="js_other_card_tr js_other_card_tr1 hide" target="vCodeCtn">
                                 <td class="c1">短信验证码</td>
-                                <td>
-                                  <div class="ops_icode">
-                                    <div class="set input"><input type="text" class="txtbox" value="" name="vCode" data-jvalidator-pattern="not_empty & vcode" placeholder="请输入验证码" maxlength="6"></div>
-                                    <a placeholder="get-permit" class="btn" href="javascript:void(0);" js-reset-class="get_code" js-sent-class="btn_grey"><em>免费获取</em></a>
-                                    <div class="set popup_tips_wrap js_tipcontainer" placeholder="get-permit-error"></div>
-                                  </div>
-                                </td>
+                                <td><div class="ops_icode"><div class="set input"><input type="text" class="txtbox" value="" name="vCode" data-jvalidator-pattern="not_empty & vcode" placeholder="请输入验证码" maxlength="6"></div><a placeholder="get-permit" class="btn" href="javascript:void(0);" js-reset-class="get_code" js-sent-class="btn_grey"><em>免费获取</em></a><div class="set popup_tips_wrap js_tipcontainer" placeholder="get-permit-error"></div></div></td>
                               </tr>
-                              <tr>
+                              <tr class="js_other_card_tr js_other_card_tr1 hide" >
                                 <td class="c1"></td>
-                                <td><a class="btn_submit" id="btnSubmitBindCard">确认付款</a><div class="set popup_tips_wrap js_tipcontainer"></div></td>
+                                <td><a class="btn_submit" id="btn_submit_other_card_pay">确认付款</a><div class="set popup_tips_wrap js_tipcontainer"></div></td>
                               </tr>
                             </tbody>
                           </table>

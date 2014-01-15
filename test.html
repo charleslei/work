@@ -1,0 +1,21 @@
+﻿<DOCTYPE html>
+<html>
+<body BGCOLOR="#FFFFFF">
+<form name='formsubmitf' id ="the" method="post" action="XXX.asp">
+<input type='hidden' name='mypretime' value='0'> 
+<input type="button" value="写好了" name="button1" class="4round" onclick='formsubmit()'>
+</form>
+
+<script Language='JavaScript'>
+function formsubmit() {
+    Today = new Date();
+    var NowHour = Today.getHours();
+    var NowMinute = Today.getMinutes();
+    var NowSecond = Today.getSeconds();
+    var mysec = (NowHour*3600)+(NowMinute*60)+NowSecond;
+
+    document.forms.formsubmitf.submit();
+}
+</script>
+</body>
+</html>
