@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+	<script src='./jquery-2.1.0.min.js'></script>
+	<style>
+.ctn{width:400px;background:rgb(70, 245, 70);margin:0 auto;padding:50px;text-align:center;}
+.ctn a{padding:20px 30px;}
+</style>
+</head>
+<body>
+	<div class='ctn'>
+		<a id='clk' href='javascript:;' alt='click me!'>click me!</a>
+	</div>
+	<div class='ctn'>
+		<a id='clk1' href='javascript:;' alt='click me!'>click me!</a>
+	</div>
+
+	<!--<iframe src="/flight-test2.html" width="900px"></iframe>-->
+	<script>
+		//alert(window.TopParam);
+		$('#clk').click(function(e){
+			//alert(window.TopParam);
+			// window.TopParam = 'im father';
+			// alert(window.TopParam);
+			aa = window.open('flight-test1.html', 'childwindow1');
+			//syncsubmit('flight-test1.html');
+		});
+
+		$('#clk1').click(function(e){
+			//window.open('flight-test2.html', 'childwindow1');
+			dotimeout();
+		});
+
+		function dotimeout(){
+			$.ajax({
+				url: 'flight-test2.html',
+				dataType: 'HTML',
+				type: 'get',
+				async: false,
+				success: function(e){
+					window.open('flight-test1.html', 'childwindow1');
+				}
+			});
+			/*
+			setTimeout(function(){
+				window.open('flight-test1.html', 'childwindow1');
+			}, 1500);*/
+			/*
+			var i = 0;
+			var t1 = (new Date()).getTime() + 2000;
+			while(++i){
+				if((new Date()).getTime() >= t1){
+					//window.open('flight-test1.html', 'childwindow1');
+					syncsubmit('flight-test1.html', '_self');
+					break;
+				}
+			}*/
+		}
+
+		function syncsubmit(url, tgt) {//TODO:更新一下这个函数；
+		    var syncForm = document.createElement("form"), tgt = tgt || '_blank';
+		    document.body.appendChild(syncForm);
+		    syncForm.method = 'post';
+		    syncForm.action = url;
+		    syncForm.target = tgt;
+
+		    syncForm.submit();
+		  }
+	</script>
+</body>
+</html>

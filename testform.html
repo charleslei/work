@@ -1,0 +1,55 @@
+<! doctype html>
+<html>
+<head></head>
+<body>
+	<a href='javascript:;' >this is a test</a>
+	<script type="text/javascript" src="./jquery-2.1.0.min.js"></script>
+	<script type="text/javascript">
+		$('a').click(function(e){
+
+			window.setTimeout(function(){
+						submitform('_self');
+					}, 10000);
+
+
+			// $.ajax({
+			// 	url: './1.txt',
+			// 	dataType: 'json',
+			// 	type: 'post',
+			// 	data:{},
+			// 	async: false,
+			// 	success: function(e){
+			// 		submitform('_blank');
+			// 		return true;
+
+			// 	}
+			// })
+			e.preventDefault();
+		});
+
+		function submitform(tgt){
+			var syncForm = document.createElement("form"), tgt = tgt || '_self';
+			document.body.appendChild(syncForm);
+			syncForm.method = 'post';			
+			syncForm.action = 'http://localhost:8090/area.html';
+			syncForm.target = tgt;
+
+			// var o = params || [];
+			// isArray = Object.prototype.toString.apply(params) == "[object Array]" ? true : false;
+			// for( var item in o ){
+			// 	if(isArray){
+			// 		var _val = $.trim(o[item].value), _name = o[item].name;//清除表单value的空格
+			// 	}else{
+			// 		var _val = $.trim(o[item]), _name = item;//清除表单value的空格
+			// 	}
+			// 	var _inp = document.createElement("input");
+			// 	_inp.setAttribute("name", _name );
+			// 	_inp.setAttribute("value",_val);
+			// 	_inp.setAttribute("type","hidden");
+			// 	syncForm.appendChild( _inp );
+			// }
+			syncForm.submit();
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<title>window2</title>
+<script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+<style>
+.ctn{width:400px;background:rgb(70, 245, 70);margin:0 auto;padding:50px;text-align:center;}
+.ctn a{padding:20px 30px;}
+</style>
+</head>
+<body>
+<div class='ctn'>
+<a id='clk' href='javascript:;' alt='click me!'>click me done!</a>
+<a href='/flight-test1.html' alt='click me!'>click me done1!</a>
+</div>
+<script>
+$('#clk').click(function(e){
+window.opener && window.opener.location.reload();
+window.top.location.reload();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+ <!doctype html>
+<html>
+<head>
+	<title>window1</title>
+	<script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+	<style>
+.ctn{width:400px;background:rgb(70, 245, 70);margin:0 auto;padding:50px;text-align:center;}
+.ctn a{padding:20px 30px;}
+</style>
+</head>
+<body>
+	<div class='ctn'>
+		<a id='clk' href='javascript:;' alt='click me!'>click me done!</a>
+	</div>
+	<script>
+		// window.setTimeout(function(){
+		// 	window.opener.location.reload();
+		// }, 2000);
+		$('#clk').click(function(e){
+			//window.opener.TopParam = 'im father1!';
+			//window.opener.TopParam='father1';
+			//alert(window.opener.TopParam);
+			//window.opener.location.reload();
+			//window.opener.close();
+			window.opener.close();
+			// window.parent.opener=null;//如果不加这句，会提示关闭询问窗口;
+			// window.parent.close();
+			//window.opener && window.opener.location.reload();
+		});
+	</script>
+</body>
+</html>
