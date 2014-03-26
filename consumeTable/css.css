@@ -1,17 +1,18 @@
-﻿.ctn{
+﻿.content{
     margin: 0 auto;
-    width: 960px;
+    width: 1000px;
     margin-top: 100px;
+}
+.ctn{
+    width: 900px;
     height: 500px;
     background-color:#EDEDED;
+    border: 1px solid #999;
 }
 
 .richtextarea-content {
-padding: 2px;
-overflow: auto;
-font-size: 12px;
-border: 1px solid #999;
-border-radius: 3px;
+    overflow: auto;
+    font-size: 12px;
 }
 
 .richtextarea-over {
@@ -23,28 +24,23 @@ border-radius: 3px;
 .richtextarea-table-ctn {
     position: relative;
     overflow: auto;
-    border: 2px solid #AAA;
-    border-radius: 4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    padding: 2px;
-    overflow: auto
+    display:none;
 }
 
 .richtextarea-table-ctn-em {
     position: absolute;
-    top: 100px;
-    left: 1px;
-    width: 98%;
-    *width: 96%;
     text-align: center;
     font-weight: bold;
     font-size: 30px;
     font-style: normal;
     color: #666;
-    -moz-text-shadow: 0 -1px 0 #fff;
-    -webkit-text-shadow: 0 -1px 0 #fff;
-    text-shadow: 0 -1px 0 #fff
+    display: none;
+    width: 100%;
+    height: 100%;
+    line-height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
 }
 
 .richtextarea-table {
