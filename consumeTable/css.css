@@ -1,0 +1,54 @@
+﻿.ctn{
+    margin: 0 auto;
+    width: 960px;
+    margin-top: 100px;
+    height: 500px;
+    background-color:#EDEDED;
+}
+
+.richtextarea-content {
+padding: 2px;
+overflow: auto;
+font-size: 12px;
+border: 1px solid #999;
+border-radius: 3px;
+}
+
+.richtextarea-over {
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    zoom: 1
+}
+
+.richtextarea-table-ctn {
+    position: relative;
+    overflow: auto;
+    border: 2px solid #AAA;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    padding: 2px;
+    overflow: auto
+}
+
+.richtextarea-table-ctn-em {
+    position: absolute;
+    top: 100px;
+    left: 1px;
+    width: 98%;
+    *width: 96%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    font-style: normal;
+    color: #666;
+    -moz-text-shadow: 0 -1px 0 #fff;
+    -webkit-text-shadow: 0 -1px 0 #fff;
+    text-shadow: 0 -1px 0 #fff
+}
+
+.richtextarea-table {
+    margin-bottom: 0px;
+    width: 100%;
+    *width: 98%
+}
